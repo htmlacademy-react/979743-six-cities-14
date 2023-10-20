@@ -1,3 +1,5 @@
+import { City } from '../../const';
+
 function Tabs(): JSX.Element {
   return (
     <div className="tabs">
@@ -5,32 +7,32 @@ function Tabs(): JSX.Element {
         <ul className="locations__list tabs__list">
           <li className="locations__item">
             <a className="locations__item-link tabs__item" href="#">
-              <span>Paris</span>
+              <span>{City.Paris}</span>
             </a>
           </li>
           <li className="locations__item">
             <a className="locations__item-link tabs__item" href="#">
-              <span>Cologne</span>
+              <span>{City.Cologne}</span>
             </a>
           </li>
           <li className="locations__item">
             <a className="locations__item-link tabs__item" href="#">
-              <span>Brussels</span>
+              <span>{City.Brussels}</span>
             </a>
           </li>
           <li className="locations__item">
             <a className="locations__item-link tabs__item tabs__item--active">
-              <span>Amsterdam</span>
+              <span>{City.Amsterdam}</span>
             </a>
           </li>
           <li className="locations__item">
             <a className="locations__item-link tabs__item" href="#">
-              <span>Hamburg</span>
+              <span>{City.Hamburg}</span>
             </a>
           </li>
           <li className="locations__item">
             <a className="locations__item-link tabs__item" href="#">
-              <span>Dusseldorf</span>
+              <span>{City.Dusseldorf}</span>
             </a>
           </li>
         </ul>

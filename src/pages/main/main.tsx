@@ -4,10 +4,23 @@ import PlacesSortingForm from './places-sorting-form';
 import PlaceCard from './place-card';
 import Map from './map';
 
-function MainPage(): JSX.Element {
+type HeaderProps = {
+  // avatarUrl: string;
+  email: string;
+  // id: number;
+  // isPro: boolean;
+  // name: string;
+  // token: string;
+}
+
+type MainProps = {
+  userInfo: HeaderProps;
+}
+
+function MainPage({userInfo}: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <Header />
+      <Header userInfo = {userInfo} />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <Tabs />

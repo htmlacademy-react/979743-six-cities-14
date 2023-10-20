@@ -1,4 +1,17 @@
-function Header(): JSX.Element {
+// поля и их типы взяты из ТЗ
+type HeaderProps = {
+  // avatarUrl: string;
+  email: string;
+  // id: number;
+  // isPro: boolean;
+  // name: string;
+  // token: string;
+}
+type MainProps = {
+  userInfo: HeaderProps;
+}
+
+function Header({userInfo}: MainProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -14,7 +27,7 @@ function Header(): JSX.Element {
                 <a className="header__nav-link header__nav-link--profile" href="#">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  <span className="header__user-name user__name">{userInfo.email}</span>
                   <span className="header__favorite-count">3</span>
                 </a>
               </li>

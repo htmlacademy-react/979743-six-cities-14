@@ -1,8 +1,21 @@
 import MainPage from '../../pages/main/main';
 
-function App(): JSX.Element {
+type HeaderProps = {
+  // avatarUrl: string;
+  email: string;
+  // id: number;
+  // isPro: boolean;
+  // name: string;
+  // token: string;
+}
+
+type AppProps = {
+  userInfo: HeaderProps;
+}
+
+function App({userInfo}: AppProps): JSX.Element {
   return (
-    <MainPage />
+    <MainPage userInfo = {userInfo} />
   );
 }
 
