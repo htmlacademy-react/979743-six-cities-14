@@ -5,7 +5,7 @@ import PlacesSortingForm from './places-sorting-form';
 import PlaceCard from './place-card';
 import Map from './map';
 
-type MainProps = {
+export type MainProps = {
   // здесь будут объекты с данными для компонентов этой страницы
   userInfo: HeaderProps;
 }
