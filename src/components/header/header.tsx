@@ -1,5 +1,5 @@
 // поля и их типы взяты из ТЗ
-type HeaderProps = {
+export type HeaderProps = {
   // avatarUrl: string;
   email: string;
   // id: number;
@@ -7,11 +7,8 @@ type HeaderProps = {
   // name: string;
   // token: string;
 }
-type MainProps = {
-  userInfo: HeaderProps;
-}
 
-function Header({userInfo}: MainProps): JSX.Element {
+function Header(userInfo: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">

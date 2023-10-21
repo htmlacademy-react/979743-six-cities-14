@@ -1,19 +1,12 @@
 import Header from '../../components/header/header';
+import { HeaderProps } from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
 import PlacesSortingForm from './places-sorting-form';
 import PlaceCard from './place-card';
 import Map from './map';
 
-type HeaderProps = {
-  // avatarUrl: string;
-  email: string;
-  // id: number;
-  // isPro: boolean;
-  // name: string;
-  // token: string;
-}
-
 type MainProps = {
+  // здесь будут объекты с данными для компонентов этой страницы
   userInfo: HeaderProps;
 }
 
