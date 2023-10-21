@@ -2,7 +2,7 @@
 
 const USER_INFO = {
   avatarUrl: 'img/1.png',
-  email: 'Marusya.conner@gmail.com',
+  email: 'Kulema.conner@gmail.com',
   id: 1,
   isPro: false,
   name: 'Marusya.conner',
