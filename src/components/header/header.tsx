@@ -1,5 +1,5 @@
 // поля и их типы взяты из ТЗ
-import { MainProps } from '../../pages/main/main'; // без него не принимаются данные
+import { AppProps } from '../app/app';
 export type HeaderProps = {
   // avatarUrl: string;
   email: string;
@@ -9,7 +9,7 @@ export type HeaderProps = {
   // token: string;
 }
 
-function Header({userInfo}: MainProps): JSX.Element {
+function Header({userInfo}: AppProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
