@@ -1,4 +1,9 @@
 import MainPage from '../../pages/main/main';
+// import MainEmpty from '../../pages/main-empty/main-empty';
+// import Offer from '../../pages/offer/offer'; //OfferNotLogged не нужен, меняется header
+// import Login from '../../pages/login/login';
+// import Favorites from '../../pages/favorites/favorites';
+// import FavoritesEmpty from '../../pages/favorites-empty/favorites-empty';
 import Header from '../header/header';
 import { HeaderProps } from '../header/header';
 
@@ -7,7 +12,7 @@ export type AppProps = {
   userInfo: HeaderProps;
 };
 
-function App({userInfo}: AppProps): JSX.Element { //деструктуризация выделит те поля AppProps = объекты, которые нужны конкретной странице
+function App({userInfo}: AppProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header userInfo = {userInfo} />
