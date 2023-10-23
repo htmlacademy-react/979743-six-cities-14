@@ -10,13 +10,14 @@ import { HeaderProps } from '../header/header';
 export type AppProps = {
   // здесь будут объекты с данными для ВСЕХ страниц и компонентов
   userInfo: HeaderProps;
+  qty: number;
 };
 
-function App({userInfo}: AppProps): JSX.Element {
+function App({userInfo, qty}: AppProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header userInfo = {userInfo} />
-      <MainPage />
+      <MainPage qty = {qty} />
     </div>
   );
 }
