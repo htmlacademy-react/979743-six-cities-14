@@ -1,5 +1,5 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import MainPage from '../../pages/main/main';
 // import MainEmpty from '../../pages/main-empty/main-empty';
 import Offer from '../../pages/offer/offer'; //OfferNotLogged не нужен, меняется header
@@ -9,6 +9,7 @@ import Favorites from '../../pages/favorites/favorites';
 import Header from '../header/header';
 import Error404 from '../../pages/error/error';
 import { HeaderProps } from '../header/header';
+import PrivateRoute from '../private-route/private-route';
 
 export type AppProps = {
   // здесь будут объекты с данными для ВСЕХ страниц и компонентов
@@ -32,7 +33,11 @@ function App({userInfo, qty}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Favorites}
-            element={<Favorites />}
+            element={
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                <Favorites />
+              </PrivateRoute>
+            }
           />
           <Route
             path={AppRoute.Offer}
