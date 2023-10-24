@@ -8,4 +8,11 @@ enum City {
   Dusseldorf = 'Dusseldorf'
 }
 
-export {City};
+enum AppRoute {
+  Main = '/',
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer/:id'
+}
+
+export {City, AppRoute};
