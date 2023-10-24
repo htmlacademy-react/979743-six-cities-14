@@ -1,10 +1,14 @@
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
 function Offer(): JSX.Element {
+  const params = useParams();
+  // console.log(params.id);
+
   return (
     <>
       <Helmet>
-        <title>6 городов. Предложение</title>
+        <title>6 городов. Предложение {params.id}</title>
       </Helmet>
       <main className="page__main page__main--offer">
         <section className="offer">
