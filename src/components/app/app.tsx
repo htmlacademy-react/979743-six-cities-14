@@ -7,6 +7,7 @@ import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 // import FavoritesEmpty from '../../pages/favorites-empty/favorites-empty';
 import Header from '../header/header';
+import Error404 from '../../pages/error/error';
 import { HeaderProps } from '../header/header';
 
 export type AppProps = {
@@ -36,6 +37,10 @@ function App({userInfo, qty}: AppProps): JSX.Element {
           <Route
             path={AppRoute.Offer}
             element={<Offer />}
+          />
+          <Route
+            path="*"
+            element={<Error404 />}
           />
         </Routes>
       </BrowserRouter>
