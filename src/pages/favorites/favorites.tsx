@@ -1,6 +1,10 @@
+import { Helmet } from 'react-helmet-async';
 function Favorites(): JSX.Element {
   return (
     <>
+      <Helmet>
+        <title>6 городов. Избранное</title>
+      </Helmet>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

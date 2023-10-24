@@ -1,4 +1,5 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import MainPage from '../../pages/main/main';
 // import MainEmpty from '../../pages/main-empty/main-empty';
@@ -21,34 +22,36 @@ function App({userInfo, qty}: AppProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header userInfo = {userInfo} />
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path={AppRoute.Main}
-            element={<MainPage qty = {qty} />}
-          />
-          <Route
-            path={AppRoute.Login}
-            element={<Login />}
-          />
-          <Route
-            path={AppRoute.Favorites}
-            element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorites />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path={AppRoute.Offer}
-            element={<Offer />}
-          />
-          <Route
-            path="*"
-            element={<Error404 />}
-          />
-        </Routes>
-      </BrowserRouter>
+      <HelmetProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path={AppRoute.Main}
+              element={<MainPage qty = {qty} />}
+            />
+            <Route
+              path={AppRoute.Login}
+              element={<Login />}
+            />
+            <Route
+              path={AppRoute.Favorites}
+              element={
+                <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                  <Favorites />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path={AppRoute.Offer}
+              element={<Offer />}
+            />
+            <Route
+              path="*"
+              element={<Error404 />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </HelmetProvider>
     </div>
   );
 }
