@@ -10,7 +10,7 @@ export type HeaderProps = {
   // token: string;
 }
 
-function Header({userInfo}: AppProps): JSX.Element {
+function Header({userInfo}: AppProps): JSX.Element { // Не дает использовать никакой другой тип кроме AppProps
   return (
     <header className="header">
       <div className="container">

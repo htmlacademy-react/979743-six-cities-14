@@ -21,7 +21,7 @@ export type AppProps = {
 function App({userInfo, qty}: AppProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <Header userInfo = {userInfo} />
+      <Header userInfo = {userInfo} qty = {qty}/>
       <HelmetProvider>
         <BrowserRouter>
           <Routes>
