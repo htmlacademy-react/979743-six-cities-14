@@ -3,9 +3,45 @@ import Header, { HeaderProps } from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
+export type OfferInfoProps = {
+  bedrooms: number;
+  city: {
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    };
+    name: string;
+  };
+  description: string;
+  goods: [string];
+  host: {
+    avatarUrl: string;
+    id: number;
+    isPro: boolean;
+    name: string;
+  };
+  id: number;
+  images: [string];
+  isFavorite: boolean;
+  isPremium: boolean;
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+  maxAdults: number;
+  previewImage: string;
+  price: number;
+  rating: number;
+  title: string;
+  type: string;
+}
+
 type OfferProps = {
   userInfo: HeaderProps;
-  placesQty: number;
+  placesQty: number; // этот проп здесь не нужен!!!
+  offerInfo: OfferInfoProps; // тип одного объекта из массива предложений
 }
 
 function Offer({userInfo, placesQty}: OfferProps): JSX.Element {

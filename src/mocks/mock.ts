@@ -37,7 +37,7 @@ const offer1 =
       'img/1.png'
     ],
     'isFavorite': true,
-    'isPremium': false,
+    'isPremium': true,
     'location': {
       'latitude': 52.35514938496378,
       'longitude': 4.673877537499948,
@@ -90,8 +90,10 @@ const offer2 = {
   'type': 'studio'
 };
 
-const offers = [
+const OFFERS = [
   offer1, offer2
 ];
 
-export {USER_INFO, offers, PLACES_QTY};
+// const OFFERS = [];
+
+export {USER_INFO, PLACES_QTY, OFFERS};

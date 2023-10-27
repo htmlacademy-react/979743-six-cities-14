@@ -1,5 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import PrivateRoute from '../private-route/private-route';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import MainPage from '../../pages/main/main';
 // import MainEmpty from '../../pages/main-empty/main-empty';
@@ -10,22 +11,24 @@ import Favorites from '../../pages/favorites/favorites';
 // import Header from '../header/header';
 import Error404 from '../../pages/error/error';
 import { HeaderProps } from '../header/header';
-import PrivateRoute from '../private-route/private-route';
+import { OfferInfoProps } from '../../pages/offer/offer';
+
 
 export type AppProps = {
   // здесь будут объекты с данными для ВСЕХ страниц и компонентов
   userInfo: HeaderProps;
   placesQty: number;
+  offers: OfferInfoProps[];
 };
 
-function App({userInfo, placesQty}: AppProps): JSX.Element {
+function App({userInfo, placesQty, offers}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage userInfo = {userInfo} placesQty = {placesQty} />}
+            element={<MainPage userInfo = {userInfo} placesQty = {placesQty} offers = {offers} />}
           />
           <Route
             path={AppRoute.Login}
