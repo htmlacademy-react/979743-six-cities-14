@@ -19,9 +19,10 @@ export type AppProps = {
   userInfo: HeaderProps;
   placesQty: number;
   offers: OfferInfoProps[];
+  favorites: OfferInfoProps[];
 };
 
-function App({userInfo, placesQty, offers}: AppProps): JSX.Element {
+function App({userInfo, placesQty, offers, favorites}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -38,7 +39,7 @@ function App({userInfo, placesQty, offers}: AppProps): JSX.Element {
             path={AppRoute.Favorites}
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorites userInfo = {userInfo}/>
+                <Favorites userInfo = {userInfo} favorites = {favorites}/>
               </PrivateRoute>
             }
           />

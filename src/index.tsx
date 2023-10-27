@@ -13,6 +13,7 @@ root.render(
       userInfo = {USER_INFO}
       placesQty = {PLACES_QTY}
       offers = {OFFERS}
+      favorites = {OFFERS}
     />
   </React.StrictMode>
 );
