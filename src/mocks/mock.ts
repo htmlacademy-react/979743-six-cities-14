@@ -1,5 +1,7 @@
 // временные данные; структура как с сервера
 
+const PLACES_QTY: number = 350;
+
 const USER_INFO = {
   avatarUrl: 'img/1.png',
   email: 'Marusya.conner@gmail.com',
@@ -92,4 +94,4 @@ const offers = [
   offer1, offer2
 ];
 
-export {USER_INFO, offers};
+export {USER_INFO, offers, PLACES_QTY};

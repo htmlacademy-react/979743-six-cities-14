@@ -7,7 +7,7 @@ import Offer from '../../pages/offer/offer'; //OfferNotLogged не нужен, �
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 // import FavoritesEmpty from '../../pages/favorites-empty/favorites-empty';
-import Header from '../header/header';
+// import Header from '../header/header';
 import Error404 from '../../pages/error/error';
 import { HeaderProps } from '../header/header';
 import PrivateRoute from '../private-route/private-route';
@@ -15,44 +15,41 @@ import PrivateRoute from '../private-route/private-route';
 export type AppProps = {
   // здесь будут объекты с данными для ВСЕХ страниц и компонентов
   userInfo: HeaderProps;
-  qty: number;
+  placesQty: number;
 };
 
-function App({userInfo, qty}: AppProps): JSX.Element {
+function App({userInfo, placesQty}: AppProps): JSX.Element {
   return (
-    <div className="page page--gray page--main">
-      <Header userInfo = {userInfo} qty = {qty}/>
-      <HelmetProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path={AppRoute.Main}
-              element={<MainPage qty = {qty} />}
-            />
-            <Route
-              path={AppRoute.Login}
-              element={<Login />}
-            />
-            <Route
-              path={AppRoute.Favorites}
-              element={
-                <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                  <Favorites />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              path={AppRoute.Offer}
-              element={<Offer />}
-            />
-            <Route
-              path="*"
-              element={<Error404 />}
-            />
-          </Routes>
-        </BrowserRouter>
-      </HelmetProvider>
-    </div>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path={AppRoute.Main}
+            element={<MainPage userInfo = {userInfo} placesQty = {placesQty} />}
+          />
+          <Route
+            path={AppRoute.Login}
+            element={<Login userInfo = {userInfo} />}
+          />
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                <Favorites userInfo = {userInfo}/>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.Offer}
+            element={<Offer userInfo = {userInfo}/>}
+          />
+          <Route
+            path="*"
+            element={<Error404 />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 

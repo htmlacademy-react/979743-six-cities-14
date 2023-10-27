@@ -1,4 +1,6 @@
 // поля и их типы взяты из ТЗ
+// import { AppProps } from '../app/app';
+
 import { AppProps } from '../app/app';
 // import Logo from '../logo/logo';
 export type HeaderProps = {

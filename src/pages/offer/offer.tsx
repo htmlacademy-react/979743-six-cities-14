@@ -1,12 +1,20 @@
+import Header, { HeaderProps } from '../../components/header/header';
+// import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
-function Offer(): JSX.Element {
+type OfferProps = {
+  userInfo: HeaderProps;
+  placesQty: number;
+}
+
+function Offer({userInfo, placesQty}: OfferProps): JSX.Element {
   const params = useParams();
   // console.log(params.id);
 
   return (
-    <>
+    <div className="page">
+      <Header userInfo = {userInfo} placesQty={placesQty}/>
       <Helmet>
         <title>6 городов. Предложение {params.id}</title>
       </Helmet>
@@ -311,7 +319,7 @@ function Offer(): JSX.Element {
           </section>
         </div>
       </main>
-    </>
+    </div>
   );
 }
 

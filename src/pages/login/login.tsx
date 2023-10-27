@@ -1,8 +1,14 @@
+import Header, {HeaderProps} from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 
-function Login(): JSX.Element {
+type LoginProps = {
+  userInfo: HeaderProps;
+}
+
+function Login({userInfo}: LoginProps): JSX.Element {
   return (
-    <>
+    <div className="page page--gray page--login">
+      <Header userInfo = {userInfo}/>
       <Helmet>
         <title>6 гороодов. Заходи...</title>
       </Helmet>
@@ -31,7 +37,7 @@ function Login(): JSX.Element {
           </section>
         </div>
       </main>
-    </>
+    </div>
   );
 }
 

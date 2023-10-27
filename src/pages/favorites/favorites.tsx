@@ -1,7 +1,14 @@
+import Header, { HeaderProps } from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
-function Favorites(): JSX.Element {
+
+type FavoritesProps = {
+  userInfo: HeaderProps;
+}
+
+function Favorites({userInfo}: FavoritesProps): JSX.Element {
   return (
-    <>
+    <div className="page">
+      <Header userInfo = {userInfo}/>
       <Helmet>
         <title>6 городов. Избранное</title>
       </Helmet>
@@ -139,7 +146,7 @@ function Favorites(): JSX.Element {
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
         </a>
       </footer>
-    </>
+    </div>
   );
 }
 
