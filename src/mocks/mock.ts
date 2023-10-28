@@ -45,7 +45,7 @@ const offer1 =
     },
     'maxAdults': 4,
     'previewImage': 'img/1.png',
-    'price': 120,
+    'price': 320,
     'rating': 4.8,
     'title': 'Beautiful & luxurious apartment at great location',
     'type': 'apartment'

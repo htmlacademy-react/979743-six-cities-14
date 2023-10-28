@@ -44,8 +44,8 @@ function App({userInfo, placesQty, offers, favorites}: AppProps): JSX.Element {
             }
           />
           <Route
-            path={AppRoute.Offer}
-            element={<Offer userInfo = {userInfo}/>}
+            path={AppRoute.OfferId}
+            element={<Offer userInfo = {userInfo} offerInfo = {offers[0]}/>} // как передать один элемент массива?
           />
           <Route
             path="*"

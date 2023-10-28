@@ -18,8 +18,6 @@ type HeaderSecondPrors = { // !!! могу принять только как о
 }
 
 function Header({userInfo}: HeaderSecondPrors): JSX.Element {
-  console.log(userInfo);
-
   return (
     <header className="header">
       <div className="container">

@@ -14,7 +14,7 @@ export type OfferInfoProps = {
     name: string;
   };
   description: string;
-  goods: [string];
+  goods: string[];
   host: {
     avatarUrl: string;
     id: number;
@@ -22,7 +22,7 @@ export type OfferInfoProps = {
     name: string;
   };
   id: number;
-  images: [string];
+  images: string[];
   isFavorite: boolean;
   isPremium: boolean;
   location: {
@@ -40,17 +40,15 @@ export type OfferInfoProps = {
 
 type OfferProps = {
   userInfo: HeaderProps;
-  placesQty: number; // этот проп здесь не нужен!!!
   offerInfo: OfferInfoProps; // тип одного объекта из массива предложений
 }
 
-function Offer({userInfo, placesQty}: OfferProps): JSX.Element {
+function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
   const params = useParams();
   // console.log(params.id);
-
   return (
     <div className="page">
-      <Header userInfo = {userInfo} placesQty={placesQty}/>
+      <Header userInfo = {userInfo}/>
       <Helmet>
         <title>6 городов. Предложение {params.id}</title>
       </Helmet>
@@ -113,7 +111,7 @@ function Offer({userInfo, placesQty}: OfferProps): JSX.Element {
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
+                <b className="offer__price-value">&euro;{offerInfo.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">

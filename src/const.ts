@@ -13,8 +13,8 @@ enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
   Offer = '/offer',
-  OffetId = ':id'
-  //OffetId = `${AppRoute.Offer}/:id` // так тоже можно
+  // OffetId = ':id'
+  OfferId = `${AppRoute.Offer}/:id` // так тоже можно
 }
 
 enum AuthorizationStatus {
