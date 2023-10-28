@@ -1,40 +1,35 @@
-import { City } from '../../const';
+import { City, DEFAULT_CITY } from '../../const';
+import { NavLink } from 'react-router-dom';
+
+// function getActiveLinkStyle({isActive}): string {
+//   return isActive ? 'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item';
+// }
 
 function Tabs(): JSX.Element {
+  const cities = Object.keys(City);
+
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>{City.Paris}</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>{City.Cologne}</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>{City.Brussels}</span>
-            </a>
-          </li>
+          {
+            cities.map((city) => {
+              const classList = city === DEFAULT_CITY ? 'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item';
+              return ( //исходим из того, что в массиве все города уникальны
+                <li className="locations__item" key={city}>
+                  <NavLink className={classList} to="/" >
+                    <span>{city}</span>
+                  </NavLink>
+                </li>
+              );
+            })
+          }
+          {/*
           <li className="locations__item">
             <a className="locations__item-link tabs__item tabs__item--active">
               <span>{City.Amsterdam}</span>
             </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>{City.Hamburg}</span>
-            </a>
-          </li>
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>{City.Dusseldorf}</span>
-            </a>
-          </li>
+          </li>*/}
         </ul>
       </section>
     </div>

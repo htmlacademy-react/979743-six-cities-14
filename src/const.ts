@@ -1,4 +1,6 @@
 // неизменяемые величины во проекте
+const DEFAULT_CITY = 'Paris';
+
 enum City {
   Paris = 'Paris',
   Cologne = 'Cologne',
@@ -23,4 +25,4 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
-export {City, AppRoute, AuthorizationStatus};
+export {DEFAULT_CITY, City, AppRoute, AuthorizationStatus};
