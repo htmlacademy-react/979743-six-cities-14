@@ -3,7 +3,11 @@ import Map from './map';
 import PlaceCard from './place-card';
 import PlacesSortingForm from './places-sorting-form';
 
-function MainWithOffers(): JSX.Element {
+type MainWithOffersProps = {
+  placesQty: number;
+}
+
+function MainWithOffers({placesQty}: MainWithOffersProps): JSX.Element {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -12,7 +16,7 @@ function MainWithOffers(): JSX.Element {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{515} places to stay in Amsterdam</b>
+            <b className="places__found">{placesQty} places to stay in Amsterdam</b>
             <PlacesSortingForm />
             <div className="cities__places-list places__list tabs__content">
               <PlaceCard />

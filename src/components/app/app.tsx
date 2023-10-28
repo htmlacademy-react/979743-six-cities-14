@@ -2,7 +2,7 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import PrivateRoute from '../private-route/private-route';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import MainPage from '../../pages/main/main';
+import MainPage from '../../pages/main/main-page';
 // import MainEmpty from '../../pages/main-empty/main-empty';
 import Offer from '../../pages/offer/offer'; //OfferNotLogged не нужен, меняется header
 import Login from '../../pages/login/login';

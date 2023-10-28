@@ -17,8 +17,8 @@ function MainPage({userInfo, placesQty, offers}: MainProps): JSX.Element {
   const offerCount = offers.length;
   return (
     <div className="page page--gray page--main">
-      <Header userInfo = {userInfo} placesQty={placesQty} offers={offers}/>
-      {offerCount === 0 ? <MainEmpty /> : <MainWithOffers />}
+      <Header userInfo = {userInfo}/>
+      {offerCount === 0 ? <MainEmpty /> : <MainWithOffers placesQty = {placesQty}/>}
     </div>
   );
 }
