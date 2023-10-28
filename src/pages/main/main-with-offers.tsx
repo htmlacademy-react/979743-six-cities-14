@@ -1,13 +1,17 @@
+import { OfferInfoProps } from '../offer/offer';
 import Tabs from '../../components/tabs/tabs';
 import Map from './map';
 import PlaceCard from './place-card';
 import PlacesSortingForm from './places-sorting-form';
 
 type MainWithOffersProps = {
+  offers: OfferInfoProps[];
   placesQty: number;
 }
 
-function MainWithOffers({placesQty}: MainWithOffersProps): JSX.Element {
+function MainWithOffers({offers, placesQty}: MainWithOffersProps): JSX.Element {
+  console.log(offers);
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -19,10 +23,11 @@ function MainWithOffers({placesQty}: MainWithOffersProps): JSX.Element {
             <b className="places__found">{placesQty} places to stay in Amsterdam</b>
             <PlacesSortingForm />
             <div className="cities__places-list places__list tabs__content">
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
-              <PlaceCard />
+              {offers.map((offer) => (
+                <article key = {offer.id} className="cities__card place-card">
+                  <PlaceCard offer = {offer}/>
+                </article>
+              ))}
             </div>
           </section>
           <Map />

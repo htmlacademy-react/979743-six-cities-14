@@ -90,8 +90,47 @@ const offer2 = {
   'type': 'studio'
 };
 
+const offer3 = {
+  'bedrooms': 2,
+  'city': {
+    'location': {
+      'latitude': 52.370216,
+      'longitude': 4.895168,
+      'zoom': 8
+    },
+    'name': 'Amsterdam'
+  },
+  'description': 'Nice studio in Amsterdam.',
+  'goods': [
+    'Heating'
+  ],
+  'host': {
+    'avatarUrl': 'img/1.png',
+    'id': 5,
+    'isPro': true,
+    'name': 'Marusya'
+  },
+  'id': 2,
+  'images': [
+    'img/1.png'
+  ],
+  'isFavorite': false,
+  'isPremium': false,
+  'location': {
+    'latitude': 52.35514938496378,
+    'longitude': 4.673877537499948,
+    'zoom': 8
+  },
+  'maxAdults': 2,
+  'previewImage': 'img/1.png',
+  'price': 515,
+  'rating': 4.5,
+  'title': 'Nice studio at great location',
+  'type': 'studio'
+};
+
 const OFFERS = [
-  offer1, offer2
+  offer1, offer2, offer3
 ];
 
 // const OFFERS = [];

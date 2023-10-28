@@ -29,6 +29,7 @@ function App({userInfo, placesQty, offers, favorites}: AppProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
+            // пока отдаю все офферы, но надо будет делать выборку по городу
             element={<MainPage userInfo = {userInfo} placesQty = {placesQty} offers = {offers} />}
           />
           <Route
