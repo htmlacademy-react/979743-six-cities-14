@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import './error.css';
 
 function Error404(): JSX.Element{
   return (
@@ -6,7 +7,7 @@ function Error404(): JSX.Element{
       <Helmet>
         <title>6 городов. Страница не найдена</title>
       </Helmet>
-      <main className="page__main page__main--index">
+      <main className="page__main page__main--index page--error">
         <p className="error">Page not found</p>
       </main>
     </>
