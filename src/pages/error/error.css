@@ -1,0 +1,13 @@
+.page--error {
+  display: flex;
+  height: 100vh;
+}
+
+.error {
+  margin: 100px auto;
+  font-family: rubik, arial, sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 32px;
+  color: rgb(68, 129, 195);
+}
