@@ -10,8 +10,6 @@ type MainWithOffersProps = {
 }
 
 function MainWithOffers({offers, placesQty}: MainWithOffersProps): JSX.Element {
-  console.log(offers);
-
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>

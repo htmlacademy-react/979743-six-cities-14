@@ -10,7 +10,6 @@ type FavoritesProps = {
 }
 
 function Favorites({userInfo, favorites}: FavoritesProps): JSX.Element {
-  console.log(favorites.length);
   const favoritesCount: number = favorites.length;
   const favoritesClassList: string = favoritesCount === 0 ? 'page page--favorites-empty' : 'page';
   return (
