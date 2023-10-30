@@ -10,6 +10,7 @@ import Favorites from '../../pages/favorites/favorites';
 // import FavoritesEmpty from '../../pages/favorites-empty/favorites-empty';
 // import Header from '../header/header';
 import Error404 from '../../pages/error/error';
+import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { HeaderProps } from '../header/header';
 import { OfferInfoProps } from '../../pages/offer/offer';
 
@@ -26,6 +27,7 @@ function App({userInfo, placesQty, offers, favorites}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route
             path={AppRoute.Main}
