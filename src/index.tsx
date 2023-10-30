@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { USER_INFO, PLACES_QTY, OFFERS } from './mocks/mock';
+import { USER_INFO, PLACES_QTY } from './mocks/mock';
+import { OFFERS } from './mocks/offers';
+// import { REVIEWS } from './mocks/reviews';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
