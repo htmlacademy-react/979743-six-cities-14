@@ -31,8 +31,8 @@ const offer1 =
       'zoom': 8
     },
     'maxAdults': 4,
-    'previewImage': 'img/1.png',
-    'price': 320,
+    'previewImage': 'img/apartment-01.jpg',
+    'price': 333,
     'rating': 4.8,
     'title': 'Beautiful & luxurious apartment at great location',
     'type': 'apartment'
@@ -70,9 +70,9 @@ const offer2 = {
     'zoom': 8
   },
   'maxAdults': 2,
-  'previewImage': 'img/1.png',
-  'price': 320,
-  'rating': 4.5,
+  'previewImage': 'img/apartment-03.jpg',
+  'price': 340,
+  'rating': 3.5,
   'title': 'Nice studio at great location',
   'type': 'studio'
 };
@@ -109,10 +109,10 @@ const offer3 = {
     'zoom': 8
   },
   'maxAdults': 1,
-  'previewImage': 'img/1.png',
+  'previewImage': 'img/apartment-02.jpg',
   'price': 150,
-  'rating': 4.5,
-  'title': 'Nice studio at great location',
+  'rating': 2.5,
+  'title': 'Cool studio at cool location',
   'type': 'studio'
 };
 
@@ -126,7 +126,7 @@ const offer4 = {
     },
     'name': 'Amsterdam'
   },
-  'description': 'Nice studio in Amsterdam.',
+  'description': 'Nice cottage in Prostokvashino.',
   'goods': [
     'Heating'
   ],
@@ -141,18 +141,18 @@ const offer4 = {
     'img/3.png'
   ],
   'isFavorite': false,
-  'isPremium': false,
+  'isPremium': true,
   'location': {
     'latitude': 52.35514938496378,
     'longitude': 4.673877537499948,
     'zoom': 8
   },
-  'maxAdults': 1,
-  'previewImage': 'img/1.png',
-  'price': 250,
-  'rating': 4.5,
-  'title': 'Nice studio at great location',
-  'type': 'studio'
+  'maxAdults': 5,
+  'previewImage': 'img/apartment-01.jpg',
+  'price': 2000,
+  'rating': 4.0,
+  'title': 'Prostokvashino hause',
+  'type': 'cottage'
 };
 
 const OFFERS = [
