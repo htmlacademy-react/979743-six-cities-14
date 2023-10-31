@@ -148,7 +148,7 @@ const offer4 = {
     'zoom': 8
   },
   'maxAdults': 5,
-  'previewImage': 'img/apartment-01.jpg',
+  'previewImage': 'img/room.jpg',
   'price': 2000,
   'rating': 4.0,
   'title': 'Prostokvashino hause',
