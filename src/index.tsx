@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { USER_INFO, PLACES_QTY } from './mocks/mock';
 import { OFFERS } from './mocks/offers';
-// import { REVIEWS } from './mocks/reviews';
 import { selecFavorites } from './util';
 
 const root = ReactDOM.createRoot(
@@ -11,6 +10,9 @@ const root = ReactDOM.createRoot(
 );
 
 const favorites = selecFavorites(OFFERS);
+
+// for (const key in City) {console.log(City[key]);
+// }
 
 root.render(
   <React.StrictMode>

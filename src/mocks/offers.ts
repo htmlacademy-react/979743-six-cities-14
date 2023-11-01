@@ -140,7 +140,7 @@ const offer4 = {
   'images': [
     'img/3.png'
   ],
-  'isFavorite': false,
+  'isFavorite': true,
   'isPremium': true,
   'location': {
     'latitude': 52.35514938496378,
