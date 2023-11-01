@@ -62,7 +62,7 @@ const offer2 = {
   'images': [
     'img/2.png'
   ],
-  'isFavorite': false,
+  'isFavorite': true,
   'isPremium': false,
   'location': {
     'latitude': 52.35514938496378,
@@ -85,7 +85,7 @@ const offer3 = {
       'longitude': 4.895168,
       'zoom': 8
     },
-    'name': 'Amsterdam'
+    'name': 'Paris'
   },
   'description': 'Nice studio in Amsterdam.',
   'goods': [
@@ -124,7 +124,7 @@ const offer4 = {
       'longitude': 4.895168,
       'zoom': 8
     },
-    'name': 'Amsterdam'
+    'name': 'Paris'
   },
   'description': 'Nice cottage in Prostokvashino.',
   'goods': [
