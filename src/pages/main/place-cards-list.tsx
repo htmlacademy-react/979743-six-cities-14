@@ -8,7 +8,7 @@ type PlaceCardsListProps = {
 
 function PlaceCardsList({offers}: PlaceCardsListProps): JSX.Element {
   const [state, setState] = useState({
-    activeCardId: offers[0].id});
+    activeCardId: offers[0].id}); // по идеее длжно быть что-то типа null
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (

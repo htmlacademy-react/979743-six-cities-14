@@ -1,11 +1,12 @@
 import { OfferInfoProps } from '../offer/offer';
+import { Link } from 'react-router-dom';
 
 type PlaceCardProps = {
   offer: OfferInfoProps;
 }
 
+//на входе уже соответствующий оффер
 function PlaceCard({offer}: PlaceCardProps): JSX.Element {
-  // console.log(offer);
   const {isPremium, previewImage, price, rating, title, type} = offer;
   const ratingStarr: string = `${rating / 5 * 100}%`;
   return (
@@ -40,7 +41,7 @@ function PlaceCard({offer}: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/${offer.id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
