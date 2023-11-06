@@ -24,12 +24,6 @@ function Tabs(): JSX.Element {
               );
             })
           }
-          {/*
-          <li className="locations__item">
-            <a className="locations__item-link tabs__item tabs__item--active">
-              <span>{City.Amsterdam}</span>
-            </a>
-          </li>*/}
         </ul>
       </section>
     </div>

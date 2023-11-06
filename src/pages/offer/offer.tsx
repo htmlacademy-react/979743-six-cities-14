@@ -1,5 +1,5 @@
 import Header, { HeaderProps } from '../../components/header/header';
-// import Header from '../../components/header/header';
+import CommentForm from './comment-form';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
@@ -45,7 +45,8 @@ type OfferProps = {
 
 function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
   const params = useParams();
-  // console.log(params.id);
+
+  //здесь видимо должен быть запрос данных на сервер по id оффера, а не передача данных через пропс
   return (
     <div className="page">
       <Header userInfo = {userInfo}/>
@@ -197,7 +198,8 @@ function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
                     </div>
                   </li>
                 </ul>
-                <form className="reviews__form form" action="#" method="post">
+                <CommentForm />
+                {/* <form className="reviews__form form" action="#" method="post">
                   <label className="reviews__label form__label" htmlFor="review">Your review</label>
                   <div className="reviews__rating-form form__rating">
                     <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
@@ -241,7 +243,7 @@ function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
                     </p>
                     <button className="reviews__submit form__submit button" type="submit" disabled={false} >Submit</button>
                   </div>
-                </form>
+                </form> */}
               </section>
             </div>
           </div>
