@@ -1,6 +1,6 @@
 // временные данные; структура как с сервера
 
-const PLACES_QTY: number = 520;
+const PLACES_QTY: number = 33;
 
 const USER_INFO = {
   avatarUrl: 'img/1.png',

@@ -11,7 +11,7 @@ type MainWithOffersProps = {
 }
 
 function MainWithOffers({offers, placesQty}: MainWithOffersProps): JSX.Element {
-  const [state, setState] = useState(offers[0].id); // по идеее длжно быть что-то типа null
+  const [activeCardId, setState] = useState(offers[0].id); // по идеее длжно быть что-то типа null
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -24,7 +24,7 @@ function MainWithOffers({offers, placesQty}: MainWithOffersProps): JSX.Element {
             <PlacesSortingForm />
             <PlaceCardsList offers = {offers} setState = {setState} />
           </section>
-          <Map />
+          <Map offers = {offers} activeCardId = {activeCardId}/>
         </div>
       </div>
     </main>
