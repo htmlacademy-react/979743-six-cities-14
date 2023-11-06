@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 function CommentForm(): JSX.Element {
   const [state, setState] = useState({
     rating: 0,
     comment: ''});
 
-  const dataChangeHandler = (evt) => {
+  const dataChangeHandler = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = evt.target;
     setState({
       ...state,
