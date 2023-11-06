@@ -1,5 +1,3 @@
-// useEffect не нашелся при импорте
-// см п. 3.12 в конце
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 

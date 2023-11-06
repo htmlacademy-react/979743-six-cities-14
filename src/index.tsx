@@ -11,9 +11,6 @@ const root = ReactDOM.createRoot(
 
 const favorites = selecFavorites(OFFERS);
 
-// for (const key in City) {console.log(City[key]);
-// }
-
 root.render(
   <React.StrictMode>
     <App

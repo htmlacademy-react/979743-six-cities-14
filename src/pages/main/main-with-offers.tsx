@@ -1,7 +1,6 @@
 import { OfferInfoProps } from '../offer/offer';
 import Tabs from '../../components/tabs/tabs';
 import Map from './map';
-// import PlaceCard from './place-card';
 import PlaceCardsList from './place-cards-list';
 import PlacesSortingForm from './places-sorting-form';
 import { useState } from 'react';

@@ -1,6 +1,5 @@
 import Header, { HeaderProps } from '../../components/header/header';
 import CommentForm from './comment-form';
-// import Header from '../../components/header/header';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
