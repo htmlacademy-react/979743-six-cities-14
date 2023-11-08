@@ -1,12 +1,15 @@
 import { OfferInfoProps } from '../offer/offer';
+import { CitesLocationType } from '../../types/cities';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
 import { useRef } from 'react';
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 import {Icon} from 'leaflet';
+import { getCitiesLocation } from '../../util';
 
 type MapProps = {
+  city: CitesLocationType;
   offers: OfferInfoProps[];
-  activeCardId: number;
+  activeCardId: number | null;
 };
 
 const defaultCustomIcon = new Icon({
@@ -21,17 +24,18 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map({offers, activeCardId}: MapProps): JSX.Element {
+function Map({cityLocation, offers, activeCardId}: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  // в mapRefcurrent попадет ссылка на тот DOM-элемент, которому будет назначен пропс ref={mapRef}
+  // в mapRef.current попадет ссылка на тот DOM-элемент, которому будет назначен пропс ref={mapRef}
   // будет заполнено ТОЛЬКО после отрисовки компонента
-  const map = useMap(mapRef, offers[0].city, activeCardId); // как правильно получить название города??
+
+  const map = useMap(mapRef, cityLocation, activeCardId); // как правильно получить название города??
 
   return (
     <div className="cities__right-section">
       <section
         className="cities__map map"
-        style = {{height: '500px'}} //?????
+        style = {{minHeight: '100%'}}
         ref={mapRef}
       >
       </section>

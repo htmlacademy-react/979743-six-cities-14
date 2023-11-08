@@ -1,17 +1,24 @@
 import { OfferInfoProps } from '../offer/offer';
+import { CitesLocationType } from '../../types/cities';
 import Tabs from '../../components/tabs/tabs';
 import Map from './map';
 import PlaceCardsList from './place-cards-list';
 import PlacesSortingForm from './places-sorting-form';
 import { useState } from 'react';
+import { getCityLocation } from '../../util';
 
 type MainWithOffersProps = {
   offers: OfferInfoProps[];
   placesQty: number;
 }
 
+const currentCity: string = 'Amsterdam'; // временно. Потом будем получать текущее значение города в пропсах
+
 function MainWithOffers({offers, placesQty}: MainWithOffersProps): JSX.Element {
-  const [activeCardId, setState] = useState(offers[0].id); // по идеее длжно быть что-то типа null
+  // потом будем получать здесь уже отфильтрованые по городу офферы
+  const [activeCardId, setState] = useState<number | null>(null);
+  const cityLocation: CitesLocationType = getCityLocation(offers, currentCity);
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -24,7 +31,7 @@ function MainWithOffers({offers, placesQty}: MainWithOffersProps): JSX.Element {
             <PlacesSortingForm />
             <PlaceCardsList offers = {offers} setState = {setState} />
           </section>
-          <Map offers = {offers} activeCardId = {activeCardId}/>
+          <Map cityLocation = {cityLocation} offers = {offers} activeCardId = {activeCardId}/>
         </div>
       </div>
     </main>

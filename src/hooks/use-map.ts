@@ -1,8 +1,21 @@
-import { useRef, useState, useEffect} from 'react';
-// import leaflet from 'leaflet';
+import { CitesLocationType } from '../types/cities';
+import { useRef, useState, useEffect, MutableRefObject} from 'react';
 import { Map, TileLayer } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
-function useMap(mapRef, city, activeCardId) {
+// type City = {
+//   'location': {
+//     'latitude': number;
+//     'longitude': number;
+//     'zoom': number;
+//   };
+//   'name': string;
+// };
+
+function useMap(
+  mapRef: MutableRefObject<HTMLElement | null>,
+  cityLocation: CitesLocationType,
+  activeCardId: number | null) {
   const [map, setMap] = useState(null);
   const isRenderRef = useRef(false);
 
@@ -10,10 +23,10 @@ function useMap(mapRef, city, activeCardId) {
     if (mapRef.current !== null && !isRenderRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: city.location.latitude,
-          lng: city.location.longitude,
+          lat: cityLocation.lat,
+          lng: cityLocation.lng,
         },
-        zoom: city.location.zoom
+        zoom: cityLocation.zoom
       });
 
       const layer = new TileLayer(
@@ -29,7 +42,7 @@ function useMap(mapRef, city, activeCardId) {
       setMap(instance);
       isRenderRef.current = true;
     }
-  }, [mapRef, city]);
+  }, [mapRef, cityLocation.name]);
 
   return map;
 }
