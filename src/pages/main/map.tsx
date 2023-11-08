@@ -1,26 +1,25 @@
 import { OfferInfoProps } from '../offer/offer';
-import { CitesLocationType } from '../../types/cities';
-import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
-import { useRef } from 'react';
+import { CityLocationType } from '../../types/cities';
+import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE } from '../../const';
+import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
-import {Icon} from 'leaflet';
-import { getCitiesLocation } from '../../util';
+import {Icon, Marker, layerGroup} from 'leaflet';
 
 type MapProps = {
-  city: CitesLocationType;
+  cityLocation: CityLocationType;
   offers: OfferInfoProps[];
   activeCardId: number | null;
 };
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
+  iconSize: [30, 40],
   iconAnchor: [20, 40]
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
+  iconUrl: URL_MARKER_ACTIVE,
+  iconSize: [30, 40],
   iconAnchor: [20, 40]
 });
 
@@ -29,7 +28,28 @@ function Map({cityLocation, offers, activeCardId}: MapProps): JSX.Element {
   // в mapRef.current попадет ссылка на тот DOM-элемент, которому будет назначен пропс ref={mapRef}
   // будет заполнено ТОЛЬКО после отрисовки компонента
 
-  const map = useMap(mapRef, cityLocation, activeCardId); // как правильно получить название города??
+  const map = useMap(mapRef, cityLocation, activeCardId);
+
+  useEffect(() => {
+    if(map) {
+      const markerLayer = layerGroup().addTo(map);
+      offers.forEach((offer) => {
+        const marker = new Marker({
+          lat: offer.location.latitude,
+          lng: offer.location.longitude
+        });
+
+        marker
+          .setIcon(
+            activeCardId !== undefined && offer.id === activeCardId ? currentCustomIcon : defaultCustomIcon)
+          .addTo(markerLayer);
+      });
+
+      return () => {
+        map.removeLayer(markerLayer);
+      };
+    }
+  }, [map, offers, activeCardId]);
 
   return (
     <div className="cities__right-section">

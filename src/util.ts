@@ -1,6 +1,6 @@
 //ф-я для выборки из массива оффером по городу
 import { OfferInfoProps } from './pages/offer/offer';
-import { CitesLocationType } from './types/cities';
+import { CityLocationType } from './types/cities';
 import { City } from './const';
 
 function selectOffersByCity (allOffers: OfferInfoProps[], city: string): OfferInfoProps[] {
@@ -18,7 +18,7 @@ function selecFavorites(allOffers: OfferInfoProps[]): OfferInfoProps[] {
   return selectedOffers;
 }
 
-function getCitiesLocation (allOffers: OfferInfoProps[]): CitesLocationType[] { // возможно, избыточна
+function getCitiesLocation (allOffers: OfferInfoProps[]): CityLocationType[] { // возможно, избыточна
   const cities = Object.keys(City);
   const citiesLocationInfo = cities
     .map((city) => selectOneOfferByCity(allOffers, city)) // => offer | undefined
@@ -33,7 +33,7 @@ function getCitiesLocation (allOffers: OfferInfoProps[]): CitesLocationType[] { 
   return citiesLocationInfo;
 }
 
-function getCityLocation (allOffers: OfferInfoProps[], city: string): CitesLocationType | undefined {
+function getCityLocation (allOffers: OfferInfoProps[], city: string): CityLocationType | undefined {
   const cityLocationInfo = allOffers.find((offer) => offer.city.name === city);
   if (cityLocationInfo) {
     return ({

@@ -1,5 +1,5 @@
 import { OfferInfoProps } from '../offer/offer';
-import { CitesLocationType } from '../../types/cities';
+import { CityLocationType } from '../../types/cities';
 import Tabs from '../../components/tabs/tabs';
 import Map from './map';
 import PlaceCardsList from './place-cards-list';
@@ -17,7 +17,7 @@ const currentCity: string = 'Amsterdam'; // временно. Потом буд�
 function MainWithOffers({offers, placesQty}: MainWithOffersProps): JSX.Element {
   // потом будем получать здесь уже отфильтрованые по городу офферы
   const [activeCardId, setState] = useState<number | null>(null);
-  const cityLocation: CitesLocationType = getCityLocation(offers, currentCity);
+  const cityLocation: CityLocationType = getCityLocation(offers, currentCity);
 
   return (
     <main className="page__main page__main--index">
