@@ -5,10 +5,9 @@ import 'leaflet/dist/leaflet.css';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  cityLocation: CityLocationType,
-  activeCardId: number | null) {
-  const [map, setMap] = useState(null);
-  const isRenderRef = useRef(false);
+  cityLocation: CityLocationType): Map | null {
+  const [map, setMap] = useState<Map | null>(null);
+  const isRenderRef = useRef<boolean>(false);
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderRef.current) {

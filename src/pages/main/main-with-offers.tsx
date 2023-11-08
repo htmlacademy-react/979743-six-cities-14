@@ -17,7 +17,7 @@ const currentCity: string = 'Amsterdam'; // временно. Потом буд�
 function MainWithOffers({offers, placesQty}: MainWithOffersProps): JSX.Element {
   // потом будем получать здесь уже отфильтрованые по городу офферы
   const [activeCardId, setState] = useState<number | null>(null);
-  const cityLocation: CityLocationType = getCityLocation(offers, currentCity);
+  const cityLocation: CityLocationType | undefined = getCityLocation(offers, currentCity);
 
   return (
     <main className="page__main page__main--index">

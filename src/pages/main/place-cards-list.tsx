@@ -3,7 +3,7 @@ import PlaceCard from './place-card';
 
 type PlaceCardsListProps = {
   offers: OfferInfoProps[];
-  setState(id: number): void; // void???
+  setState(id: number | null): void; // void???
 };
 
 function PlaceCardsList({offers, setState}: PlaceCardsListProps): JSX.Element {
@@ -14,6 +14,7 @@ function PlaceCardsList({offers, setState}: PlaceCardsListProps): JSX.Element {
           key = {offer.id}
           className="cities__card place-card"
           onMouseOver = {() => setState(offer.id)}
+          onMouseOut = {() => setState(null)}
         >
           <PlaceCard offer = {offer} />
         </article>

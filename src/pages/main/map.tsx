@@ -28,7 +28,7 @@ function Map({cityLocation, offers, activeCardId}: MapProps): JSX.Element {
   // в mapRef.current попадет ссылка на тот DOM-элемент, которому будет назначен пропс ref={mapRef}
   // будет заполнено ТОЛЬКО после отрисовки компонента
 
-  const map = useMap(mapRef, cityLocation, activeCardId);
+  const map = useMap(mapRef, cityLocation);
 
   useEffect(() => {
     if(map) {
