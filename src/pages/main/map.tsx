@@ -1,6 +1,7 @@
+import './map.css';
 import { OfferInfoProps } from '../offer/offer';
 import { CityLocationType } from '../../types/cities';
-import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE } from '../../const';
+import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE, ICON_ANCHOR, ICON_SIZE } from '../../const';
 import { useRef, useEffect } from 'react';
 import useMap from '../../hooks/use-map';
 import {Icon, Marker, layerGroup} from 'leaflet';
@@ -13,14 +14,14 @@ type MapProps = {
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [30, 40],
-  iconAnchor: [20, 40]
+  iconSize: ICON_SIZE,
+  iconAnchor: ICON_ANCHOR
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_ACTIVE,
-  iconSize: [30, 40],
-  iconAnchor: [20, 40]
+  iconSize: ICON_SIZE,
+  iconAnchor: ICON_ANCHOR
 });
 
 function Map({cityLocation, offers, activeCardId}: MapProps): JSX.Element {
@@ -55,7 +56,7 @@ function Map({cityLocation, offers, activeCardId}: MapProps): JSX.Element {
     <div className="cities__right-section">
       <section
         className="cities__map map"
-        style = {{minHeight: '100%'}}
+        // style = {{minHeight: '100%'}}
         ref={mapRef}
       >
       </section>

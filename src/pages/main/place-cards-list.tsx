@@ -3,7 +3,7 @@ import PlaceCard from './place-card';
 
 type PlaceCardsListProps = {
   offers: OfferInfoProps[];
-  setState(id: number | null): void; // void???
+  setState(id: number | null): React.SetStateAction<number | null>;
 };
 
 function PlaceCardsList({offers, setState}: PlaceCardsListProps): JSX.Element {
