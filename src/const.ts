@@ -1,4 +1,5 @@
-// неизменяемые величины во проекте
+import { PointExpression } from 'leaflet';
+
 const DEFAULT_CITY = 'Paris';
 
 enum City {
@@ -24,4 +25,13 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
-export {DEFAULT_CITY, City, AppRoute, AuthorizationStatus};
+const URL_MARKER_DEFAULT = './img/pin.svg';
+
+const URL_MARKER_ACTIVE =
+  './img/pin-active.svg';
+
+const ICON_SIZE: PointExpression = [30, 40];
+
+const ICON_ANCHOR: PointExpression = [20, 40];
+
+export {DEFAULT_CITY, City, AppRoute, AuthorizationStatus, URL_MARKER_DEFAULT, URL_MARKER_ACTIVE, ICON_ANCHOR, ICON_SIZE};

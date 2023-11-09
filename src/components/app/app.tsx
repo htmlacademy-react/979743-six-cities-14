@@ -16,14 +16,12 @@ import { OfferInfoProps } from '../../pages/offer/offer';
 
 
 export type AppProps = {
-  // здесь будут объекты с данными для ВСЕХ страниц и компонентов
   userInfo: HeaderProps;
-  placesQty: number;
   offers: OfferInfoProps[];
   favorites: OfferInfoProps[];
 };
 
-function App({userInfo, placesQty, offers, favorites}: AppProps): JSX.Element {
+function App({userInfo, offers, favorites}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -31,8 +29,7 @@ function App({userInfo, placesQty, offers, favorites}: AppProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
-            // пока отдаю все офферы, но надо будет делать выборку по городу
-            element={<MainPage userInfo = {userInfo} placesQty = {placesQty} offers = {offers} />}
+            element={<MainPage userInfo = {userInfo} offers = {offers} />}
           />
           <Route
             path={AppRoute.Login}

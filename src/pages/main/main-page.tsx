@@ -5,16 +5,16 @@ import MainEmpty from './main-empty';
 
 type MainProps = {
   userInfo: HeaderProps;
-  placesQty: number;
   offers: OfferInfoProps[];
 }
 
-function MainPage({userInfo, placesQty, offers}: MainProps): JSX.Element {
+function MainPage({userInfo, offers}: MainProps): JSX.Element {
   const offerCount = offers.length;
   return (
     <div className="page page--gray page--main">
       <Header userInfo = {userInfo}/>
-      {offerCount === 0 ? <MainEmpty /> : <MainWithOffers offers = {offers} placesQty = {placesQty}/>}
+      {/* // пока передаю в Main ВСЕ офферы, в дальнейшем нужно будет делать выборку по городу */}
+      {offerCount === 0 ? <MainEmpty /> : <MainWithOffers offers = {offers} />}
     </div>
   );
 }
