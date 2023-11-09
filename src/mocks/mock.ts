@@ -1,7 +1,5 @@
 // временные данные; структура как с сервера
 
-const PLACES_QTY: number = 33;
-
 const USER_INFO = {
   avatarUrl: 'img/1.png',
   email: 'Marusya.conner@gmail.com',
@@ -11,4 +9,4 @@ const USER_INFO = {
   token: 'T2xpdmVyLmNvbm5lckBnbWFpbC5jb20='
 };
 
-export {USER_INFO, PLACES_QTY};
+export {USER_INFO};

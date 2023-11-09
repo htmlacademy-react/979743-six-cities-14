@@ -9,15 +9,14 @@ import { getCityLocation } from '../../util';
 
 type MainWithOffersProps = {
   offers: OfferInfoProps[];
-  placesQty: number;
 }
 
 const currentCity: string = 'Amsterdam'; // временно. Потом будем получать текущее значение города в пропсах
 
-function MainWithOffers({offers, placesQty}: MainWithOffersProps): JSX.Element {
+function MainWithOffers({offers}: MainWithOffersProps): JSX.Element {
   // потом будем получать здесь уже отфильтрованые по городу офферы
   const [activeCardId, setState] = useState<number | null>(null);
-  const cityLocation: CityLocationType | undefined = getCityLocation(offers, currentCity);
+  const cityLocation: CityLocationType = getCityLocation(offers, currentCity);
 
   return (
     <main className="page__main page__main--index">
@@ -27,7 +26,7 @@ function MainWithOffers({offers, placesQty}: MainWithOffersProps): JSX.Element {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{placesQty} places to stay in Amsterdam</b>
+            <b className="places__found">{offers.length} places to stay in Amsterdam</b>
             <PlacesSortingForm />
             <PlaceCardsList offers = {offers} setState = {setState} />
           </section>
