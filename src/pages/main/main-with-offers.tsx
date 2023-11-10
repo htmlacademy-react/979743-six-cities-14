@@ -2,7 +2,8 @@ import { OfferInfoProps } from '../offer/offer';
 import { CityLocationType } from '../../types/cities';
 import Tabs from '../../components/tabs/tabs';
 import Map from './map';
-import PlaceCardsList from './place-cards-list';
+import { ParentForPlaceCardList } from '../../const';
+import PlaceCardsList from '../../components/place-card-list/place-cards-list';
 import PlacesSortingForm from './places-sorting-form';
 import { useState } from 'react';
 import { getCityLocation } from '../../util';
@@ -28,7 +29,7 @@ function MainWithOffers({offers}: MainWithOffersProps): JSX.Element {
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{offers.length} places to stay in Amsterdam</b>
             <PlacesSortingForm />
-            <PlaceCardsList offers = {offers} setState = {setState} />
+            <PlaceCardsList offers = {offers} setState = {setState} parentPage = {ParentForPlaceCardList.Main}/>
           </section>
           <Map cityLocation = {cityLocation} offers = {offers} activeCardId = {activeCardId}/>
         </div>

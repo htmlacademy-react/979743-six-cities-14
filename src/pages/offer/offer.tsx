@@ -1,13 +1,16 @@
 import Header, { HeaderProps } from '../../components/header/header';
 import ReviewsList from './reviews-list';
 import CommentForm from './comment-form';
+import { ParentForPlaceCardList } from '../../const';
+import PlaceCardsList from '../../components/place-card-list/place-cards-list';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
-import { REVIEWS } from '../../mocks/reviews'; // запрашивает данные с сервера
+import { useState } from 'react';
 import Map from '../main/map';
 import { CityLocationType } from '../../types/cities';
 import './offer.css';
-import { OFFERS } from '../../mocks/offers'; // ВРЕМЕННО. Потом будет запрос на сервер на получение офферов неподалеку
+import { REVIEWS } from '../../mocks/reviews'; // ВРЕМЕННО. запрашивает данные с сервера
+import { OFFERS } from '../../mocks/offers'; //  Потом будет запрос на сервер на получение офферов неподалеку
 
 export type OfferInfoProps = {
   bedrooms: number;
@@ -50,6 +53,7 @@ type OfferProps = {
 }
 
 function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
+  const [activeCardId, setState] = useState<number | null>(null);
   const {city} = offerInfo;
   const cityLocation: CityLocationType = {
     name: city.name,
@@ -193,13 +197,14 @@ function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
             </div>
           </div>
           <section className="offer__map map">
-            <Map cityLocation = {cityLocation} offers = {OFFERS} activeCardId = {null}/>
+            <Map cityLocation = {cityLocation} offers = {OFFERS} activeCardId = {activeCardId}/>
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
+            <PlaceCardsList offers = {OFFERS} setState = {setState} parentPage = {ParentForPlaceCardList.Offer}/>
+            {/* <div className="near-places__list places__list">
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
@@ -298,7 +303,7 @@ function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
                   <p className="place-card__type">Apartment</p>
                 </div>
               </article>
-            </div>
+            </div> */}
           </section>
         </div>
       </main>

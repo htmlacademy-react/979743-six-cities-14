@@ -1,12 +1,13 @@
-import { OfferInfoProps } from '../offer/offer';
+import { OfferInfoProps } from '../../pages/offer/offer';
 import { Link } from 'react-router-dom';
 
 type PlaceCardProps = {
   offer: OfferInfoProps;
+  cardClassList: string;
 }
 
 //на входе уже соответствующий оффер
-function PlaceCard({offer}: PlaceCardProps): JSX.Element {
+function PlaceCard({offer, cardClassList}: PlaceCardProps): JSX.Element {
   const {isPremium, previewImage, price, rating, title, type} = offer;
   const ratingStarr: string = `${rating / 5 * 100}%`;
   return (
@@ -16,7 +17,7 @@ function PlaceCard({offer}: PlaceCardProps): JSX.Element {
           ? (<div className="place-card__mark"><span>Premium</span></div>)
           : ''
       }
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={cardClassList}>
         <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
         </a>

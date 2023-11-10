@@ -34,4 +34,9 @@ const ICON_SIZE: PointExpression = [30, 40];
 
 const ICON_ANCHOR: PointExpression = [20, 40];
 
-export {DEFAULT_CITY, City, AppRoute, AuthorizationStatus, URL_MARKER_DEFAULT, URL_MARKER_ACTIVE, ICON_ANCHOR, ICON_SIZE};
+enum ParentForPlaceCardList {
+  Main = 'Main',
+  Offer = 'Offer'
+}
+
+export {DEFAULT_CITY, City, AppRoute, AuthorizationStatus, URL_MARKER_DEFAULT, URL_MARKER_ACTIVE, ICON_ANCHOR, ICON_SIZE, ParentForPlaceCardList};
