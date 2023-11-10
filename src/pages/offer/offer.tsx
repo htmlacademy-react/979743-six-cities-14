@@ -4,6 +4,10 @@ import CommentForm from './comment-form';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { REVIEWS } from '../../mocks/reviews'; // запрашивает данные с сервера
+import Map from '../main/map';
+import { CityLocationType } from '../../types/cities';
+import './offer.css';
+import { OFFERS } from '../../mocks/offers'; // ВРЕМЕННО. Потом будет запрос на сервер на получение офферов неподалеку
 
 export type OfferInfoProps = {
   bedrooms: number;
@@ -46,6 +50,13 @@ type OfferProps = {
 }
 
 function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
+  const {city} = offerInfo;
+  const cityLocation: CityLocationType = {
+    name: city.name,
+    zoom: city.location.zoom,
+    lat: city.location.latitude,
+    lng: city.location.longitude,
+  };
   const params = useParams();
 
   //здесь видимо должен быть запрос данных на сервер по id оффера, а не передача данных через пропс
@@ -181,7 +192,9 @@ function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <section className="offer__map map">
+            <Map cityLocation = {cityLocation} offers = {OFFERS} activeCardId = {null}/>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
