@@ -1,7 +1,6 @@
 import Header, { HeaderProps } from '../../components/header/header';
 import ReviewsList from './reviews-list';
 import CommentForm from './comment-form';
-import { ParentForPlaceCardList } from '../../const';
 import PlaceCardsList from '../../components/place-card-list/place-cards-list';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
@@ -62,6 +61,12 @@ function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
     lng: city.location.longitude,
   };
   const params = useParams();
+
+  const placeCardsClassList = { // список классов для списка офферов неподалеку
+    containerClassList: 'near-places__list places__list',
+    itemClassList: 'near-places__card place-card',
+    cardClassList: 'near-places__image-wrapper place-card__image-wrapper',
+  };
 
   //здесь видимо должен быть запрос данных на сервер по id оффера, а не передача данных через пропс
   return (
@@ -203,7 +208,7 @@ function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceCardsList offers = {OFFERS} setState = {setState} parentPage = {ParentForPlaceCardList.Offer}/>
+            <PlaceCardsList offers = {OFFERS} setState = {setState} classList = {placeCardsClassList}/>
             {/* <div className="near-places__list places__list">
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">

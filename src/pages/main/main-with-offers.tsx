@@ -2,7 +2,6 @@ import { OfferInfoProps } from '../offer/offer';
 import { CityLocationType } from '../../types/cities';
 import Tabs from '../../components/tabs/tabs';
 import Map from './map';
-import { ParentForPlaceCardList } from '../../const';
 import PlaceCardsList from '../../components/place-card-list/place-cards-list';
 import PlacesSortingForm from './places-sorting-form';
 import { useState } from 'react';
@@ -18,6 +17,11 @@ function MainWithOffers({offers}: MainWithOffersProps): JSX.Element {
   // потом будем получать здесь уже отфильтрованые по городу офферы
   const [activeCardId, setState] = useState<number | null>(null);
   const cityLocation: CityLocationType = getCityLocation(offers, currentCity);
+  const placeCardsClassList = { // список классов для списка офферов
+    containerClassList: 'cities__places-list places__list tabs__content',
+    itemClassList: 'cities__card place-card',
+    cardClassList: 'cities__image-wrapper place-card__image-wrapper',
+  };
 
   return (
     <main className="page__main page__main--index">
@@ -29,7 +33,7 @@ function MainWithOffers({offers}: MainWithOffersProps): JSX.Element {
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{offers.length} places to stay in Amsterdam</b>
             <PlacesSortingForm />
-            <PlaceCardsList offers = {offers} setState = {setState} parentPage = {ParentForPlaceCardList.Main}/>
+            <PlaceCardsList offers = {offers} setState = {setState} classList = {placeCardsClassList}/>
           </section>
           <Map cityLocation = {cityLocation} offers = {offers} activeCardId = {activeCardId}/>
         </div>
