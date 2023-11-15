@@ -8,7 +8,7 @@ type LoginProps = {
 function Login({userInfo}: LoginProps): JSX.Element {
   return (
     <div className="page page--gray page--login">
-      <Header userInfo = {userInfo}/>
+      <Header {...userInfo}/>
       <Helmet>
         <title>6 гороодов. Заходи...</title>
       </Helmet>

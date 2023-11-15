@@ -14,7 +14,7 @@ function Favorites({userInfo, favorites}: FavoritesProps): JSX.Element {
   const favoritesClassList: string = favoritesCount === 0 ? 'page page--favorites-empty' : 'page';
   return (
     <div className={favoritesClassList}>
-      <Header userInfo = {userInfo}/>
+      <Header {...userInfo}/>
       <Helmet>
         <title>6 городов. Избранное</title>
       </Helmet>
