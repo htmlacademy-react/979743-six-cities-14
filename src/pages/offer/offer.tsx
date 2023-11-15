@@ -71,7 +71,7 @@ function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
   //здесь видимо должен быть запрос данных на сервер по id оффера, а не передача данных через пропс
   return (
     <div className="page">
-      <Header userInfo = {userInfo}/>
+      <Header {...userInfo}/>
       <Helmet>
         <title>6 городов. Предложение {params.id}</title>
       </Helmet>

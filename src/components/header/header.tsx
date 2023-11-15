@@ -9,11 +9,7 @@ export type HeaderProps = {
   // token: string;
 }
 
-type HeaderSecondPrors = { // !!! могу принять только как объект в объекте !!!
-  userInfo: HeaderProps;
-}
-
-function Header({userInfo}: HeaderSecondPrors): JSX.Element {
+function Header(userInfo: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
