@@ -13,7 +13,7 @@ function ReviewsList({reviews}: ReviewsListProps): JSX.Element {
           className="reviews__item"
           key={review.id}
         >
-          <Review review = {review}/>
+          <Review {...review}/>
         </li>
       ))}
     </ul>

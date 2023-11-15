@@ -10,11 +10,7 @@ export type ReviewProps = {
   };
 }
 
-type ReviewSecondProps = {
-  review: ReviewProps;
-};
-
-function Review({review}: ReviewSecondProps): JSX.Element { // !!! могу принять только как объект в объекте !!!
+function Review(review: ReviewProps): JSX.Element {
   const {rating, comment, user} = review;
   const ratingStarr: string = `${rating / 5 * 100}%`;
 
