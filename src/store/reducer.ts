@@ -9,8 +9,8 @@ const initialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(cityChange, (state) => {
-      console.log(state.city); // как сюда положить новое значение? payload?
+    .addCase(cityChange, (state, action) => {
+      state.city = action.payload;
       //выборка офферов по городу тоже здесь,в этом же действии? делаем выборку и сохраняем?
     });
 });
