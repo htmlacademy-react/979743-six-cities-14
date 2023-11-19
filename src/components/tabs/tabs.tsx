@@ -1,5 +1,4 @@
 import { City } from '../../const';
-import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { cityChange } from '../../store/action';
 
@@ -18,15 +17,12 @@ function Tabs(): JSX.Element {
               const classList = city === currentCity ? 'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item';
               return ( //исходим из того, что в массиве все города уникальны
                 <li className="locations__item" key={city}>
-                  {/* <NavLink */}
                   <div
                     className={classList}
-                    // to="/"
-                    onClick={() => dispatch(cityChange())}
+                    onClick={() => dispatch(cityChange(city))}
                   >
                     <span>{city}</span>
                   </div>
-                  {/* </NavLink> */}
                 </li>
               );
             })

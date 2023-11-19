@@ -12,6 +12,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(cityChange, (state, action) => {
       state.city = action.payload;
       //выборка офферов по городу тоже здесь,в этом же действии? делаем выборку и сохраняем?
+      console.log(state.city);
+
     });
 });
 
