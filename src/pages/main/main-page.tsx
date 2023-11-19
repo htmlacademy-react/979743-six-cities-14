@@ -2,6 +2,8 @@ import Header, { HeaderProps } from '../../components/header/header';
 import { OfferInfoProps } from '../offer/offer';
 import MainWithOffers from './main-with-offers';
 import MainEmpty from './main-empty';
+import { useAppSelector } from '../../hooks';
+import { selectOffersByCity } from '../../util';
 
 type MainProps = {
   userInfo: HeaderProps;
@@ -9,12 +11,15 @@ type MainProps = {
 }
 
 function MainPage({userInfo, offers}: MainProps): JSX.Element {
-  const offerCount = offers.length;
+
+  const currentCity: string = useAppSelector((state) => state.city); // извлекаем данные из store - город
+  const offersByCity = selectOffersByCity(offers, currentCity);
+
+  const offerCount = offersByCity.length;
   return (
     <div className="page page--gray page--main">
       <Header {...userInfo}/>
-      {/* // пока передаю в Main ВСЕ офферы, в дальнейшем нужно будет делать выборку по городу */}
-      {offerCount === 0 ? <MainEmpty /> : <MainWithOffers offers = {offers} />}
+      {offerCount === 0 ? <MainEmpty currentCity = {currentCity}/> : <MainWithOffers offers = {offersByCity} currentCity = {currentCity}/>}
     </div>
   );
 }

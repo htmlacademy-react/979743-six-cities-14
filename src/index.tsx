@@ -13,12 +13,16 @@ const root = ReactDOM.createRoot(
 
 const favorites = selecFavorites(OFFERS);
 
+// наверное, здесь должен быть запрос на сервер и получение данных
+// где офферы класть в store? наверное, это должен делать можуль, который запросы на сервер делает
+// данные получил - действие - сохранение в store
+
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
       <App
         userInfo = {USER_INFO}
-        offers = {OFFERS}
+        offers = {OFFERS} // все офферы по всем городам
         favorites = {favorites} // отсюда ли их передавать???
       />
     </Provider>

@@ -4,7 +4,7 @@ import { DEFAULT_CITY } from '../const';
 
 const initialState = {
   city: DEFAULT_CITY,
-  // список офферов для Парижа
+  // список офферов для всех городов - так получаем с сервера
 };
 
 const reducer = createReducer(initialState, (builder) => {
