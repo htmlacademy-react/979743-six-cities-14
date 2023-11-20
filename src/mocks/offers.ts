@@ -155,8 +155,47 @@ const offer4 = {
   'type': 'cottage'
 };
 
+const offer5 = {
+  'bedrooms': 2,
+  'city': {
+    'location': {
+      'latitude': 52.370216,
+      'longitude': 4.895168,
+      'zoom': 8
+    },
+    'name': 'Dusseldorf'
+  },
+  'description': 'Nice cottage in Prostokvashino.',
+  'goods': [
+    'Heating'
+  ],
+  'host': {
+    'avatarUrl': 'img/1.png',
+    'id': 5,
+    'isPro': true,
+    'name': 'Marusya'
+  },
+  'id': 5,
+  'images': [
+    'img/3.png'
+  ],
+  'isFavorite': true,
+  'isPremium': true,
+  'location': {
+    'latitude': 52.3809553943508,
+    'longitude': 4.939309666406198,
+    'zoom': 8
+  },
+  'maxAdults': 5,
+  'previewImage': 'img/room.jpg',
+  'price': 2000,
+  'rating': 4.0,
+  'title': 'Prostokvashino hause',
+  'type': 'cottage'
+};
+
 const OFFERS = [
-  offer1, offer2, offer3, offer4
+  offer1, offer2, offer3, offer4, offer5
 ];
 
 // const OFFERS = [];

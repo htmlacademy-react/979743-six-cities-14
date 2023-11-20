@@ -17,11 +17,10 @@ import { OfferInfoProps } from '../../pages/offer/offer';
 
 export type AppProps = {
   userInfo: HeaderProps;
-  offers: OfferInfoProps[];
   favorites: OfferInfoProps[];
 };
 
-function App({userInfo, offers, favorites}: AppProps): JSX.Element {
+function App({userInfo, favorites}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -29,7 +28,7 @@ function App({userInfo, offers, favorites}: AppProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage userInfo = {userInfo} offers = {offers} />}
+            element={<MainPage userInfo = {userInfo} />}
           />
           <Route
             path={AppRoute.Login}
@@ -45,7 +44,8 @@ function App({userInfo, offers, favorites}: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.OfferId}
-            element={<Offer userInfo = {userInfo} offerInfo = {offers[0]}/>} // как передать один элемент массива?
+            // element={<Offer userInfo = {userInfo} offerInfo = {offers[0]}/>} // как передать один элемент массива?
+            element={<Offer userInfo = {userInfo} />} // как передать один элемент массива?
           />
           <Route
             path="*"

@@ -22,7 +22,6 @@ root.render(
     <Provider store = {store}>
       <App
         userInfo = {USER_INFO}
-        offers = {OFFERS} // все офферы по всем городам
         favorites = {favorites} // отсюда ли их передавать???
       />
     </Provider>

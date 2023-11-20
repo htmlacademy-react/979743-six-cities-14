@@ -10,6 +10,8 @@ import { CityLocationType } from '../../types/cities';
 import './offer.css';
 import { REVIEWS } from '../../mocks/reviews'; // ВРЕМЕННО. запрашивает данные с сервера
 import { OFFERS } from '../../mocks/offers'; //  Потом будет запрос на сервер на получение офферов неподалеку
+import { useAppSelector } from '../../hooks';
+import { findOfferByID } from '../../util';
 
 export type OfferInfoProps = {
   bedrooms: number;
@@ -48,19 +50,21 @@ export type OfferInfoProps = {
 
 type OfferProps = {
   userInfo: HeaderProps;
-  offerInfo: OfferInfoProps; // тип одного объекта из массива предложений
 }
 
-function Offer({userInfo, offerInfo}: OfferProps): JSX.Element {
-  const [activeCardId, setState] = useState<number | null>(null);
-  const {city} = offerInfo;
-  const cityLocation: CityLocationType = {
-    name: city.name,
-    zoom: city.location.zoom,
-    lat: city.location.latitude,
-    lng: city.location.longitude,
-  };
+function Offer({userInfo}: OfferProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers); // извлекаем данные из store - офферы
   const params = useParams();
+  const offerInfo = findOfferByID(offers, Number(params.id));
+
+  const [activeCardId, setState] = useState<number | null>(null);
+
+  const cityLocation: CityLocationType = {
+    name: offerInfo.city.name,
+    zoom: offerInfo.city.location.zoom,
+    lat: offerInfo.city.location.latitude,
+    lng: offerInfo.city.location.longitude,
+  };
 
   const placeCardsClassList = { // список классов для списка офферов неподалеку
     containerClassList: 'near-places__list places__list',
