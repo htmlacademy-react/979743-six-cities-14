@@ -6,8 +6,17 @@ function selectOffersByCity (allOffers: OfferInfoProps[], city: string): OfferIn
   return selectedOffers;
 }
 
+function findOfferByID (allOffers: OfferInfoProps[], id: number): OfferInfoProps {
+  const selectedOffer = allOffers.find((offer) => offer.id === id);
+  if (selectedOffer) {
+    return selectedOffer;
+  } else {
+    return allOffers[0]; // !!! не знаю, как еще undefind обойти
+  }
+}
+
 function selecFavorites(allOffers: OfferInfoProps[]): OfferInfoProps[] {
-  const selectedOffers = allOffers.filter((offer) => offer.isFavorite);
+  const selectedOffers = allOffers.filter((offer) => offer.isFavorite); // возвращает новый массив
   return selectedOffers;
 }
 
@@ -31,4 +40,4 @@ function getCityLocation (allOffers: OfferInfoProps[], city: string): CityLocati
   }
 }
 
-export {selectOffersByCity, selecFavorites, getCityLocation};
+export {selectOffersByCity, selecFavorites, getCityLocation, findOfferByID};
