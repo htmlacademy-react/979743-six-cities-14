@@ -40,4 +40,8 @@ function getCityLocation (allOffers: OfferInfoProps[], city: string): CityLocati
   }
 }
 
-export {selectOffersByCity, selecFavorites, getCityLocation, findOfferByID};
+function sortLowToHigh(offers: OfferInfoProps[]) {
+
+}
+
+export {selectOffersByCity, selecFavorites, getCityLocation, findOfferByID, sortLowToHigh};

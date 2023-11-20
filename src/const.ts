@@ -34,9 +34,29 @@ const ICON_SIZE: PointExpression = [30, 40];
 
 const ICON_ANCHOR: PointExpression = [20, 40];
 
-enum ParentForPlaceCardList {
-  Main = 'Main',
-  Offer = 'Offer'
+// enum ParentForPlaceCardList { // не нужен
+//   Main = 'Main',
+//   Offer = 'Offer'
+// }
+
+enum SortingType {
+  Popular = 'Popular',
+  LowToHigh = 'Price: low to high',
+  HighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first'
 }
 
-export {DEFAULT_CITY, City, AppRoute, AuthorizationStatus, URL_MARKER_DEFAULT, URL_MARKER_ACTIVE, ICON_ANCHOR, ICON_SIZE, ParentForPlaceCardList};
+// const DEFAULT_SORTING_TYPE = SortingType.Popular;
+const DEFAULT_SORTING_TYPE = 'Popular';
+
+export {
+  DEFAULT_CITY,
+  City,
+  AppRoute,
+  AuthorizationStatus,
+  URL_MARKER_DEFAULT,
+  URL_MARKER_ACTIVE,
+  ICON_ANCHOR,
+  ICON_SIZE,
+  SortingType,
+  DEFAULT_SORTING_TYPE};
