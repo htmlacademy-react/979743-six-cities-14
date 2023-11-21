@@ -3,7 +3,6 @@ import Header, { HeaderProps } from '../../components/header/header';
 import MainWithOffers from './main-with-offers';
 import MainEmpty from './main-empty';
 import { useAppSelector } from '../../hooks';
-import { selectOffersByCity } from '../../util';
 
 type MainProps = {
   userInfo: HeaderProps;
@@ -12,8 +11,7 @@ type MainProps = {
 function MainPage({userInfo}: MainProps): JSX.Element {
 
   const currentCity: string = useAppSelector((state) => state.city); // извлекаем данные из store - город
-  const offers = useAppSelector((state) => state.offers); // извлекаем данные из store - офферы
-  const offersByCity = selectOffersByCity(offers, currentCity);
+  const offersByCity = useAppSelector((state) => state.byCityOffers); // извлекаем данные из store - офферы по городу
 
   const offerCount = offersByCity.length;
   return (
