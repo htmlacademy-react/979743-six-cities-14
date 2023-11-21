@@ -1,7 +1,9 @@
 import { createAction } from '@reduxjs/toolkit';
 import { OfferInfoProps } from '../pages/offer/offer';
 
-export const loadOffers = createAction<OfferInfoProps[]>('loadOffers');
+export const loadedOffers = createAction<OfferInfoProps[]>('loadOffers');
+
+export const favoritesOffers = createAction<OfferInfoProps[]>('favoritesOffers');
 
 export const cityChange = createAction<string>('main/cityChange'); // если вызвать с аргументом, то он подставится в поле payload.
 
