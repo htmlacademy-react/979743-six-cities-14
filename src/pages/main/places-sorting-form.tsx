@@ -1,9 +1,9 @@
-import { SortingType } from '../../const';
+import { SORTING_TYPES } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sortingChange } from '../../store/action';
 
 function PlacesSortingForm(): JSX.Element {
-  const sortingTypes = Object.keys(SortingType);
+  // const sortingTypes = Object.keys(SortingType);
   const currentSorting = useAppSelector((state) => state.sorting); // извлекаем данные из store
 
   const dispatch = useAppDispatch();
@@ -19,16 +19,17 @@ function PlacesSortingForm(): JSX.Element {
       </span>
       <ul className="places__options places__options--custom places__options--opened">
         {
-          sortingTypes.map((sorting) => {
-            const classList: string = SortingType[sorting] === currentSorting ? 'places__option places__option--active' : 'places__option';
+          SORTING_TYPES.map((sorting) => {
+            const classList: string = sorting === currentSorting ? 'places__option places__option--active' : 'places__option';
             return (
               <li
                 className={classList}
                 tabIndex={0}
                 key={sorting}
-                onClick={() => dispatch(sortingChange(SortingType[sorting]))}
+                onClick={() => dispatch(sortingChange(sorting))}
+                // onClick={(evt:React.ChangeEvent<HTML???>) => dispatch(sortingChange(evt.target.textContent))}
               >
-                {SortingType[sorting]}
+                {sorting}
               </li>
             );
           })

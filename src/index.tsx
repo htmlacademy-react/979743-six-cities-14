@@ -6,11 +6,12 @@ import App from './components/app/app';
 import { USER_INFO } from './mocks/mock';
 import { OFFERS } from './mocks/offers';
 import { selecFavorites } from './util';
+import { loadOffers } from './store/action';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
+store.dispatch(loadOffers(OFFERS));
 const favorites = selecFavorites(OFFERS);
 
 // наверное, здесь должен быть запрос на сервер и получение данных
