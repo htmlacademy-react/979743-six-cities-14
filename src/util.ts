@@ -40,8 +40,30 @@ function getCityLocation (allOffers: OfferInfoProps[], city: string): CityLocati
   }
 }
 
-function sortLowToHigh(offers: OfferInfoProps[]) {
-
+function sortLowToHigh(offers: OfferInfoProps[]): OfferInfoProps[] {
+  return offers.slice().sort((a, b) => a.price - b.price);
 }
 
-export {selectOffersByCity, selecFavorites, getCityLocation, findOfferByID, sortLowToHigh};
+function sortHighToLow(offers: OfferInfoProps[]): OfferInfoProps[] {
+  return offers.slice().sort((a, b) => b.price - a.price);
+}
+
+function sortByRating(offers: OfferInfoProps[]): OfferInfoProps[] {
+  return offers.slice().sort((a, b) => b.rating - a.rating);
+}
+
+function sortOffers(offers: OfferInfoProps[], sortingType: string): OfferInfoProps[] { // offers - это офферы в первоначальном порядке
+  // надо сделать, чтобы sortingType принимала значения только из массива
+  switch (sortingType) {
+    case 'Price: low to high':
+      return sortLowToHigh(offers);
+    case 'Price: high to low':
+      return sortHighToLow(offers);
+    case 'Top rated first':
+      return sortByRating(offers);
+    default: //  = Popular
+      return offers; // первоначальный порядок
+  }
+}
+
+export {selectOffersByCity, selecFavorites, getCityLocation, findOfferByID, sortOffers};

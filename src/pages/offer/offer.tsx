@@ -53,9 +53,10 @@ type OfferProps = {
 }
 
 function Offer({userInfo}: OfferProps): JSX.Element {
-  const offers = useAppSelector((state) => state.offers); // извлекаем данные из store - офферы
   const params = useParams();
-  const offerInfo = findOfferByID(offers, Number(params.id));
+
+  const offers = useAppSelector((state) => state.offers); // извлекаем данные из store - офферы
+  const offerInfo = findOfferByID(offers, Number(params.id)); // пока так. Потом здесь будет запрос на сервер
 
   const [activeCardId, setState] = useState<number | null>(null);
 

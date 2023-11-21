@@ -10,6 +10,7 @@ function PlacesSortingForm(): JSX.Element {
 
   return (
     <form className="places__sorting" action="#" method="get">
+      {/* input в форме где??? */}
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex={0}>
         {currentSorting}
@@ -34,7 +35,6 @@ function PlacesSortingForm(): JSX.Element {
             );
           })
         }
-        {/* <li className="places__option places__option--active" tabIndex={0}>Popular</li> */}
       </ul>
     </form>
   );

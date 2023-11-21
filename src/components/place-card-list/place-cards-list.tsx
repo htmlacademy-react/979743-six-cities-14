@@ -12,7 +12,6 @@ type PlaceCardsListProps = {
   offers: OfferInfoProps[];
   // setState(id: number | null): React.SetStateAction<number | null>;
   setState(id: number | null): void | null;
-  // parentPage: string;
   classList: ClassListProps;
 
 };
