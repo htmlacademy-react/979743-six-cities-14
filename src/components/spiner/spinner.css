@@ -1,0 +1,8 @@
+.loading-data {
+  display: flex;
+  max-height: 100vh;
+}
+
+.loading-data img {
+  margin: auto;
+}

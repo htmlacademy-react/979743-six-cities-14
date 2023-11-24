@@ -56,7 +56,6 @@ function Map({cityLocation, offers, activeCardId}: MapProps): JSX.Element {
     <div className="cities__right-section">
       <section
         className="cities__map map"
-        // style = {{minHeight: '100%'}}
         ref={mapRef}
       >
       </section>

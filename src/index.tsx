@@ -11,7 +11,7 @@ import { fetchOffersAction } from './store/api-actions';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-// store.dispatch(loadedOffers(OFFERS));
+
 store.dispatch(fetchOffersAction());
 
 store.dispatch(favoritesOffers(OFFERS));

@@ -22,8 +22,10 @@ function selecFavorites(allOffers: OfferInfoProps[]): OfferInfoProps[] {
 
 function getCityLocation (allOffers: OfferInfoProps[], city: string): CityLocationType {
   // вызывается в MainWithOffers при старте и при изменении города
+
   const cityLocationInfo = allOffers.find((offer) => offer.city.name === city);
   if (cityLocationInfo) {
+
     return ({
       name: cityLocationInfo.city.name,
       zoom: cityLocationInfo.city.location.zoom,

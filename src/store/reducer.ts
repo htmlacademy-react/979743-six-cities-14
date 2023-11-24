@@ -36,6 +36,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(cityChange, (state, action) => {
       state.city = action.payload; // на входе - выбранный город
       state.byCityOffers = selectOffersByCity(state.offers, action.payload);
+      state.sortedOffers = state.byCityOffers;
     })
     .addCase(sortingChange, (state, action) => {
       state.sorting = action.payload; // на входе тип сортировки
