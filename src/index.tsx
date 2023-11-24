@@ -5,17 +5,16 @@ import { store } from './store';
 import App from './components/app/app';
 import { USER_INFO } from './mocks/mock';
 import { OFFERS } from './mocks/offers';
-import { loadedOffers, favoritesOffers } from './store/action';
+import { favoritesOffers } from './store/action';
+import { fetchOffersAction } from './store/api-actions';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-store.dispatch(loadedOffers(OFFERS));
-store.dispatch(favoritesOffers(OFFERS));
+// store.dispatch(loadedOffers(OFFERS));
+store.dispatch(fetchOffersAction());
 
-// наверное, здесь должен быть запрос на сервер и получение данных
-// где офферы класть в store? наверное, это должен делать можуль, который запросы на сервер делает
-// данные получил - действие - сохранение в store
+store.dispatch(favoritesOffers(OFFERS));
 
 root.render(
   <React.StrictMode>

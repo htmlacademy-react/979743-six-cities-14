@@ -25,6 +25,7 @@ const initialState: TInitialState = {
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(loadedOffers, (state, action) => {
+      console.log(action.payload);
       state.offers = action.payload;
       state.byCityOffers = selectOffersByCity(action.payload, DEFAULT_CITY);
       state.sortedOffers = state.byCityOffers;
