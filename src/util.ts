@@ -1,12 +1,13 @@
-import { OfferInfoProps } from './pages/offer/offer';
+import { TOffers } from './types/offers';
+import { TOfferInfo } from './types/offer-info';
 import { CityLocationType } from './types/cities';
 
-function selectOffersByCity (allOffers: OfferInfoProps[], city: string): OfferInfoProps[] {
+function selectOffersByCity (allOffers: TOffers, city: string): TOffers {
   const selectedOffers = allOffers.filter((offer) => offer.city.name === city);
   return selectedOffers;
 }
 
-function findOfferByID (allOffers: OfferInfoProps[], id: number): OfferInfoProps {
+function findOfferByID (allOffers: TOffers, id: string): TOfferInfo {
   const selectedOffer = allOffers.find((offer) => offer.id === id);
   if (selectedOffer) {
     return selectedOffer;
@@ -15,12 +16,12 @@ function findOfferByID (allOffers: OfferInfoProps[], id: number): OfferInfoProps
   }
 }
 
-function selecFavorites(allOffers: OfferInfoProps[]): OfferInfoProps[] {
+function selecFavorites(allOffers: TOffers): TOffers {
   const selectedOffers = allOffers.filter((offer) => offer.isFavorite); // возвращает новый массив
   return selectedOffers;
 }
 
-function getCityLocation (allOffers: OfferInfoProps[], city: string): CityLocationType {
+function getCityLocation (allOffers: TOffers, city: string): CityLocationType {
   // вызывается в MainWithOffers при старте и при изменении города
 
   const cityLocationInfo = allOffers.find((offer) => offer.city.name === city);
@@ -42,19 +43,19 @@ function getCityLocation (allOffers: OfferInfoProps[], city: string): CityLocati
   }
 }
 
-function sortLowToHigh(offers: OfferInfoProps[]): OfferInfoProps[] {
+function sortLowToHigh(offers: TOffers): TOffers {
   return offers.slice().sort((a, b) => a.price - b.price);
 }
 
-function sortHighToLow(offers: OfferInfoProps[]): OfferInfoProps[] {
+function sortHighToLow(offers: TOffers): TOffers {
   return offers.slice().sort((a, b) => b.price - a.price);
 }
 
-function sortByRating(offers: OfferInfoProps[]): OfferInfoProps[] {
+function sortByRating(offers: TOffers): TOffers {
   return offers.slice().sort((a, b) => b.rating - a.rating);
 }
 
-function sortOffers(offers: OfferInfoProps[], sortingType: string): OfferInfoProps[] { // offers - это офферы в первоначальном порядке
+function sortOffers(offers: TOffers, sortingType: string): TOffers { // offers - это офферы в первоначальном порядке
   // надо сделать, чтобы sortingType принимала значения только из массива
   switch (sortingType) {
     case 'Price: low to high':

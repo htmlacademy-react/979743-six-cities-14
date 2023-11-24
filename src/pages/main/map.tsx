@@ -1,5 +1,5 @@
 import './map.css';
-import { OfferInfoProps } from '../offer/offer';
+import { TOffers } from '../../types/offers';
 import { CityLocationType } from '../../types/cities';
 import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE, ICON_ANCHOR, ICON_SIZE } from '../../const';
 import { useRef, useEffect } from 'react';
@@ -8,7 +8,7 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 
 type MapProps = {
   cityLocation: CityLocationType;
-  offers: OfferInfoProps[];
+  offers: TOffers;
   activeCardId: number | null;
 };
 

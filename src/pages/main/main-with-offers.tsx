@@ -1,4 +1,4 @@
-import { OfferInfoProps } from '../offer/offer';
+import { TOffers } from '../../types/offers';
 import { CityLocationType } from '../../types/cities';
 import Tabs from '../../components/tabs/tabs';
 import Map from './map';
@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { getCityLocation } from '../../util';
 
 type MainWithOffersProps = {
-  offers: OfferInfoProps[];
+  offers: TOffers;
   currentCity: string;
 }
 

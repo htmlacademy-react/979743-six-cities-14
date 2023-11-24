@@ -1,12 +1,11 @@
+import { TFavorite } from '../../types/favorites';
 
-import { OfferInfoProps } from '../offer/offer';
-
-type FavoritesCardProps = {
-  offer: OfferInfoProps;
+type FavoritesCardProps = { // УБРАТЬ ЭТУ ОБЕРТКУ!!!!!
+  offer: TFavorite;
 }
 
 function FavoritesCard({offer}: FavoritesCardProps): JSX.Element {
-  const {isPremium, price, previewImage, description, type, rating} = offer;
+  const {isPremium, price, previewImage, title, type, rating} = offer;
   const ratingStarr: string = `${rating / 5 * 100}%`;
   return (
     <>
@@ -40,7 +39,7 @@ function FavoritesCard({offer}: FavoritesCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{description}</a>
+          <a href="#">{title}</a>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

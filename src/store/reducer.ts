@@ -1,16 +1,16 @@
 import {createReducer} from '@reduxjs/toolkit';
 import { cityChange, sortingChange, loadedOffers, favoritesOffers } from './action';
 import { DEFAULT_CITY, DEFAULT_SORTING_TYPE } from '../const';
-import { OfferInfoProps } from '../pages/offer/offer';
+import { TOffers } from '../types/offers';
 import { selecFavorites, selectOffersByCity, sortOffers } from '../util';
 
 type TInitialState = {
   city: string;
-  offers: OfferInfoProps[];
-  byCityOffers: OfferInfoProps[];
-  favoritesOffers: OfferInfoProps[];
+  offers: TOffers;
+  byCityOffers: TOffers;
+  favoritesOffers: TOffers;
   sorting: string;
-  sortedOffers: OfferInfoProps[];
+  sortedOffers: TOffers;
 };
 const initialState: TInitialState = {
   city: DEFAULT_CITY,
@@ -25,7 +25,6 @@ const initialState: TInitialState = {
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(loadedOffers, (state, action) => {
-      console.log(action.payload);
       state.offers = action.payload;
       state.byCityOffers = selectOffersByCity(action.payload, DEFAULT_CITY);
       state.sortedOffers = state.byCityOffers;

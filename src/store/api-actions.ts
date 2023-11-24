@@ -1,18 +1,31 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { State, AppDispatch } from '../types/state';
 import {AxiosInstance} from 'axios';
-import { loadedOffers } from './action';
+import { loadedOffers, loadedOfferInfo } from './action';
 import {APIRoute} from '../const';
-import { OfferInfoProps } from '../pages/offer/offer';
+import { TOffers } from '../types/offers';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchQuestions',
+  'data/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<OfferInfoProps[]>(APIRoute.Offers);
+    const {data} = await api.get<TOffers>(APIRoute.Offers);
     dispatch(loadedOffers(data));
   },
 );
+
+export const fetchOfferInfoAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOfferInfo',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<TOffers>(`${APIRoute.Offers}`);
+    dispatch(loadedOfferInfo(data));
+  },
+);
+

@@ -1,5 +1,4 @@
 import Header, { HeaderProps } from '../../components/header/header';
-// import { OfferInfoProps } from '../offer/offer';
 import MainWithOffers from './main-with-offers';
 import MainEmpty from './main-empty';
 import { useAppSelector } from '../../hooks';

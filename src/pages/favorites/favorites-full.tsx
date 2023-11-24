@@ -1,10 +1,10 @@
-import { OfferInfoProps } from '../offer/offer';
+import { TOffers } from '../../types/offers';
 import FavoritesCard from './favorites-card';
 import { City } from '../../const';
 import { selectOffersByCity } from '../../util';
 
 type FavoritesFullProps = {
-  favorites: OfferInfoProps[];
+  favorites: TOffers;
 }
 
 //на входе уже отфильтрованный массив по isFavorites
