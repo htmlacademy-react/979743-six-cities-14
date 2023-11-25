@@ -5,13 +5,13 @@ import { store } from './store';
 import App from './components/app/app';
 import { USER_INFO } from './mocks/mock';
 import { OFFERS } from './mocks/offers';
-import { selecFavorites } from './util';
+import { loadedOffers, favoritesOffers } from './store/action';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-
-const favorites = selecFavorites(OFFERS);
+store.dispatch(loadedOffers(OFFERS));
+store.dispatch(favoritesOffers(OFFERS));
 
 // наверное, здесь должен быть запрос на сервер и получение данных
 // где офферы класть в store? наверное, это должен делать можуль, который запросы на сервер делает
@@ -22,7 +22,6 @@ root.render(
     <Provider store = {store}>
       <App
         userInfo = {USER_INFO}
-        favorites = {favorites} // отсюда ли их передавать???
       />
     </Provider>
   </React.StrictMode>

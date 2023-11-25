@@ -1,15 +1,15 @@
 import Header, { HeaderProps } from '../../components/header/header';
 import FavoritesEmpty from './favorites-empty';
 import FavoritesFull from './favorites-full';
-import { OfferInfoProps } from '../offer/offer';
 import { Helmet } from 'react-helmet-async';
+import { useAppSelector } from '../../hooks';
 
 type FavoritesProps = {
   userInfo: HeaderProps;
-  favorites: OfferInfoProps[];
 }
 
-function Favorites({userInfo, favorites}: FavoritesProps): JSX.Element {
+function Favorites({userInfo}: FavoritesProps): JSX.Element {
+  const favorites = useAppSelector((state) => state.favoritesOffers);
   const favoritesCount: number = favorites.length;
   const favoritesClassList: string = favoritesCount === 0 ? 'page page--favorites-empty' : 'page';
   return (
