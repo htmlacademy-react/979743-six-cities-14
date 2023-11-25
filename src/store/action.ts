@@ -1,9 +1,9 @@
 import { createAction } from '@reduxjs/toolkit';
 import { TOffers } from '../types/offers';
 
-export const loadedOffers = createAction<TOffers>('loadOffers');
+export const loadedOffers = createAction<TOffers>('loadOffers'); // загружаем массив офферов, при старте
 
-export const loadedOfferInfo = createAction<TOffers>('loadOfferInfo');
+// export const loadedOfferInfo = createAction<TOffers>('loadOfferInfo'); // загружаем подробную инфу об оффере
 
 export const favoritesOffers = createAction<TOffers>('favoritesOffers');
 

@@ -1,5 +1,4 @@
-import { TOffers } from './types/offers';
-import { TOfferInfo } from './types/offer-info';
+import { TOffers, TOffer } from './types/offers';
 import { CityLocationType } from './types/cities';
 
 function selectOffersByCity (allOffers: TOffers, city: string): TOffers {
@@ -7,7 +6,7 @@ function selectOffersByCity (allOffers: TOffers, city: string): TOffers {
   return selectedOffers;
 }
 
-function findOfferByID (allOffers: TOffers, id: string): TOfferInfo {
+function findOfferByID (allOffers: TOffers, id: string): TOffer {
   const selectedOffer = allOffers.find((offer) => offer.id === id);
   if (selectedOffer) {
     return selectedOffer;
@@ -21,7 +20,7 @@ function selecFavorites(allOffers: TOffers): TOffers {
   return selectedOffers;
 }
 
-function getCityLocation (allOffers: TOffers, city: string): CityLocationType {
+function getCityLocation (allOffers: TOffers, city: string | undefined): CityLocationType {
   // вызывается в MainWithOffers при старте и при изменении города
 
   const cityLocationInfo = allOffers.find((offer) => offer.city.name === city);

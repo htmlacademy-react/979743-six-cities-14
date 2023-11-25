@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { cityChange, sortingChange, loadedOffers, favoritesOffers } from './action';
+import { cityChange, sortingChange, loadedOffers, favoritesOffers, loadedOfferInfo } from './action';
 import { DEFAULT_CITY, DEFAULT_SORTING_TYPE } from '../const';
 import { TOffers } from '../types/offers';
 import { selecFavorites, selectOffersByCity, sortOffers } from '../util';

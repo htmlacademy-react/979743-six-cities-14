@@ -1,7 +1,9 @@
 import Header, { HeaderProps } from '../../components/header/header';
-import { TOfferInfo } from '../../types/offer-info';
 import { useAppSelector } from '../../hooks';
 import { findOfferByID } from '../../util';
+import { TOfferInfo } from '../../types/offer-info';
+import axios, { AxiosInstance } from 'axios';
+import { APIRoute, REQUEST_TIMEOUT, BASE_URL } from '../../const';
 import ReviewsList from './reviews-list';
 import CommentForm from './comment-form';
 import PlaceCardsList from '../../components/place-card-list/place-cards-list';
@@ -58,7 +60,19 @@ function Offer({userInfo}: OfferProps): JSX.Element {
   const params = useParams();
 
   const offers = useAppSelector((state) => state.offers); // извлекаем данные из store - офферы
-  const offerInfo = findOfferByID(offers, params.id);
+  const offerInfo: TOfferInfo = {};
+
+  // const url = `${BASE_URL}${APIRoute.Offers}/${params.id}`;
+
+  // axios.get(url , {timeout: REQUEST_TIMEOUT})
+  //   .then((response) => {
+  //     console.log(`Status code ${response.status}`);
+  //     offerInfo = response.data;
+  //     console.log(offerInfo);
+  //   })
+  //   .catch((err) => {
+  //     console.log('Error: что-то пошло не так', err);
+  //   });
 
   //здесь видимо должен быть запрос данных на сервер по id оффера, а не передача данных через пропс
 

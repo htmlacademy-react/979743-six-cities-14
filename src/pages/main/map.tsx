@@ -9,7 +9,8 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 type MapProps = {
   cityLocation: CityLocationType;
   offers: TOffers;
-  activeCardId: number | null;
+  // activeCardId: number | null;
+  activeCardId: string | null;
 };
 
 const defaultCustomIcon = new Icon({
@@ -51,6 +52,10 @@ function Map({cityLocation, offers, activeCardId}: MapProps): JSX.Element {
       };
     }
   }, [map, offers, activeCardId]);
+
+  useEffect(() => {
+    map?.setView([cityLocation.lat, cityLocation.lng]);
+  }, [map, cityLocation]);
 
   return (
     <div className="cities__right-section">
