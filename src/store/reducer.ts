@@ -1,10 +1,11 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { cityChange, sortingChange, loadedOffers, favoritesOffers, loadedOfferInfo } from './action';
+import { cityChange, sortingChange, loadedOffers, favoritesOffers, offersLoading } from './action';
 import { DEFAULT_CITY, DEFAULT_SORTING_TYPE } from '../const';
 import { TOffers } from '../types/offers';
 import { selecFavorites, selectOffersByCity, sortOffers } from '../util';
 
 type TInitialState = {
+  isOffersLoading: boolean;
   city: string;
   offers: TOffers;
   byCityOffers: TOffers;
@@ -13,6 +14,7 @@ type TInitialState = {
   sortedOffers: TOffers;
 };
 const initialState: TInitialState = {
+  isOffersLoading: true,
   city: DEFAULT_CITY,
   // список офферов для всех городов - так получаем с сервера
   offers: [],
@@ -28,6 +30,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload;
       state.byCityOffers = selectOffersByCity(action.payload, DEFAULT_CITY);
       state.sortedOffers = state.byCityOffers;
+      state.isOffersLoading = false; // завершили загрузку
     })
     .addCase(favoritesOffers, (state, action) => {
       state.favoritesOffers = selecFavorites(action.payload); // на входе - ВСЕ офферы, dispatch в index.tsx
@@ -40,6 +43,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(sortingChange, (state, action) => {
       state.sorting = action.payload; // на входе тип сортировки
       state.sortedOffers = sortOffers(state.byCityOffers, action.payload);
+    })
+    .addCase(offersLoading, (state, action) => {
+      state.isOffersLoading = action.payload;
     });
 });
 
