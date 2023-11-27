@@ -1,0 +1,15 @@
+.error-container {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  padding: 100px;
+  z-index: 100;
+}
+
+.error-message {
+  margin: auto;
+  padding: 10px;
+  background-color: #d96666;
+  color: white;
+  border-radius: 5px;
+}

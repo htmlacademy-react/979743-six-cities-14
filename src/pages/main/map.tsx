@@ -1,5 +1,5 @@
 import './map.css';
-import { OfferInfoProps } from '../offer/offer';
+import { TOffers } from '../../types/offers';
 import { CityLocationType } from '../../types/cities';
 import { URL_MARKER_DEFAULT, URL_MARKER_ACTIVE, ICON_ANCHOR, ICON_SIZE } from '../../const';
 import { useRef, useEffect } from 'react';
@@ -8,8 +8,9 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 
 type MapProps = {
   cityLocation: CityLocationType;
-  offers: OfferInfoProps[];
-  activeCardId: number | null;
+  offers: TOffers;
+  // activeCardId: number | null;
+  activeCardId: string | null;
 };
 
 const defaultCustomIcon = new Icon({
@@ -52,11 +53,14 @@ function Map({cityLocation, offers, activeCardId}: MapProps): JSX.Element {
     }
   }, [map, offers, activeCardId]);
 
+  useEffect(() => {
+    map?.setView([cityLocation.lat, cityLocation.lng]);
+  }, [map, cityLocation]);
+
   return (
     <div className="cities__right-section">
       <section
         className="cities__map map"
-        // style = {{minHeight: '100%'}}
         ref={mapRef}
       >
       </section>

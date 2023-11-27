@@ -1,9 +1,13 @@
 import { createAction } from '@reduxjs/toolkit';
-import { OfferInfoProps } from '../pages/offer/offer';
+import { TOffers } from '../types/offers';
 
-export const loadedOffers = createAction<OfferInfoProps[]>('loadOffers');
+export const offersLoading = createAction<boolean>('offersLoading'); // процесс загрузки
 
-export const favoritesOffers = createAction<OfferInfoProps[]>('favoritesOffers');
+export const serverError = createAction<string | null>('serverError'); // ошибка в ответ сервера
+
+export const loadedOffers = createAction<TOffers>('loadOffers'); // загружаем массив офферов, при старте
+
+export const favoritesOffers = createAction<TOffers>('favoritesOffers');
 
 export const cityChange = createAction<string>('main/cityChange'); // если вызвать с аргументом, то он подставится в поле payload.
 

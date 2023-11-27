@@ -38,6 +38,23 @@ const SORTING_TYPES = ['Popular', 'Price: low to high', 'Price: high to low', 'T
 
 const DEFAULT_SORTING_TYPE = 'Popular';
 
+const BASE_URL = 'https://14.design.pages.academy/six-cities';
+
+const REQUEST_TIMEOUT = 5000;
+
+enum APIRoute {
+  Offers = '/offers',
+  // /offers/{offerId} - как?
+  // /offers/{offerId}/nearby
+  Favorites = '/favorite',
+  // /favorite/{offerId}/{status}
+  // /comments/{offerId}
+  Login = '/login',
+  Logout = '/logout',
+}
+
+const TIMEOUT_SHOW_ERROR = 2000;
+
 export {
   DEFAULT_CITY,
   City,
@@ -48,4 +65,9 @@ export {
   ICON_ANCHOR,
   ICON_SIZE,
   SORTING_TYPES,
-  DEFAULT_SORTING_TYPE};
+  DEFAULT_SORTING_TYPE,
+  BASE_URL,
+  REQUEST_TIMEOUT,
+  APIRoute,
+  TIMEOUT_SHOW_ERROR,
+};

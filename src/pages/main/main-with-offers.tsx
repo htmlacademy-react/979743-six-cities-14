@@ -1,4 +1,4 @@
-import { OfferInfoProps } from '../offer/offer';
+import { TOffers } from '../../types/offers';
 import { CityLocationType } from '../../types/cities';
 import Tabs from '../../components/tabs/tabs';
 import Map from './map';
@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { getCityLocation } from '../../util';
 
 type MainWithOffersProps = {
-  offers: OfferInfoProps[];
+  offers: TOffers;
   currentCity: string;
 }
 
@@ -17,6 +17,7 @@ function MainWithOffers({offers, currentCity}: MainWithOffersProps): JSX.Element
 
   const [activeCardId, setState] = useState<number | null>(null);
   const cityLocation: CityLocationType = getCityLocation(offers, currentCity);
+
   const placeCardsClassList = { // список классов для списка офферов
     containerClassList: 'cities__places-list places__list tabs__content',
     itemClassList: 'cities__card place-card',

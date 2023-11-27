@@ -1,8 +1,8 @@
-import { OfferInfoProps } from '../../pages/offer/offer';
+import { TOffer } from '../../types/offers';
 import { Link } from 'react-router-dom';
 
 type PlaceCardProps = {
-  offer: OfferInfoProps;
+  offer: TOffer; // один элемент из массива, краткая инфа об оффере
   cardClassList: string;
 }
 

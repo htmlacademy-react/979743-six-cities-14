@@ -1,18 +1,21 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { cityChange, sortingChange, loadedOffers, favoritesOffers } from './action';
+import { cityChange, sortingChange, loadedOffers, favoritesOffers, offersLoading, serverError } from './action';
 import { DEFAULT_CITY, DEFAULT_SORTING_TYPE } from '../const';
-import { OfferInfoProps } from '../pages/offer/offer';
+import { TOffers } from '../types/offers';
 import { selecFavorites, selectOffersByCity, sortOffers } from '../util';
 
 type TInitialState = {
+  isOffersLoading: boolean;
   city: string;
-  offers: OfferInfoProps[];
-  byCityOffers: OfferInfoProps[];
-  favoritesOffers: OfferInfoProps[];
+  offers: TOffers;
+  byCityOffers: TOffers;
+  favoritesOffers: TOffers;
   sorting: string;
-  sortedOffers: OfferInfoProps[];
+  sortedOffers: TOffers;
+  serverError: string | null; // хранит текст сообщения об ошибке для пользователя
 };
 const initialState: TInitialState = {
+  isOffersLoading: true,
   city: DEFAULT_CITY,
   // список офферов для всех городов - так получаем с сервера
   offers: [],
@@ -20,6 +23,7 @@ const initialState: TInitialState = {
   favoritesOffers: [],
   sorting: DEFAULT_SORTING_TYPE,
   sortedOffers: [],
+  serverError: null, // текст ошибки
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -28,6 +32,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload;
       state.byCityOffers = selectOffersByCity(action.payload, DEFAULT_CITY);
       state.sortedOffers = state.byCityOffers;
+      state.isOffersLoading = false; // завершили загрузку
     })
     .addCase(favoritesOffers, (state, action) => {
       state.favoritesOffers = selecFavorites(action.payload); // на входе - ВСЕ офферы, dispatch в index.tsx
@@ -35,10 +40,17 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(cityChange, (state, action) => {
       state.city = action.payload; // на входе - выбранный город
       state.byCityOffers = selectOffersByCity(state.offers, action.payload);
+      state.sortedOffers = state.byCityOffers;
     })
     .addCase(sortingChange, (state, action) => {
       state.sorting = action.payload; // на входе тип сортировки
       state.sortedOffers = sortOffers(state.byCityOffers, action.payload);
+    })
+    .addCase(offersLoading, (state, action) => {
+      state.isOffersLoading = action.payload;
+    })
+    .addCase(serverError, (state, action) => {
+      state.serverError = action.payload; // хранит текст ошибки сервера
     });
 });
 

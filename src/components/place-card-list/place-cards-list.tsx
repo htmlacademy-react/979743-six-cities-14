@@ -1,6 +1,5 @@
-import { OfferInfoProps } from '../../pages/offer/offer';
+import { TOffers } from '../../types/offers';
 import PlaceCard from '../place-card/place-card';
-// import { ParentForPlaceCardList } from '../../const';
 
 type ClassListProps = {
   containerClassList: string;
@@ -9,7 +8,7 @@ type ClassListProps = {
 };
 
 type PlaceCardsListProps = {
-  offers: OfferInfoProps[];
+  offers: TOffers;
   // setState(id: number | null): React.SetStateAction<number | null>;
   setState(id: number | null): void | null;
   classList: ClassListProps;
