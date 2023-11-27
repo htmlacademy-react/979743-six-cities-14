@@ -11,9 +11,10 @@ enum City {
   Dusseldorf = 'Dusseldorf'
 }
 
-enum AppRoute {
+enum AppRoute { // адреса для запросов к серверу
   Main = '/',
   Login = '/login',
+  Logout = '/logout',
   Favorites = '/favorites',
   Offer = '/offer',
   OfferId = `${AppRoute.Offer}/:id` // так тоже можно
@@ -55,6 +56,8 @@ enum APIRoute {
 
 const TIMEOUT_SHOW_ERROR = 2000;
 
+const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
+
 export {
   DEFAULT_CITY,
   City,
@@ -70,4 +73,5 @@ export {
   REQUEST_TIMEOUT,
   APIRoute,
   TIMEOUT_SHOW_ERROR,
+  AUTH_TOKEN_KEY_NAME,
 };

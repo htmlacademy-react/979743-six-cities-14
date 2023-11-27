@@ -1,9 +1,9 @@
-import Header, { HeaderProps } from '../../components/header/header';
-import { useAppSelector } from '../../hooks';
-import { findOfferByID } from '../../util';
+import Header from '../../components/header/header';
+// import { useAppSelector } from '../../hooks';
+// import { findOfferByID } from '../../util';
 import { TOfferInfo } from '../../types/offer-info';
-import axios, { AxiosInstance } from 'axios';
-import { APIRoute, REQUEST_TIMEOUT, BASE_URL } from '../../const';
+// import axios, { AxiosInstance } from 'axios';
+// import { APIRoute, REQUEST_TIMEOUT, BASE_URL } from '../../const';
 import ReviewsList from './reviews-list';
 import CommentForm from './comment-form';
 import PlaceCardsList from '../../components/place-card-list/place-cards-list';
@@ -16,50 +16,10 @@ import './offer.css';
 import { REVIEWS } from '../../mocks/reviews'; // ВРЕМЕННО. запрашивает данные с сервера
 import { OFFERS } from '../../mocks/offers'; //  Потом будет запрос на сервер на получение офферов неподалеку
 
-
-// export type OfferInfoProps = {
-//   bedrooms: number;
-//   city: {
-//     location: {
-//       latitude: number;
-//       longitude: number;
-//       zoom: number;
-//     };
-//     name: string;
-//   };
-//   description: string;
-//   goods: string[];
-//   host: {
-//     avatarUrl: string;
-//     id: number;
-//     isPro: boolean;
-//     name: string;
-//   };
-//   id: string; //
-//   images: string[];
-//   isFavorite: boolean;
-//   isPremium: boolean;
-//   location: {
-//     latitude: number;
-//     longitude: number;
-//     zoom: number;
-//   };
-//   maxAdults: number;
-//   previewImage: string;
-//   price: number;
-//   rating: number;
-//   title: string;
-//   type: string;
-// }
-
-type OfferProps = {
-  userInfo: HeaderProps;
-}
-
-function Offer({userInfo}: OfferProps): JSX.Element {
+function Offer(): JSX.Element {
   const params = useParams();
 
-  const offers = useAppSelector((state) => state.offers); // извлекаем данные из store - офферы
+  // const offers = useAppSelector((state) => state.offers); // извлекаем данные из store - офферы
   const offerInfo: TOfferInfo = {};
 
   // const url = `${BASE_URL}${APIRoute.Offers}/${params.id}`;
@@ -93,7 +53,7 @@ function Offer({userInfo}: OfferProps): JSX.Element {
 
   return (
     <div className="page">
-      <Header {...userInfo}/>
+      <Header />
       <Helmet>
         <title>6 городов. Предложение {params.id}</title>
       </Helmet>

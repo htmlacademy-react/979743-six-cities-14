@@ -1,9 +1,10 @@
-import axios, {AxiosInstance, AxiosResponse, AxiosError} from 'axios';
+import axios, {AxiosInstance, AxiosResponse, AxiosError, AxiosRequestConfig} from 'axios';
 import { BASE_URL, REQUEST_TIMEOUT } from '../const';
 import { StatusCodes } from 'http-status-codes';
 import { processErrorHandle } from './process-error-handle';
 import { offersLoading } from '../store/action';
 import { store } from '../store';
+import { getToken } from './token';
 
 type DetailMessageType = {
   type: string;
@@ -23,6 +24,19 @@ export const createAPI = (): AxiosInstance => {
     baseURL: BASE_URL,
     timeout: REQUEST_TIMEOUT,
   });
+
+  api.interceptors.request.use(
+    (config: AxiosRequestConfig) => {
+      const token = getToken();
+
+      if (token && config.headers) {
+        config.headers['x-token'] = token;
+      }
+
+      return config;
+    },
+  );
+
 
   api.interceptors.response.use(
     (response) => response,
