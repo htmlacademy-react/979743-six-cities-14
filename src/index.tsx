@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import App from './components/app/app';
+import ErrorMessage from './components/error-message/error-message';
 import { USER_INFO } from './mocks/mock';
 // import { OFFERS } from './mocks/offers';
 // import { favoritesOffers } from './store/action';
@@ -19,6 +20,7 @@ store.dispatch(fetchOffersAction());
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
+      <ErrorMessage />
       <App
         userInfo = {USER_INFO}
       />

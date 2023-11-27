@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { State, AppDispatch } from '../types/state';
 import {AxiosInstance} from 'axios';
-import { loadedOffers, offersLoading } from './action';
-import {APIRoute} from '../const';
+import { loadedOffers, offersLoading, serverError } from './action';
+import {APIRoute, TIMEOUT_SHOW_ERROR} from '../const';
 import { TOffers } from '../types/offers';
+import { store } from '.';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -14,7 +15,18 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     dispatch(offersLoading(true));
     const {data} = await api.get<TOffers>(APIRoute.Offers);
+    // const {data} = await api.get<TOffers>('https//dfdf.com');
     dispatch(loadedOffers(data));
+  },
+);
+
+export const clearErrorAction = createAsyncThunk(
+  'clearServerError',
+  () => {
+    setTimeout(
+      () => store.dispatch(serverError(null)),
+      TIMEOUT_SHOW_ERROR,
+    );
   },
 );
 

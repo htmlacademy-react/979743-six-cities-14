@@ -3,6 +3,8 @@ import { TOffers } from '../types/offers';
 
 export const offersLoading = createAction<boolean>('offersLoading'); // процесс загрузки
 
+export const serverError = createAction<string | null>('serverError'); // ошибка в ответ сервера
+
 export const loadedOffers = createAction<TOffers>('loadOffers'); // загружаем массив офферов, при старте
 
 export const favoritesOffers = createAction<TOffers>('favoritesOffers');

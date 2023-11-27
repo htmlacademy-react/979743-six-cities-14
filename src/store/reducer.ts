@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { cityChange, sortingChange, loadedOffers, favoritesOffers, offersLoading } from './action';
+import { cityChange, sortingChange, loadedOffers, favoritesOffers, offersLoading, serverError } from './action';
 import { DEFAULT_CITY, DEFAULT_SORTING_TYPE } from '../const';
 import { TOffers } from '../types/offers';
 import { selecFavorites, selectOffersByCity, sortOffers } from '../util';
@@ -12,6 +12,7 @@ type TInitialState = {
   favoritesOffers: TOffers;
   sorting: string;
   sortedOffers: TOffers;
+  serverError: string | null; // хранит текст сообщения об ошибке для пользователя
 };
 const initialState: TInitialState = {
   isOffersLoading: true,
@@ -22,6 +23,7 @@ const initialState: TInitialState = {
   favoritesOffers: [],
   sorting: DEFAULT_SORTING_TYPE,
   sortedOffers: [],
+  serverError: null, // текст ошибки
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -46,6 +48,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(offersLoading, (state, action) => {
       state.isOffersLoading = action.payload;
+    })
+    .addCase(serverError, (state, action) => {
+      state.serverError = action.payload; // хранит текст ошибки сервера
     });
 });
 

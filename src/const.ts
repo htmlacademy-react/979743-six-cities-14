@@ -53,6 +53,8 @@ enum APIRoute {
   Logout = '/logout',
 }
 
+const TIMEOUT_SHOW_ERROR = 2000;
+
 export {
   DEFAULT_CITY,
   City,
@@ -67,4 +69,5 @@ export {
   BASE_URL,
   REQUEST_TIMEOUT,
   APIRoute,
+  TIMEOUT_SHOW_ERROR,
 };
