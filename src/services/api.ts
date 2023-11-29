@@ -26,7 +26,7 @@ export const createAPI = (): AxiosInstance => {
   });
 
   api.interceptors.request.use(
-    // (config: AxiosRequestConfig) => {
+    // (config: AxiosRequestConfig) => { // TODO
     (config) => {
       const token = getToken();
 
@@ -51,7 +51,6 @@ export const createAPI = (): AxiosInstance => {
       throw error;
     }
   );
-
 
   return api;
 };
