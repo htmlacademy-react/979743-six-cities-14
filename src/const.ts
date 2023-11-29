@@ -28,8 +28,7 @@ enum AuthorizationStatus {
 
 const URL_MARKER_DEFAULT = './img/pin.svg';
 
-const URL_MARKER_ACTIVE =
-  './img/pin-active.svg';
+const URL_MARKER_ACTIVE = './img/pin-active.svg';
 
 const ICON_SIZE: PointExpression = [30, 40];
 

@@ -1,7 +1,8 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { cityChange, sortingChange, loadedOffers, favoritesOffers, offersLoading, serverError, requireAuthorization } from './action';
+import { cityChange, sortingChange, loadedOffers, favoritesOffers, offersLoading, serverError, requireAuthorization, userInfo } from './action';
 import { DEFAULT_CITY, DEFAULT_SORTING_TYPE, AuthorizationStatus } from '../const';
 import { TOffers } from '../types/offers';
+import { TUserData } from '../types/user-data';
 import { selecFavorites, selectOffersByCity, sortOffers } from '../util';
 
 type TInitialState = {
@@ -14,6 +15,8 @@ type TInitialState = {
   sortedOffers: TOffers;
   serverError: string | null; // хранит текст сообщения об ошибке для пользователя
   authorizationStatus: AuthorizationStatus;
+  userInfo: TUserData;
+
 };
 
 const initialState: TInitialState = {
@@ -27,6 +30,13 @@ const initialState: TInitialState = {
   sortedOffers: [],
   serverError: null, // текст ошибки
   authorizationStatus: AuthorizationStatus.Unknown,
+  userInfo: {
+    name: '',
+    avatarUrl: '',
+    email: '',
+    isPro: false,
+    token: '',
+  }
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -57,6 +67,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(userInfo, (state, action) => {
+      state.userInfo = action.payload;
     });
 });
 

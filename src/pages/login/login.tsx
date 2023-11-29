@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import {useRef, FormEvent} from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
@@ -12,7 +12,7 @@ function Login(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -21,7 +21,12 @@ function Login(): JSX.Element {
       dispatch(loginAction({
         email: loginRef.current.value,
         password: passwordRef.current.value
-      }));
+      }))
+        .then((serverRusult) => {
+          if (serverRusult.type === 'user/login/fulfilled') {
+            navigate('/');
+          }
+        });
     }
   };
 
