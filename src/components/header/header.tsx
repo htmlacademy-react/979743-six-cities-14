@@ -1,13 +1,22 @@
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Logo from '../logo/logo';
+import { TUserData } from '../../types/user-data';
+import { logoutAction } from '../../store/api-actions';
 
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  if (authorizationStatus === AuthorizationStatus.Auth) {
-    console.log(authorizationStatus);
+  const userInfo: TUserData = useAppSelector((state) => state.userInfo);
 
+  const dispatch = useAppDispatch();
+
+  const handleLogoutClick = (evt: React.MouseEvent) => {
+    evt.preventDefault();
+    dispatch(logoutAction());
+  };
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
     return (
       <header className="header">
         <div className="container">
@@ -21,12 +30,12 @@ function Header(): JSX.Element {
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    <span className="header__user-name user__name">{userInfo.email}</span>
                     <span className="header__favorite-count">3</span>
                   </a>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
+                  <a className="header__nav-link" onClick={handleLogoutClick}>
                     <span className="header__signout">Sign out</span>
                   </a>
                 </li>
