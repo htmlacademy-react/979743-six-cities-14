@@ -44,11 +44,7 @@ const REQUEST_TIMEOUT = 5000;
 
 enum APIRoute {
   Offers = '/offers',
-  // /offers/{offerId} - как?
-  // /offers/{offerId}/nearby
   Favorites = '/favorite',
-  // /favorite/{offerId}/{status}
-  // /comments/{offerId}
   Login = '/login',
   Logout = '/logout',
 }

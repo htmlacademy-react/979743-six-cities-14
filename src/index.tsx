@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 );
 
 store.dispatch(fetchOffersAction());
-store.dispatch(checkAuthAction);
+store.dispatch(checkAuthAction());
 
 // store.dispatch(favoritesOffers(OFFERS));
 

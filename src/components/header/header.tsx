@@ -6,10 +6,10 @@ import { TUserData } from '../../types/user-data';
 import { logoutAction } from '../../store/api-actions';
 
 function Header(): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const userInfo: TUserData = useAppSelector((state) => state.userInfo);
-
-  const dispatch = useAppDispatch();
 
   const handleLogoutClick = (evt: React.MouseEvent) => {
     evt.preventDefault();
