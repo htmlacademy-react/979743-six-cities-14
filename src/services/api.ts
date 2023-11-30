@@ -4,6 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import { processErrorHandle } from './process-error-handle';
 import { offersLoading } from '../store/action';
 import { store } from '../store';
+import { getToken } from './token';
 
 type DetailMessageType = {
   type: string;
@@ -24,6 +25,20 @@ export const createAPI = (): AxiosInstance => {
     timeout: REQUEST_TIMEOUT,
   });
 
+  api.interceptors.request.use(
+    // (config: AxiosRequestConfig) => { // TODO
+    (config) => {
+      const token = getToken();
+
+      if (token && config.headers) {
+        config.headers['x-token'] = token;
+      }
+
+      return config;
+    },
+  );
+
+
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<DetailMessageType>) => {
@@ -36,7 +51,6 @@ export const createAPI = (): AxiosInstance => {
       throw error;
     }
   );
-
 
   return api;
 };

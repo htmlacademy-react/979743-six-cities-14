@@ -11,9 +11,10 @@ enum City {
   Dusseldorf = 'Dusseldorf'
 }
 
-enum AppRoute {
+enum AppRoute { // адреса для запросов к серверу
   Main = '/',
   Login = '/login',
+  Logout = '/logout',
   Favorites = '/favorites',
   Offer = '/offer',
   OfferId = `${AppRoute.Offer}/:id` // так тоже можно
@@ -27,8 +28,7 @@ enum AuthorizationStatus {
 
 const URL_MARKER_DEFAULT = './img/pin.svg';
 
-const URL_MARKER_ACTIVE =
-  './img/pin-active.svg';
+const URL_MARKER_ACTIVE = './img/pin-active.svg';
 
 const ICON_SIZE: PointExpression = [30, 40];
 
@@ -44,16 +44,14 @@ const REQUEST_TIMEOUT = 5000;
 
 enum APIRoute {
   Offers = '/offers',
-  // /offers/{offerId} - как?
-  // /offers/{offerId}/nearby
   Favorites = '/favorite',
-  // /favorite/{offerId}/{status}
-  // /comments/{offerId}
   Login = '/login',
   Logout = '/logout',
 }
 
 const TIMEOUT_SHOW_ERROR = 2000;
+
+const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 
 export {
   DEFAULT_CITY,
@@ -70,4 +68,5 @@ export {
   REQUEST_TIMEOUT,
   APIRoute,
   TIMEOUT_SHOW_ERROR,
+  AUTH_TOKEN_KEY_NAME,
 };

@@ -1,10 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { State, AppDispatch } from '../types/state';
 import {AxiosInstance} from 'axios';
-import { loadedOffers, offersLoading, serverError } from './action';
-import {APIRoute, TIMEOUT_SHOW_ERROR} from '../const';
+import { loadedOffers, offersLoading, requireAuthorization, userInfo } from './action';
+import {APIRoute, AuthorizationStatus} from '../const';
 import { TOffers } from '../types/offers';
-import { store } from '.';
+import { TUserData } from '../types/user-data';
+import { TAuthData } from '../types/auth-data';
+import { saveToken, dropToken } from '../services/token';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -15,30 +17,50 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     dispatch(offersLoading(true));
     const {data} = await api.get<TOffers>(APIRoute.Offers);
-    // const {data} = await api.get<TOffers>('https//dfdf.com');
     dispatch(loadedOffers(data));
   },
 );
 
-export const clearErrorAction = createAsyncThunk(
-  'clearServerError',
-  () => {
-    setTimeout(
-      () => store.dispatch(serverError(null)),
-      TIMEOUT_SHOW_ERROR,
-    );
+export const checkAuthAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/checkAuth',
+  async (_arg, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<TUserData>(APIRoute.Login);
+      dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(userInfo(data));
+    } catch {
+      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    }
   },
 );
 
-// export const fetchOfferInfoAction = createAsyncThunk<void, undefined, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: AxiosInstance;
-// }>(
-//   'data/fetchOfferInfo',
-//   async (_arg, {dispatch, extra: api}) => {
-//     const {data} = await api.get<TOffers>(`${APIRoute.Offers}/5c98ba73-ed22-494d-bbca-ceada152879b`);
-//     dispatch(loadedOfferInfo(data));
-//   },
-// );
+export const loginAction = createAsyncThunk<void, TAuthData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/login',
+  async ({email, password}, {dispatch, extra: api}) => {
+    const {data} = await api.post<TUserData>(APIRoute.Login, {email, password});
+    saveToken(data.token);
+    dispatch(userInfo(data));
+    dispatch(requireAuthorization(AuthorizationStatus.Auth)); //меняем статус авториизации
+  },
+);
 
+export const logoutAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/logout',
+  async (_arg, {dispatch, extra: api}) => {
+    await api.delete(APIRoute.Logout);
+    dropToken();
+    dispatch(requireAuthorization(AuthorizationStatus.NoAuth)); //меняем статус авториизации
+  },
+);

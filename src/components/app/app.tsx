@@ -1,20 +1,18 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import PrivateRoute from '../private-route/private-route';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { AppRoute } from '../../const';
 import MainPage from '../../pages/main/main-page';
 import Offer from '../../pages/offer/offer';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Error404 from '../../pages/error/error';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
-import { HeaderProps } from '../header/header';
 
-export type AppProps = {
-  userInfo: HeaderProps;
-};
+function App(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-function App({userInfo}: AppProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -22,23 +20,23 @@ function App({userInfo}: AppProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage userInfo = {userInfo} />}
+            element={<MainPage />}
           />
           <Route
             path={AppRoute.Login}
-            element={<Login userInfo = {userInfo} />}
+            element={<Login/>}
           />
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorites userInfo = {userInfo}/>
+              <PrivateRoute authorizationStatus={authorizationStatus}>
+                <Favorites />
               </PrivateRoute>
             }
           />
           <Route
             path={AppRoute.OfferId}
-            element={<Offer userInfo = {userInfo} />} // как передать один элемент массива?
+            element={<Offer />} // как передать один элемент массива?
           />
           <Route
             path="*"

@@ -10,7 +10,7 @@ type ClassListProps = {
 type PlaceCardsListProps = {
   offers: TOffers;
   // setState(id: number | null): React.SetStateAction<number | null>;
-  setState(id: number | null): void | null;
+  setState(id: string | null): void | null;
   classList: ClassListProps;
 
 };

@@ -1,7 +1,8 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { cityChange, sortingChange, loadedOffers, favoritesOffers, offersLoading, serverError } from './action';
-import { DEFAULT_CITY, DEFAULT_SORTING_TYPE } from '../const';
+import { cityChange, sortingChange, loadedOffers, favoritesOffers, offersLoading, serverError, requireAuthorization, userInfo } from './action';
+import { DEFAULT_CITY, DEFAULT_SORTING_TYPE, AuthorizationStatus } from '../const';
 import { TOffers } from '../types/offers';
+import { TUserData } from '../types/user-data';
 import { selecFavorites, selectOffersByCity, sortOffers } from '../util';
 
 type TInitialState = {
@@ -13,7 +14,11 @@ type TInitialState = {
   sorting: string;
   sortedOffers: TOffers;
   serverError: string | null; // хранит текст сообщения об ошибке для пользователя
+  authorizationStatus: AuthorizationStatus;
+  userInfo: TUserData;
+
 };
+
 const initialState: TInitialState = {
   isOffersLoading: true,
   city: DEFAULT_CITY,
@@ -24,6 +29,14 @@ const initialState: TInitialState = {
   sorting: DEFAULT_SORTING_TYPE,
   sortedOffers: [],
   serverError: null, // текст ошибки
+  authorizationStatus: AuthorizationStatus.Unknown,
+  userInfo: {
+    name: '',
+    avatarUrl: '',
+    email: '',
+    isPro: false,
+    token: '',
+  }
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -51,6 +64,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(serverError, (state, action) => {
       state.serverError = action.payload; // хранит текст ошибки сервера
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(userInfo, (state, action) => {
+      state.userInfo = action.payload;
     });
 });
 

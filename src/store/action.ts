@@ -1,5 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { TOffers } from '../types/offers';
+import { AuthorizationStatus } from '../const';
+import { TUserData } from '../types/user-data';
 
 export const offersLoading = createAction<boolean>('offersLoading'); // процесс загрузки
 
@@ -14,3 +16,7 @@ export const cityChange = createAction<string>('main/cityChange'); // если �
 export const offersListChange = createAction('main/offersListChange'); // нужен ли??
 
 export const sortingChange = createAction<string>('main/sortingChange');
+
+export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+
+export const userInfo = createAction<TUserData>('user/info');
