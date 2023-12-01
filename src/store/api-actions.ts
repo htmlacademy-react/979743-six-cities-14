@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { State, AppDispatch } from '../types/state';
 import {AxiosInstance} from 'axios';
-import { loadedOffers, offersLoading, requireAuthorization, userInfo } from './action';
+import { loadedOffers, offerInfoLoading, offersLoading, requireAuthorization, userInfo } from './action';
 import {APIRoute, AuthorizationStatus} from '../const';
 import { TOffers } from '../types/offers';
+import { TOfferInfo } from '../types/offer-info';
 import { TUserData } from '../types/user-data';
 import { TAuthData } from '../types/auth-data';
 import { saveToken, dropToken } from '../services/token';
@@ -18,6 +19,19 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
     dispatch(offersLoading(true));
     const {data} = await api.get<TOffers>(APIRoute.Offers);
     dispatch(loadedOffers(data));
+  },
+);
+
+export const fetchOfferInfoAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOfferInfo',
+  async (_arg, {dispatch, extra: api}) => {
+    dispatch(offersLoading(true)); // начинаем загрузку
+    const {data} = await api.get<TOfferInfo>(APIRoute.Offers);
+    dispatch(offerInfoLoading(data));
   },
 );
 

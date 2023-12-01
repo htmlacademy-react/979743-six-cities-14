@@ -1,42 +1,67 @@
-import Header from '../../components/header/header';
-// import { useAppSelector } from '../../hooks';
-// import { findOfferByID } from '../../util';
-import { TOfferInfo } from '../../types/offer-info';
-// import axios, { AxiosInstance } from 'axios';
-// import { APIRoute, REQUEST_TIMEOUT, BASE_URL } from '../../const';
-import ReviewsList from './reviews-list';
-import CommentForm from './comment-form';
-import PlaceCardsList from '../../components/place-card-list/place-cards-list';
+import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
+import Header from '../../components/header/header';
+import Spinner from '../../components/spiner/spinner';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { TOfferInfo } from '../../types/offer-info';
+import { APIRoute, REQUEST_TIMEOUT, BASE_URL } from '../../const';
+import ReviewsList from './reviews-list';
+import CommentForm from './comment-form';
+import PlaceCardsList from '../../components/place-card-list/place-cards-list';
 import Map from '../main/map';
 import { CityLocationType } from '../../types/cities';
 import './offer.css';
 import { REVIEWS } from '../../mocks/reviews'; // ВРЕМЕННО. запрашивает данные с сервера
-import { OFFERS } from '../../mocks/offers'; //  Потом будет запрос на сервер на получение офферов неподалеку
+import { OFFERS } from '../../mocks/offers';
+import { offerInfoLoading, offersLoading } from '../../store/action';
+import { processErrorHandle } from '../../services/process-error-handle';
 
 function Offer(): JSX.Element {
   const params = useParams();
+  const dispatch = useAppDispatch();
+  const url = `${BASE_URL}${APIRoute.Offers}/${params.id}`;
 
-  // const offers = useAppSelector((state) => state.offers); // извлекаем данные из store - офферы
-  const offerInfo: TOfferInfo = {};
+  const isOfferLoading = useAppSelector((state) => state.isOffersLoading);
+  const offerInfo = useAppSelector((state) => state.offerInfo);
 
-  // const url = `${BASE_URL}${APIRoute.Offers}/${params.id}`;
+  // const [offerInfo, setOfferInfo] = useState<TOfferInfo>(null); // нужно переддавать не null, а объект с пустыми полями, нач. состояние.
+  // const [isOfferInfoLoading, setOfferLoading] = useState<boolean>(true);
 
-  // axios.get(url , {timeout: REQUEST_TIMEOUT})
-  //   .then((response) => {
-  //     console.log(`Status code ${response.status}`);
-  //     offerInfo = response.data;
-  //     console.log(offerInfo);
-  //   })
-  //   .catch((err) => {
-  //     console.log('Error: что-то пошло не так', err);
-  //   });
+  if(offerInfo && !(offerInfo.id === params.id)) {
+    axios.get<TOfferInfo>(url , {timeout: REQUEST_TIMEOUT})
+      .then((response) => {
+        dispatch(offerInfoLoading(response.data));
+        dispatch(offersLoading(false));
+      })
+      .catch((err) => {
+        // console.log('Error: что-то пошло не так ', err); // TODO
+        processErrorHandle(err.response.data.message); // TODO
+      });
+  }
 
-  //здесь видимо должен быть запрос данных на сервер по id оффера, а не передача данных через пропс
+  // if(offerInfo && !(offerInfo.id === params.id)) {
+  //   axios.get<TOfferInfo>(url , {timeout: REQUEST_TIMEOUT})
+  //     .then((response) => {
+  //       setOfferInfo(response.data);
+  //       setOfferLoading(false); //завершили загрузку
+  //     })
+  //     .catch((err) => {
+  //       console.log('Error: что-то пошло не так ', err); // TODO
+  //       // dispatch(serverError(???));
+  //     });
+  // }
 
   const [activeCardId, setState] = useState<number | null>(null);
+
+  if (isOfferLoading) {
+    return (<Spinner />);
+  }
+
+  // if (isOfferInfoLoading) {
+  //   return (<Spinner />);
+  // }
 
   const cityLocation: CityLocationType = {
     name: offerInfo.city.name,
@@ -184,13 +209,13 @@ function Offer(): JSX.Element {
             </div>
           </div>
           <section className="offer__map map">
-            <Map cityLocation = {cityLocation} offers = {OFFERS} activeCardId = {activeCardId}/>
+            {/* <Map cityLocation = {cityLocation} offers = {OFFERS} activeCardId = {activeCardId}/> */}
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceCardsList offers = {OFFERS} setState = {setState} classList = {placeCardsClassList}/>
+            {/* <PlaceCardsList offers = {OFFERS} setState = {setState} classList = {placeCardsClassList}/> */}
           </section>
         </div>
       </main>
