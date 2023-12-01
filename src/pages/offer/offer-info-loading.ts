@@ -19,4 +19,4 @@ function useLoadOfferInfo(paramsId: string): void {
     });
 }
 
-export default useLoadOfferInfo;
+export {useLoadOfferInfo};
