@@ -1,9 +1,10 @@
-// import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
-import { CityLocationType } from '../../types/cities';
 import { AuthorizationStatus, OFFERS_NEARBY_QTY } from '../../const';
+import { TOffer, TOffers } from '../../types/offers';
+import { CityLocationType } from '../../types/cities';
+import { findOfferByID } from '../../util';
 import Header from '../../components/header/header';
 import Spinner from '../../components/spiner/spinner';
 import ReviewsList from './reviews-list';
@@ -15,32 +16,31 @@ import './offer.css';
 import { useLoadOfferInfo } from './use-load-offer-info';
 import { useLoadReviews } from './use-load-reviews';
 import { useLoadNearby } from './use-load-nearby';
-import { TOffers } from '../../types/offers';
-
 
 function Offer(): JSX.Element {
 
+  const allOffers = useAppSelector((state) => state.offers);
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
   const isAuth = useAppSelector((state) => state.authorizationStatus);
 
   const {isOfferInfoLoading, offerInfo, paramsID} = useLoadOfferInfo();
   const {reviews, isReviewsLoading} = useLoadReviews();
   const {isNearbyLoading, offersNearby} = useLoadNearby();
 
-  console.log(isAuth);
-  console.log(offerInfo);
-  console.log(reviews);
-  console.log(offersNearby);
+  const [activeCardId, setState] = useState<string | null>(null);
 
-
-  const [activeCardId, setState] = useState<number | null>(null);
-
-  if (isOfferInfoLoading || isReviewsLoading || isNearbyLoading) {
+  if (isOfferInfoLoading || isReviewsLoading || isNearbyLoading || isOffersLoading) {
     return (<Spinner />);
   }
-
+  const currentOfferForMap: TOffer = findOfferByID(allOffers, paramsID);
   const offersForMap: TOffers = offersNearby.slice(0, OFFERS_NEARBY_QTY);
+  offersForMap.push(currentOfferForMap);
   console.log(offersForMap);
+  console.log(activeCardId);
 
+  if(!activeCardId) {
+    setState(currentOfferForMap.id);
+  }
 
   const cityLocation: CityLocationType = {
     name: offerInfo.city.name,
