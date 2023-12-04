@@ -56,6 +56,8 @@ const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
 
 const OFFERS_NEARBY_QTY = 3;
 
+const DATE_FORMAT = 'MMMM YYYY';
+
 export {
   DEFAULT_CITY,
   City,
@@ -73,4 +75,5 @@ export {
   TIMEOUT_SHOW_ERROR,
   AUTH_TOKEN_KEY_NAME,
   OFFERS_NEARBY_QTY,
+  DATE_FORMAT,
 };
