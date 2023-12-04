@@ -9,7 +9,7 @@ type TLoadOfferInfo = {
   isOfferInfoLoading: boolean;
   offerInfo: TOfferInfo; // TS хочет | undefined, но тогда будет проблема в offer.tsx, он везде будет ругаться на undefined
   // либо гарантированно что-то возвращать, объект с пустыми полями, например...
-  paramsID:string | undefined;
+  paramsID: string;
 };
 
 function useLoadOfferInfo(): TLoadOfferInfo {

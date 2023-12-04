@@ -32,11 +32,9 @@ function Offer(): JSX.Element {
   if (isOfferInfoLoading || isReviewsLoading || isNearbyLoading || isOffersLoading) {
     return (<Spinner />);
   }
-  const currentOfferForMap: TOffer = findOfferByID(allOffers, paramsID);
+  const currentOfferForMap: TOffer = findOfferByID(allOffers, paramsID); // TODO - плохое решение...
   const offersForMap: TOffers = offersNearby.slice(0, OFFERS_NEARBY_QTY);
   offersForMap.push(currentOfferForMap);
-  console.log(offersForMap);
-  console.log(activeCardId);
 
   if(!activeCardId) {
     setState(currentOfferForMap.id);

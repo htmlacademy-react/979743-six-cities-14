@@ -3,10 +3,14 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { APIRoute, BASE_URL, REQUEST_TIMEOUT } from '../../const';
 import { processErrorHandle } from '../../services/process-error-handle';
-import { TOffersNearby } from '../../types/offers-nearby';
 import { TOffers } from '../../types/offers';
 
-function useLoadNearby (): TOffers {
+type TLoadNearby = {
+  isNearbyLoading: boolean;
+  offersNearby: TOffers;
+};
+
+function useLoadNearby (): TLoadNearby {
   const params = useParams();
   const url = `${BASE_URL}${APIRoute.Offers}/${params.id}/nearby`;
 
