@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { BASE_URL, APIRoute } from '../../const';
+import { usePostReview } from './use-post-review';
 
 function CommentForm(): JSX.Element {
   const [state, setState] = useState({
@@ -13,10 +18,23 @@ function CommentForm(): JSX.Element {
     });
   };
 
+  const params = useParams();
+  const url = `${BASE_URL}${APIRoute.Reviews}/${params.id}`;
+
   const reviewSubmitHandler = (evt: React.FormEvent) => {
     evt.preventDefault();
     console.log('form submitted');
     console.log(state);
+    // usePostReview(state);
+    useEffect (() => {
+      axios.post<TNewReview>(url, review)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  },[url, review]);
 
   };
 
