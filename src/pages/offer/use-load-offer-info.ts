@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { TOfferInfo } from '../../types/offer-info';
 import { BASE_URL, APIRoute, REQUEST_TIMEOUT } from '../../const';
@@ -15,6 +15,7 @@ type TLoadOfferInfo = {
 function useLoadOfferInfo(): TLoadOfferInfo {
   const params = useParams();
   const paramsID = params.id;
+  const navigate = useNavigate();
   const url = `${BASE_URL}${APIRoute.Offers}/${params.id}`;
 
   const [offerInfo, setOfferInfo] = useState<TOfferInfo | undefined>();
@@ -27,7 +28,10 @@ function useLoadOfferInfo(): TLoadOfferInfo {
         setOfferLoading(false); //завершили загрузку
       })
       .catch((err) => {
-        processErrorHandle(err.response.data.message); // TODO
+        setOfferLoading(false);
+        if (err.response.status === 404) {
+          navigate('/page-not-found');
+        }
       });
   }, [url]);
 

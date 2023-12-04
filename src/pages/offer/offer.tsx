@@ -24,6 +24,7 @@ function Offer(): JSX.Element {
   const isAuth = useAppSelector((state) => state.authorizationStatus);
 
   const {isOfferInfoLoading, offerInfo, paramsID} = useLoadOfferInfo();
+
   const {reviews, isReviewsLoading} = useLoadReviews();
   const {isNearbyLoading, offersNearby} = useLoadNearby();
 
@@ -32,6 +33,7 @@ function Offer(): JSX.Element {
   if (isOfferInfoLoading || isReviewsLoading || isNearbyLoading || isOffersLoading) {
     return (<Spinner />);
   }
+
   const currentOfferForMap: TOffer = findOfferByID(allOffers, paramsID); // TODO - плохое решение...
   const offersForMap: TOffers = offersNearby.slice(0, OFFERS_NEARBY_QTY);
   offersForMap.push(currentOfferForMap);
