@@ -13,8 +13,15 @@ function CommentForm(): JSX.Element {
     });
   };
 
+  const reviewSubmitHandler = (evt: React.FormEvent) => {
+    evt.preventDefault();
+    console.log('form submitted');
+    console.log(state);
+
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" method="post" onSubmit={reviewSubmitHandler}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input onChange = {dataChangeHandler} className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
@@ -65,7 +72,13 @@ function CommentForm(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!(state.comment)}>Submit</button>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={!(state.comment)}
+        >
+          Submit
+        </button>
       </div>
     </form>
   );
