@@ -1,16 +1,18 @@
-export type ReviewProps = {
-  comment: string;
-  date: string;
-  id: string;
-  rating: number;
-  user: {
-    avatarUrl: string;
-    name: string;
-    isPro: boolean;
-  };
-}
+import { TReview } from '../../types/reviews';
 
-function Review(review: ReviewProps): JSX.Element {
+// export type ReviewProps = {
+//   comment: string;
+//   date: string;
+//   id: string;
+//   rating: number;
+//   user: {
+//     avatarUrl: string;
+//     name: string;
+//     isPro: boolean;
+//   };
+// }
+
+function Review(review: TReview): JSX.Element {
   const {rating, comment, user} = review;
   const ratingStarr: string = `${rating / 5 * 100}%`;
 

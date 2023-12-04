@@ -1,70 +1,46 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useAppSelector } from '../../hooks';
+import { CityLocationType } from '../../types/cities';
+import { AuthorizationStatus, OFFERS_NEARBY_QTY } from '../../const';
 import Header from '../../components/header/header';
 import Spinner from '../../components/spiner/spinner';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { TOfferInfo } from '../../types/offer-info';
-import { APIRoute, REQUEST_TIMEOUT, BASE_URL } from '../../const';
 import ReviewsList from './reviews-list';
 import CommentForm from './comment-form';
 import PlaceCardsList from '../../components/place-card-list/place-cards-list';
 import Map from '../main/map';
-import { CityLocationType } from '../../types/cities';
-import './offer.css';
-import { REVIEWS } from '../../mocks/reviews'; // ВРЕМЕННО. запрашивает данные с сервера
-// import { OFFERS } from '../../mocks/offers';
-import { offerInfoLoading, offersLoading } from '../../store/action';
-import { processErrorHandle } from '../../services/process-error-handle';
 import OfferGallery from './offer-gallery';
-import { useLoadOfferInfo } from './offer-info-loading';
+import './offer.css';
+import { useLoadOfferInfo } from './use-load-offer-info';
+import { useLoadReviews } from './use-load-reviews';
+import { useLoadNearby } from './use-load-nearby';
+import { TOffers } from '../../types/offers';
+
 
 function Offer(): JSX.Element {
-  const params = useParams();
-  const dispatch = useAppDispatch();
-  const url = `${BASE_URL}${APIRoute.Offers}/${params.id}`;
 
-  const isOfferLoading = useAppSelector((state) => state.isOffersLoading);
-  const offerInfo = useAppSelector((state) => state.offerInfo);
+  const isAuth = useAppSelector((state) => state.authorizationStatus);
 
-  // const [offerInfo, setOfferInfo] = useState<TOfferInfo>(null); // нужно переддавать не null, а объект с пустыми полями, нач. состояние.
-  // const [isOfferInfoLoading, setOfferLoading] = useState<boolean>(true);
+  const {isOfferInfoLoading, offerInfo, paramsID} = useLoadOfferInfo();
+  const {reviews, isReviewsLoading} = useLoadReviews();
+  const {isNearbyLoading, offersNearby} = useLoadNearby();
 
-  if(offerInfo && !(offerInfo.id === params.id)) {
-    axios.get<TOfferInfo>(url , {timeout: REQUEST_TIMEOUT})
-      .then((response) => {
-        dispatch(offerInfoLoading(response.data));
-        dispatch(offersLoading(false));
-      })
-      .catch((err) => {
-        // console.log('Error: что-то пошло не так ', err); // TODO
-        processErrorHandle(err.response.data.message); // TODO
-      });
-    // useLoadOfferInfo(params.id);
-  }
+  console.log(isAuth);
+  console.log(offerInfo);
+  console.log(reviews);
+  console.log(offersNearby);
 
-  // if(offerInfo && !(offerInfo.id === params.id)) {
-  //   axios.get<TOfferInfo>(url , {timeout: REQUEST_TIMEOUT})
-  //     .then((response) => {
-  //       setOfferInfo(response.data);
-  //       setOfferLoading(false); //завершили загрузку
-  //     })
-  //     .catch((err) => {
-  //       console.log('Error: что-то пошло не так ', err); // TODO
-  //       // dispatch(serverError(???));
-  //     });
-  // }
 
   const [activeCardId, setState] = useState<number | null>(null);
 
-  if (isOfferLoading) {
+  if (isOfferInfoLoading || isReviewsLoading || isNearbyLoading) {
     return (<Spinner />);
   }
 
-  // if (isOfferInfoLoading) {
-  //   return (<Spinner />);
-  // }
+  const offersForMap: TOffers = offersNearby.slice(0, OFFERS_NEARBY_QTY);
+  console.log(offersForMap);
+
 
   const cityLocation: CityLocationType = {
     name: offerInfo.city.name,
@@ -85,7 +61,7 @@ function Offer(): JSX.Element {
     <div className="page">
       <Header />
       <Helmet>
-        <title>6 городов. Предложение {params.id}</title>
+        <title>6 городов. Предложение {paramsID}</title>
       </Helmet>
       <main className="page__main page__main--offer">
         <section className="offer">
@@ -97,7 +73,7 @@ function Offer(): JSX.Element {
               {
                 isPremium
                   ? (<div className="offer__mark"><span>Premium</span></div>)
-                  : ''
+                  : null
               }
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
@@ -154,7 +130,7 @@ function Offer(): JSX.Element {
                   {
                     host.isPro
                       ? (<div className="offer__user-status"><span>Pro</span></div>)
-                      : ''
+                      : null
                   }
                 </div>
                 <div className="offer__description">
@@ -164,20 +140,24 @@ function Offer(): JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ReviewsList reviews = {REVIEWS} />
-                <CommentForm />
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews?.length}</span></h2>
+                <ReviewsList reviews = {reviews} />
+                {
+                  isAuth === AuthorizationStatus.Auth
+                    ? (<CommentForm />)
+                    : null
+                }
               </section>
             </div>
           </div>
           <section className="offer__map map">
-            {/* <Map cityLocation = {cityLocation} offers = {OFFERS} activeCardId = {activeCardId}/> */}
+            <Map cityLocation = {cityLocation} offers = {offersForMap} activeCardId = {activeCardId}/>
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            {/* <PlaceCardsList offers = {OFFERS} setState = {setState} classList = {placeCardsClassList}/> */}
+            <PlaceCardsList offers = {offersNearby} setState = {setState} classList = {placeCardsClassList}/>
           </section>
         </div>
       </main>

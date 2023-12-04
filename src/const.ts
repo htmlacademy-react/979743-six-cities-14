@@ -47,11 +47,14 @@ enum APIRoute {
   Favorites = '/favorite',
   Login = '/login',
   Logout = '/logout',
+  Reviews = '/comments'
 }
 
 const TIMEOUT_SHOW_ERROR = 2000;
 
 const AUTH_TOKEN_KEY_NAME = 'six-cities-token';
+
+const OFFERS_NEARBY_QTY = 3;
 
 export {
   DEFAULT_CITY,
@@ -69,4 +72,5 @@ export {
   APIRoute,
   TIMEOUT_SHOW_ERROR,
   AUTH_TOKEN_KEY_NAME,
+  OFFERS_NEARBY_QTY,
 };
