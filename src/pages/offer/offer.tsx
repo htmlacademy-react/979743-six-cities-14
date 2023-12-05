@@ -8,7 +8,7 @@ import { findOfferByID } from '../../util';
 import Header from '../../components/header/header';
 import Spinner from '../../components/spiner/spinner';
 import ReviewsList from './reviews-list';
-import CommentForm from './comment-form';
+import ReviewForm from './review-form';
 import PlaceCardsList from '../../components/place-card-list/place-cards-list';
 import Map from '../main/map';
 import OfferGallery from './offer-gallery';
@@ -144,7 +144,7 @@ function Offer(): JSX.Element {
                 <ReviewsList reviews = {reviews} />
                 {
                   isAuth === AuthorizationStatus.Auth
-                    ? (<CommentForm />)
+                    ? (<ReviewForm />)
                     : null
                 }
               </section>

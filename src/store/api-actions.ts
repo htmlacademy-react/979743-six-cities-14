@@ -8,6 +8,8 @@ import { TOfferInfo } from '../types/offer-info';
 import { TUserData } from '../types/user-data';
 import { TAuthData } from '../types/auth-data';
 import { saveToken, dropToken } from '../services/token';
+import { TSendReview } from '../types/send-review';
+import { TNewReview } from '../types/new-review';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -76,5 +78,21 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth)); //меняем статус авториизации
+  },
+);
+
+export const sendReviewAction = createAsyncThunk<void, TSendReview, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'send/review',
+  async ({comment, rating, id}, {dispatch, extra: api}) => {
+    const {data} = await api.post<TNewReview>(`${APIRoute.Reviews}/${id}`, {comment, rating});
+    console.log(data);
+
+    // dispatch(userInfo(data));
+    // dispatch(requireAuthorization(AuthorizationStatus.Auth)); //меняем статус авториизации
+    //YS5ib2dvc2xvdnNrYWphQHlhbmRleC5ydQ==
   },
 );

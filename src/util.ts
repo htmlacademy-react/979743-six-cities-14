@@ -68,4 +68,8 @@ function sortOffers(offers: TOffers, sortingType: string): TOffers { // offers -
   }
 }
 
-export {selectOffersByCity, selecFavorites, getCityLocation, findOfferByID, sortOffers};
+function checkReviewValidate(comment: string, rating: number): boolean {
+  return (comment.length > 49 && comment.length < 301 && rating > 0 && rating < 6); // TODO
+}
+
+export {selectOffersByCity, selecFavorites, getCityLocation, findOfferByID, sortOffers, checkReviewValidate};
