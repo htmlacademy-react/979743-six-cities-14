@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
-import { useAppSelector } from '../../hooks';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthorizationStatus, OFFERS_NEARBY_QTY } from '../../const';
 import { TOffer, TOffers } from '../../types/offers';
 import { CityLocationType } from '../../types/cities';
@@ -16,25 +16,35 @@ import './offer.css';
 import { useLoadOfferInfo } from './use-load-offer-info';
 import { useLoadReviews } from './use-load-reviews';
 import { useLoadNearby } from './use-load-nearby';
+import { fetchReviewListAction } from '../../store/api-actions';
+import { useParams } from 'react-router-dom';
 
 function Offer(): JSX.Element {
-
+  const params = useParams();
   const allOffers = useAppSelector((state) => state.offers);
   const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
   const isAuth = useAppSelector((state) => state.authorizationStatus);
+  const reviews = useAppSelector((state) => state.reviewsList);
+  const isReviewsLoading = useAppSelector((state) => state.isReviewListLoading);
+
+  const dispatch = useAppDispatch();
 
   const {isOfferInfoLoading, offerInfo, paramsID} = useLoadOfferInfo();
 
-  const {reviews, isReviewsLoading} = useLoadReviews();
+  useEffect(() => {
+    dispatch(fetchReviewListAction(params.id));
+  },[params, dispatch]);
+
+  // const {reviews, isReviewsLoading} = useLoadReviews();
   const {isNearbyLoading, offersNearby} = useLoadNearby();
 
   const [activeCardId, setState] = useState<string | null>(null);
 
-  if (isOfferInfoLoading || isReviewsLoading || isNearbyLoading || isOffersLoading) {
+  if (isOfferInfoLoading || isNearbyLoading || isOffersLoading || isReviewsLoading) { // TODO
     return (<Spinner />);
   }
 
-  const currentOfferForMap: TOffer = findOfferByID(allOffers, paramsID); // TODO - плохое решение...
+  const currentOfferForMap: TOffer = findOfferByID(allOffers, paramsID);
   const offersForMap: TOffers = offersNearby.slice(0, OFFERS_NEARBY_QTY);
   offersForMap.push(currentOfferForMap);
 
@@ -141,7 +151,7 @@ function Offer(): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews?.length}</span></h2>
-                <ReviewsList reviews = {reviews} />
+                <ReviewsList />
                 {
                   isAuth === AuthorizationStatus.Auth
                     ? (<ReviewForm />)

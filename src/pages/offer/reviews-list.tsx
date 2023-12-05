@@ -1,12 +1,8 @@
-import { TReviews } from '../../types/reviews';
+import { useAppSelector } from '../../hooks';
 import Review from './review';
-// import { ReviewProps } from './review';
 
-type ReviewsListProps = {
-  reviews: TReviews;
-};
-
-function ReviewsList({reviews}: ReviewsListProps): JSX.Element {
+function ReviewsList(): JSX.Element {
+  const reviews = useAppSelector((state) => state.reviewsList);
   return (
     <ul className="reviews__list">
       {reviews.map((review) => (

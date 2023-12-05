@@ -1,10 +1,12 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { cityChange, sortingChange, loadedOffers, favoritesOffers, offersLoading, serverError, requireAuthorization, userInfo, offerInfoLoading } from './action';
+import { cityChange, sortingChange, loadedOffers, favoritesOffers, offersLoading, serverError, requireAuthorization, userInfo, offerInfoLoading, newReview, reviewList, reviewListLoading } from './action';
 import { DEFAULT_CITY, DEFAULT_SORTING_TYPE, AuthorizationStatus } from '../const';
 import { TOffers } from '../types/offers';
 import { TUserData } from '../types/user-data';
 import { selecFavorites, selectOffersByCity, sortOffers } from '../util';
 import { TOfferInfo } from '../types/offer-info';
+import { TNewReview } from '../types/new-review';
+import { TReviews } from '../types/reviews';
 
 type TInitialState = {
   isOffersLoading: boolean;
@@ -18,6 +20,9 @@ type TInitialState = {
   serverError: string | null; // хранит текст сообщения об ошибке для пользователя
   authorizationStatus: AuthorizationStatus;
   userInfo: TUserData;
+  // newReview: TNewReview;
+  reviewsList: TReviews;
+  isReviewListLoading: boolean;
 };
 
 const initialState: TInitialState = {
@@ -68,7 +73,20 @@ const initialState: TInitialState = {
     },
     'images': [''],
     'maxAdults': 0
-  }
+  },
+  // newReview: {
+  //   id: '',
+  //   date: '',
+  //   user: {
+  //     name: '',
+  //     avatarUrl: '',
+  //     isPro: false,
+  //   },
+  //   comment: '',
+  //   rating: 0,
+  // }
+  reviewsList: [],
+  isReviewListLoading: true,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -105,6 +123,16 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(offerInfoLoading, (state, action) => {
       state.offerInfo = action.payload;
+    })
+    .addCase(reviewList, (state, action) => {
+      state.reviewsList = action.payload;
+      state.isReviewListLoading = false;
+    })
+    .addCase(reviewListLoading, (state, action) => {
+      state.isReviewListLoading = action.payload;
+    })
+    .addCase(newReview, (state, action) => {
+      state.reviewsList = [...state.reviewsList, action.payload];
     });
 });
 

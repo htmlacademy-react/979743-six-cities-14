@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { State, AppDispatch } from '../types/state';
 import {AxiosInstance} from 'axios';
-import { loadedOffers, offerInfoLoading, offersLoading, requireAuthorization, userInfo } from './action';
+import { loadedOffers, newReview, offerInfoLoading, offersLoading, requireAuthorization, userInfo, reviewList, reviewListLoading } from './action';
 import {APIRoute, AuthorizationStatus} from '../const';
 import { TOffers } from '../types/offers';
 import { TOfferInfo } from '../types/offer-info';
@@ -10,6 +10,7 @@ import { TAuthData } from '../types/auth-data';
 import { saveToken, dropToken } from '../services/token';
 import { TSendReview } from '../types/send-review';
 import { TNewReview } from '../types/new-review';
+import { TReviews } from '../types/reviews';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -81,7 +82,21 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const sendReviewAction = createAsyncThunk<void, TSendReview, {
+export const fetchReviewListAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchReviewList',
+  async (id, {dispatch, extra: api}) => {
+    dispatch(reviewListLoading(true)); // начинаем загрузку
+    const {data} = await api.get<TReviews>(`${APIRoute.Reviews}/${id}`);
+    dispatch(reviewList(data));
+    // dispatch(reviewListLoading(false));
+  },
+);
+
+export const sendReviewAction = createAsyncThunk<void, TNewReview, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -90,9 +105,6 @@ export const sendReviewAction = createAsyncThunk<void, TSendReview, {
   async ({comment, rating, id}, {dispatch, extra: api}) => {
     const {data} = await api.post<TNewReview>(`${APIRoute.Reviews}/${id}`, {comment, rating});
     console.log(data);
-
-    // dispatch(userInfo(data));
-    // dispatch(requireAuthorization(AuthorizationStatus.Auth)); //меняем статус авториизации
-    //YS5ib2dvc2xvdnNrYWphQHlhbmRleC5ydQ==
+    dispatch(newReview(data));
   },
 );

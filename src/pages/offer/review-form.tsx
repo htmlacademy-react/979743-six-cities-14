@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sendReviewAction } from '../../store/api-actions';
 import { checkReviewValidate } from '../../util';
 
 function ReviewForm(): JSX.Element {
-  // const ratingRef = useRef<HTMLInputElement | null>(null);
-  // const commentgRef = useRef<HTMLInputElement | null>(null);
-
   const dispatch = useAppDispatch();
+  const newReview = useAppSelector((state) => state.newReview);
 
   const [state, setState] = useState({
     rating: 0,
     comment: '',
-    isReviewValid: false,});
+    isReviewValid: false,
+  });
 
   const dataChangeHandler = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = evt.target;
@@ -22,6 +21,7 @@ function ReviewForm(): JSX.Element {
       [name]: value,
       isReviewValid: checkReviewValidate(state.comment, state.rating)
     });
+    console.log(state);
   };
 
   const params = useParams();
@@ -34,13 +34,20 @@ function ReviewForm(): JSX.Element {
         comment: state.comment,
         id: params.id,
       }))
-        .then((serverRusult) => {
-          if (!(serverRusult === null)) {
-            console.log('serverRusult - ', serverRusult);
+        .then((serverResult) => {
+          if (!(serverResult.meta.requestStatus === 'fulfilled')) {
+            console.log('serverResult - ', serverResult);
           }
         });
     }
+    setState({
+      rating: 0,
+      comment: '',
+      isReviewValid: false,
+    });
   };
+
+  console.log('from store - ', newReview);
 
   return (
     <form className="reviews__form form" onSubmit={reviewSubmitHandler}>
