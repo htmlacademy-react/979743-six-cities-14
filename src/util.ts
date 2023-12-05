@@ -1,5 +1,7 @@
+import dayjs from 'dayjs';
 import { TOffers, TOffer } from './types/offers';
 import { CityLocationType } from './types/cities';
+import { TReviews } from './types/reviews';
 
 function selectOffersByCity (allOffers: TOffers, city: string): TOffers {
   const selectedOffers = allOffers.filter((offer) => offer.city.name === city);
@@ -72,4 +74,8 @@ function checkReviewValidate(comment: string, rating: number): boolean {
   return (comment.length > 49 && comment.length < 301 && rating > 0 && rating < 6); // TODO
 }
 
-export {selectOffersByCity, selecFavorites, getCityLocation, findOfferByID, sortOffers, checkReviewValidate};
+function sortReviews(reviwes: TReviews): TReviews {
+  return reviwes.slice().sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));
+}
+
+export {selectOffersByCity, selecFavorites, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews};

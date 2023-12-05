@@ -5,8 +5,9 @@ import { sendReviewAction } from '../../store/api-actions';
 import { checkReviewValidate } from '../../util';
 
 function ReviewForm(): JSX.Element {
+  const params = useParams();
   const dispatch = useAppDispatch();
-  const newReview = useAppSelector((state) => state.newReview);
+  // const newReview = useAppSelector((state) => state.newReview);
 
   const [state, setState] = useState({
     rating: 0,
@@ -21,10 +22,7 @@ function ReviewForm(): JSX.Element {
       [name]: value,
       isReviewValid: checkReviewValidate(state.comment, state.rating)
     });
-    console.log(state);
   };
-
-  const params = useParams();
 
   const reviewSubmitHandler = (evt: React.FormEvent) => {
     evt.preventDefault();
@@ -33,12 +31,7 @@ function ReviewForm(): JSX.Element {
         rating: Number(state.rating),
         comment: state.comment,
         id: params.id,
-      }))
-        .then((serverResult) => {
-          if (!(serverResult.meta.requestStatus === 'fulfilled')) {
-            console.log('serverResult - ', serverResult);
-          }
-        });
+      }));
     }
     setState({
       rating: 0,
@@ -46,8 +39,6 @@ function ReviewForm(): JSX.Element {
       isReviewValid: false,
     });
   };
-
-  console.log('from store - ', newReview);
 
   return (
     <form className="reviews__form form" onSubmit={reviewSubmitHandler}>

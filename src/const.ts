@@ -58,6 +58,8 @@ const OFFERS_NEARBY_QTY = 3;
 
 const DATE_FORMAT = 'MMMM YYYY';
 
+const REVIEWS_QTY = 10;
+
 export {
   DEFAULT_CITY,
   City,
@@ -76,4 +78,5 @@ export {
   AUTH_TOKEN_KEY_NAME,
   OFFERS_NEARBY_QTY,
   DATE_FORMAT,
+  REVIEWS_QTY,
 };

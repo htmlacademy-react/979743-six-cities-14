@@ -104,7 +104,6 @@ export const sendReviewAction = createAsyncThunk<void, TNewReview, {
   'send/review',
   async ({comment, rating, id}, {dispatch, extra: api}) => {
     const {data} = await api.post<TNewReview>(`${APIRoute.Reviews}/${id}`, {comment, rating});
-    console.log(data);
     dispatch(newReview(data));
   },
 );
