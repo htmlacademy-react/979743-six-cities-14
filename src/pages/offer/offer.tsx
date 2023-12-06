@@ -14,7 +14,6 @@ import Map from '../main/map';
 import OfferGallery from './offer-gallery';
 import './offer.css';
 import { useLoadOfferInfo } from './use-load-offer-info';
-import { useLoadReviews } from './use-load-reviews';
 import { useLoadNearby } from './use-load-nearby';
 import { fetchReviewListAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
@@ -29,13 +28,12 @@ function Offer(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const {isOfferInfoLoading, offerInfo, paramsID} = useLoadOfferInfo();
+  const {isOfferInfoLoading, offerInfo} = useLoadOfferInfo();
 
   useEffect(() => {
     dispatch(fetchReviewListAction(params.id));
   },[params, dispatch]);
 
-  // const {reviews, isReviewsLoading} = useLoadReviews();
   const {isNearbyLoading, offersNearby} = useLoadNearby();
 
   const [activeCardId, setState] = useState<string | null>(null);
@@ -44,7 +42,7 @@ function Offer(): JSX.Element {
     return (<Spinner />);
   }
 
-  const currentOfferForMap: TOffer = findOfferByID(allOffers, paramsID);
+  const currentOfferForMap: TOffer = findOfferByID(allOffers, params.id);
   const offersForMap: TOffers = offersNearby.slice(0, OFFERS_NEARBY_QTY);
   offersForMap.push(currentOfferForMap);
 
@@ -66,6 +64,8 @@ function Offer(): JSX.Element {
   };
   const {images, isPremium, title, rating, price, bedrooms, maxAdults, type, goods, host, description} = offerInfo;
   const ratingStarr: string = `${rating / 5 * 100}%`;
+
+  const paramsID = params.id;
 
   return (
     <div className="page">

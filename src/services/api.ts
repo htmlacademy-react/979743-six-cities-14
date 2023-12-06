@@ -5,7 +5,6 @@ import { processErrorHandle } from './process-error-handle';
 import { offersLoading } from '../store/action';
 import { store } from '../store';
 import { getToken } from './token';
-import { useNavigate } from 'react-router-dom';
 
 type DetailMessageType = {
   type: string;

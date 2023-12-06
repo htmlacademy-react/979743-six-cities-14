@@ -8,7 +8,6 @@ import { TOfferInfo } from '../types/offer-info';
 import { TUserData } from '../types/user-data';
 import { TAuthData } from '../types/auth-data';
 import { saveToken, dropToken } from '../services/token';
-import { TSendReview } from '../types/send-review';
 import { TNewReview } from '../types/new-review';
 import { TReviews } from '../types/reviews';
 
@@ -82,7 +81,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const fetchReviewListAction = createAsyncThunk<void, string, {
+export const fetchReviewListAction = createAsyncThunk<void, string | undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -92,7 +91,6 @@ export const fetchReviewListAction = createAsyncThunk<void, string, {
     dispatch(reviewListLoading(true)); // начинаем загрузку
     const {data} = await api.get<TReviews>(`${APIRoute.Reviews}/${id}`);
     dispatch(reviewList(data));
-    // dispatch(reviewListLoading(false));
   },
 );
 

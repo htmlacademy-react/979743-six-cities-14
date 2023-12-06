@@ -5,7 +5,6 @@ import { TOffers } from '../types/offers';
 import { TUserData } from '../types/user-data';
 import { selecFavorites, selectOffersByCity, sortOffers } from '../util';
 import { TOfferInfo } from '../types/offer-info';
-import { TNewReview } from '../types/new-review';
 import { TReviews } from '../types/reviews';
 
 type TInitialState = {
@@ -20,7 +19,6 @@ type TInitialState = {
   serverError: string | null; // хранит текст сообщения об ошибке для пользователя
   authorizationStatus: AuthorizationStatus;
   userInfo: TUserData;
-  // newReview: TNewReview;
   reviewsList: TReviews;
   isReviewListLoading: boolean;
 };
@@ -74,17 +72,6 @@ const initialState: TInitialState = {
     'images': [''],
     'maxAdults': 0
   },
-  // newReview: {
-  //   id: '',
-  //   date: '',
-  //   user: {
-  //     name: '',
-  //     avatarUrl: '',
-  //     isPro: false,
-  //   },
-  //   comment: '',
-  //   rating: 0,
-  // }
   reviewsList: [],
   isReviewListLoading: true,
 };

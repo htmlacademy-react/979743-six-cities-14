@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { sendReviewAction } from '../../store/api-actions';
 import { checkReviewValidate } from '../../util';
 
 function ReviewForm(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
-  // const newReview = useAppSelector((state) => state.newReview);
 
   const [state, setState] = useState({
     rating: 0,

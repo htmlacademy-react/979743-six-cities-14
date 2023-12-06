@@ -8,7 +8,7 @@ function selectOffersByCity (allOffers: TOffers, city: string): TOffers {
   return selectedOffers;
 }
 
-function findOfferByID (allOffers: TOffers, id: string): TOffer {
+function findOfferByID (allOffers: TOffers, id: string | undefined): TOffer {
   const selectedOffer = allOffers.find((offer) => offer.id === id);
   if (selectedOffer) {
     return selectedOffer;
