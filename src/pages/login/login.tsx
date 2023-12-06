@@ -24,7 +24,7 @@ function Login(): JSX.Element {
       }))
         .then((serverRusult) => {
           if (serverRusult.type === 'user/login/fulfilled') {
-            navigate('/');
+            navigate(-1);
           }
         });
     }

@@ -15,7 +15,7 @@ type MainWithOffersProps = {
 function MainWithOffers({offers, currentCity}: MainWithOffersProps): JSX.Element {
   // на входе офферы, отфильтрованные по городу; фильтрация в mainPage
 
-  const [activeCardId, setState] = useState<number | null>(null);
+  const [activeCardId, setState] = useState<string | null>(null);
   const cityLocation: CityLocationType = getCityLocation(offers, currentCity);
 
   const placeCardsClassList = { // список классов для списка офферов

@@ -1,16 +1,10 @@
-export type ReviewProps = {
-  comment: string;
-  date: string;
-  id: string;
-  rating: number;
-  user: {
-    avatarUrl: string;
-    name: string;
-    isPro: boolean;
-  };
-}
+import dayjs from 'dayjs';
+import { TReview } from '../../types/reviews';
+import { DATE_FORMAT } from '../../const';
 
-function Review(review: ReviewProps): JSX.Element {
+function Review(review: TReview): JSX.Element {
+  const date = dayjs(review.date).format(DATE_FORMAT);
+
   const {rating, comment, user} = review;
   const ratingStarr: string = `${rating / 5 * 100}%`;
 
@@ -34,7 +28,7 @@ function Review(review: ReviewProps): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <time className="reviews__time" dateTime="2019-04-24">{date}</time>
       </div>
     </>
   );

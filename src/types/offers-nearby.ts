@@ -1,18 +1,17 @@
-// один оффер подробно
-export type TOfferInfo = {
+export type TOfferNearby = {
   id: string;
   title: string;
   type: string;
   price: number;
   city: {
     name: string;
-      location: {
+    location: {
       latitude: number;
       longitude: number;
       zoom: number;
     };
   };
-    location: {
+  location: {
     latitude: number;
     longitude: number;
     zoom: number;
@@ -20,14 +19,7 @@ export type TOfferInfo = {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-  description: string;
-  bedrooms: number;
-  goods: string[];
-  host: {
-    name: string;
-    avatarUrl: string;
-    isPro: boolean;
-  };
-  images: string[];
-  maxAdults: number;
+  previewImage: string;
 };
+
+export type TOffersNearby = TOfferNearby[];

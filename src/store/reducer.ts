@@ -1,14 +1,17 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { cityChange, sortingChange, loadedOffers, favoritesOffers, offersLoading, serverError, requireAuthorization, userInfo } from './action';
+import { cityChange, sortingChange, loadedOffers, favoritesOffers, offersLoading, serverError, requireAuthorization, userInfo, offerInfoLoading, newReview, reviewList, reviewListLoading } from './action';
 import { DEFAULT_CITY, DEFAULT_SORTING_TYPE, AuthorizationStatus } from '../const';
 import { TOffers } from '../types/offers';
 import { TUserData } from '../types/user-data';
 import { selecFavorites, selectOffersByCity, sortOffers } from '../util';
+import { TOfferInfo } from '../types/offer-info';
+import { TReviews } from '../types/reviews';
 
 type TInitialState = {
   isOffersLoading: boolean;
   city: string;
   offers: TOffers;
+  offerInfo: TOfferInfo;
   byCityOffers: TOffers;
   favoritesOffers: TOffers;
   sorting: string;
@@ -16,14 +19,14 @@ type TInitialState = {
   serverError: string | null; // хранит текст сообщения об ошибке для пользователя
   authorizationStatus: AuthorizationStatus;
   userInfo: TUserData;
-
+  reviewsList: TReviews;
+  isReviewListLoading: boolean;
 };
 
 const initialState: TInitialState = {
   isOffersLoading: true,
   city: DEFAULT_CITY,
-  // список офферов для всех городов - так получаем с сервера
-  offers: [],
+  offers: [], // список офферов для всех городов - так получаем с сервера
   byCityOffers: [],
   favoritesOffers: [],
   sorting: DEFAULT_SORTING_TYPE,
@@ -36,7 +39,41 @@ const initialState: TInitialState = {
     email: '',
     isPro: false,
     token: '',
-  }
+  },
+  offerInfo: {
+    'id': '',
+    'title': '',
+    'type': '',
+    'price': 0,
+    'city': {
+      'name': '',
+      'location': {
+        'latitude': 0,
+        'longitude': 0,
+        'zoom': 0
+      }
+    },
+    'location': {
+      'latitude': 0,
+      'longitude': 0,
+      'zoom': 0
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 0,
+    'description': '',
+    'bedrooms': 0,
+    'goods': [''],
+    'host': {
+      'name': '',
+      'avatarUrl': '',
+      'isPro': false
+    },
+    'images': [''],
+    'maxAdults': 0
+  },
+  reviewsList: [],
+  isReviewListLoading: true,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -70,6 +107,19 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(userInfo, (state, action) => {
       state.userInfo = action.payload;
+    })
+    .addCase(offerInfoLoading, (state, action) => {
+      state.offerInfo = action.payload;
+    })
+    .addCase(reviewList, (state, action) => {
+      state.reviewsList = action.payload;
+      state.isReviewListLoading = false;
+    })
+    .addCase(reviewListLoading, (state, action) => {
+      state.isReviewListLoading = action.payload;
+    })
+    .addCase(newReview, (state, action) => {
+      state.reviewsList = [...state.reviewsList, action.payload];
     });
 });
 

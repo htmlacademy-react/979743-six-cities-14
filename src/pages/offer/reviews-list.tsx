@@ -1,11 +1,12 @@
+import { REVIEWS_QTY } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { sortReviews } from '../../util';
 import Review from './review';
-import { ReviewProps } from './review';
 
-type ReviewsListProps = {
-  reviews: ReviewProps[];
-};
+function ReviewsList(): JSX.Element {
+  const reviews1 = useAppSelector((state) => state.reviewsList);
+  const reviews = sortReviews(reviews1).slice(0, REVIEWS_QTY);
 
-function ReviewsList({reviews}: ReviewsListProps): JSX.Element {
   return (
     <ul className="reviews__list">
       {reviews.map((review) => (
