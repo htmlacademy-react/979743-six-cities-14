@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, MIN_RATING, MAX_RATING, SortingType } from './const';
 import { TOffers, TOffer } from './types/offers';
 import { CityLocationType } from './types/cities';
 import { TReviews } from './types/reviews';
@@ -13,7 +14,7 @@ function findOfferByID (allOffers: TOffers, id: string | undefined): TOffer {
   if (selectedOffer) {
     return selectedOffer;
   } else {
-    return allOffers[0]; // !!! не знаю, как еще undefind обойти
+    return allOffers[0]; // TODO как undefind обойти???
   }
 }
 
@@ -36,7 +37,7 @@ function getCityLocation (allOffers: TOffers, city: string | undefined): CityLoc
     });
   } else {
     return ({
-      name: 'Москва', // смешно
+      name: 'Москва', // смешно //TODO
       zoom: 8,
       lat: 55.558741,
       lng: 37.378847,
@@ -57,13 +58,12 @@ function sortByRating(offers: TOffers): TOffers {
 }
 
 function sortOffers(offers: TOffers, sortingType: string): TOffers { // offers - это офферы в первоначальном порядке
-  // надо сделать, чтобы sortingType принимала значения только из массива
   switch (sortingType) {
-    case 'Price: low to high':
+    case SortingType.LowToHigh:
       return sortLowToHigh(offers);
-    case 'Price: high to low':
+    case SortingType.HighToLow:
       return sortHighToLow(offers);
-    case 'Top rated first':
+    case SortingType.TopRated:
       return sortByRating(offers);
     default: //  = Popular
       return offers; // первоначальный порядок
@@ -71,7 +71,9 @@ function sortOffers(offers: TOffers, sortingType: string): TOffers { // offers -
 }
 
 function checkReviewValidate(comment: string, rating: number): boolean {
-  return (comment.length > 49 && comment.length < 301 && rating > 0 && rating < 6); // TODO
+  return (comment.length >= MIN_COMMENT_LENGTH
+            && comment.length <= MAX_COMMENT_LENGTH
+            && rating >= MIN_RATING && rating <= MAX_RATING);
 }
 
 function sortReviews(reviwes: TReviews): TReviews {

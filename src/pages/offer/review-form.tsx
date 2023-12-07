@@ -3,36 +3,37 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { sendReviewAction } from '../../store/api-actions';
 import { checkReviewValidate } from '../../util';
+import { MIN_COMMENT_LENGTH } from '../../const';
 
 function ReviewForm(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
 
-  const [state, setState] = useState({
+  const [newReview, setnewReview] = useState({
     rating: 0,
     comment: '',
     isReviewValid: false,
   });
 
-  const dataChangeHandler = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleDataChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = evt.target;
-    setState({
-      ...state,
+    setnewReview({
+      ...newReview,
       [name]: value,
-      isReviewValid: checkReviewValidate(state.comment, state.rating)
+      isReviewValid: checkReviewValidate(newReview.comment, newReview.rating)
     });
   };
 
-  const reviewSubmitHandler = (evt: React.FormEvent) => {
+  const handleReviewSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
-    if (state.isReviewValid) {
+    if (newReview.isReviewValid) {
       dispatch(sendReviewAction({
-        rating: Number(state.rating),
-        comment: state.comment,
+        rating: Number(newReview.rating),
+        comment: newReview.comment,
         id: params.id,
       }));
     }
-    setState({
+    setnewReview({
       rating: 0,
       comment: '',
       isReviewValid: false,
@@ -40,11 +41,11 @@ function ReviewForm(): JSX.Element {
   };
 
   return (
-    <form className="reviews__form form" onSubmit={reviewSubmitHandler}>
+    <form className="reviews__form form" onSubmit={handleReviewSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input
-          onChange = {dataChangeHandler}
+          onChange = {handleDataChange}
           className="form__rating-input visually-hidden"
           name="rating"
           value="5"
@@ -58,7 +59,7 @@ function ReviewForm(): JSX.Element {
         </label>
 
         <input
-          onChange = {dataChangeHandler}
+          onChange = {handleDataChange}
           className="form__rating-input visually-hidden"
           name="rating"
           value="4"
@@ -71,21 +72,21 @@ function ReviewForm(): JSX.Element {
           </svg>
         </label>
 
-        <input onChange = {dataChangeHandler} className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
+        <input onChange = {handleDataChange} className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
         <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
           <svg className="form__star-image" width="37" height="33">
             <use xlinkHref="#icon-star"></use>
           </svg>
         </label>
 
-        <input onChange = {dataChangeHandler} className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
+        <input onChange = {handleDataChange} className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
         <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
           <svg className="form__star-image" width="37" height="33">
             <use xlinkHref="#icon-star"></use>
           </svg>
         </label>
 
-        <input onChange = {dataChangeHandler} className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
+        <input onChange = {handleDataChange} className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
         <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
           <svg className="form__star-image" width="37" height="33">
             <use xlinkHref="#icon-star"></use>
@@ -93,22 +94,22 @@ function ReviewForm(): JSX.Element {
         </label>
       </div>
       <textarea
-        onChange = {dataChangeHandler}
+        onChange = {handleDataChange}
         className="reviews__textarea form__textarea"
         id="review"
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={state.comment}
+        value={newReview.comment}
       >
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_COMMENT_LENGTH} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!state.isReviewValid}
+          disabled={!newReview.isReviewValid}
         >
           Submit
         </button>

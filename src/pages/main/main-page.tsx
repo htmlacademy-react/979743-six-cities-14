@@ -6,8 +6,8 @@ import Spinner from '../../components/spiner/spinner';
 
 function MainPage(): JSX.Element {
 
-  const currentCity: string = useAppSelector((state) => state.city); // извлекаем данные из store - город
-  const offersByCity = useAppSelector((state) => state.sortedOffers); // извлекаем данные из store - офферы по городу
+  const currentCity: string = useAppSelector((state) => state.city);
+  const offersByCity = useAppSelector((state) => state.sortedOffers);
 
   const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
 

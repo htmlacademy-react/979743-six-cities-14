@@ -13,8 +13,8 @@ import PlaceCardsList from '../../components/place-card-list/place-cards-list';
 import Map from '../main/map';
 import OfferGallery from './offer-gallery';
 import './offer.css';
-import { useLoadOfferInfo } from './use-load-offer-info';
-import { useLoadNearby } from './use-load-nearby';
+import { useLoadOfferInfo } from '../../hooks/use-load-offer-info';
+import { useLoadNearby } from '../../hooks/use-load-nearby';
 import { fetchReviewListAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
 
@@ -36,7 +36,7 @@ function Offer(): JSX.Element {
 
   const {isNearbyLoading, offersNearby} = useLoadNearby();
 
-  const [activeCardId, setState] = useState<string | null>(null);
+  const [activeCardId, setActiveCardId] = useState<string | null>(null);
 
   if (isOfferInfoLoading || isNearbyLoading || isOffersLoading || isReviewsLoading) { // TODO
     return (<Spinner />);
@@ -47,7 +47,7 @@ function Offer(): JSX.Element {
   offersForMap.push(currentOfferForMap);
 
   if(!activeCardId) {
-    setState(currentOfferForMap.id);
+    setActiveCardId(currentOfferForMap.id);
   }
 
   const cityLocation: CityLocationType = {
@@ -57,7 +57,7 @@ function Offer(): JSX.Element {
     lng: offerInfo.city.location.longitude,
   };
 
-  const placeCardsClassList = { // список классов для списка офферов неподалеку
+  const placeCardsClassList = { // классы для списка офферов неподалеку
     containerClassList: 'near-places__list places__list',
     itemClassList: 'near-places__card place-card',
     cardClassList: 'near-places__image-wrapper place-card__image-wrapper',
@@ -167,7 +167,7 @@ function Offer(): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceCardsList offers = {offersNearby} setState = {setState} classList = {placeCardsClassList}/>
+            <PlaceCardsList offers = {offersNearby} onMouseMouve = {setActiveCardId} classList = {placeCardsClassList}/>
           </section>
         </div>
       </main>

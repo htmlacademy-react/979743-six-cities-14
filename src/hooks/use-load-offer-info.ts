@@ -1,8 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { TOfferInfo } from '../../types/offer-info';
-import { BASE_URL, APIRoute, REQUEST_TIMEOUT } from '../../const';
+import { TOfferInfo } from '../types/offer-info';
+import { BASE_URL, APIRoute, REQUEST_TIMEOUT } from '../const';
 
 type TLoadOfferInfo = {
   isOfferInfoLoading: boolean;

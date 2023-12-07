@@ -15,10 +15,10 @@ type MainWithOffersProps = {
 function MainWithOffers({offers, currentCity}: MainWithOffersProps): JSX.Element {
   // на входе офферы, отфильтрованные по городу; фильтрация в mainPage
 
-  const [activeCardId, setState] = useState<string | null>(null);
+  const [activeCardId, setActiveCardId] = useState<string | null>(null);
   const cityLocation: CityLocationType = getCityLocation(offers, currentCity);
 
-  const placeCardsClassList = { // список классов для списка офферов
+  const placeCardsClassList = { // классоs для списка офферов
     containerClassList: 'cities__places-list places__list tabs__content',
     itemClassList: 'cities__card place-card',
     cardClassList: 'cities__image-wrapper place-card__image-wrapper',
@@ -34,7 +34,7 @@ function MainWithOffers({offers, currentCity}: MainWithOffersProps): JSX.Element
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{offers.length} places to stay in {currentCity}</b>
             <PlacesSortingForm />
-            <PlaceCardsList offers = {offers} setState = {setState} classList = {placeCardsClassList}/>
+            <PlaceCardsList offers = {offers} onMouseMouve = {setActiveCardId} classList = {placeCardsClassList}/>
           </section>
           <Map cityLocation = {cityLocation} offers = {offers} activeCardId = {activeCardId}/>
         </div>

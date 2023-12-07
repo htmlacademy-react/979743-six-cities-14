@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import App from './components/app/app';
 import ErrorMessage from './components/error-message/error-message';
-// import { OFFERS } from './mocks/offers';
-// import { favoritesOffers } from './store/action';
 import { checkAuthAction, fetchOffersAction } from './store/api-actions';
 
 const root = ReactDOM.createRoot(
@@ -14,8 +12,6 @@ const root = ReactDOM.createRoot(
 
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
-
-// store.dispatch(favoritesOffers(OFFERS));
 
 root.render(
   <React.StrictMode>

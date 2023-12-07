@@ -9,13 +9,12 @@ type ClassListProps = {
 
 type PlaceCardsListProps = {
   offers: TOffers;
-  // setState(id: number | null): React.SetStateAction<number | null>;
-  setState(id: string | null): void | null;
+  onMouseMouve(id: string | null): void | null;
   classList: ClassListProps;
 
 };
 
-function PlaceCardsList({offers, setState, classList}: PlaceCardsListProps): JSX.Element {
+function PlaceCardsList({offers, onMouseMouve, classList}: PlaceCardsListProps): JSX.Element {
   const {containerClassList, itemClassList, cardClassList} = classList;
 
   return (
@@ -24,8 +23,8 @@ function PlaceCardsList({offers, setState, classList}: PlaceCardsListProps): JSX
         <article
           key = {offer.id}
           className={itemClassList}
-          onMouseOver = {() => setState(offer.id)}
-          onMouseOut = {() => setState(null)}
+          onMouseOver = {() => onMouseMouve(offer.id)}
+          onMouseOut = {() => onMouseMouve(null)}
         >
           <PlaceCard offer = {offer} cardClassList = {cardClassList}/>
         </article>

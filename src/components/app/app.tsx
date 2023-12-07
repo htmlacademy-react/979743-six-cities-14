@@ -36,7 +36,7 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.OfferId}
-            element={<Offer />} // как передать один элемент массива?
+            element={<Offer />}
           />
           <Route
             path="*"

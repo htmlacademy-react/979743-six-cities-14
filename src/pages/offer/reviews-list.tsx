@@ -4,17 +4,17 @@ import { sortReviews } from '../../util';
 import Review from './review';
 
 function ReviewsList(): JSX.Element {
-  const reviews1 = useAppSelector((state) => state.reviewsList);
-  const reviews = sortReviews(reviews1).slice(0, REVIEWS_QTY);
+  const reviews = useAppSelector((state) => state.reviewsList);
+  const sortedReviews = sortReviews(reviews).slice(0, REVIEWS_QTY);
 
   return (
     <ul className="reviews__list">
-      {reviews.map((review) => (
+      {sortedReviews.map((sortedReview) => (
         <li
           className="reviews__item"
-          key={review.id}
+          key={sortedReview.id}
         >
-          <Review {...review}/>
+          <Review {...sortedReview}/>
         </li>
       ))}
     </ul>

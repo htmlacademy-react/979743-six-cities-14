@@ -15,7 +15,7 @@ function Tabs(): JSX.Element {
           {
             cities.map((city) => {
               const classList = city === currentCity ? 'locations__item-link tabs__item tabs__item--active' : 'locations__item-link tabs__item';
-              return ( //исходим из того, что в массиве все города уникальны
+              return (
                 <li className="locations__item" key={city}>
                   <div
                     className={classList}

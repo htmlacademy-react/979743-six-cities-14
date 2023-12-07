@@ -2,11 +2,10 @@ import { TOffer } from '../../types/offers';
 import { Link } from 'react-router-dom';
 
 type PlaceCardProps = {
-  offer: TOffer; // один элемент из массива, краткая инфа об оффере
+  offer: TOffer;
   cardClassList: string;
 }
 
-//на входе уже соответствующий оффер
 function PlaceCard({offer, cardClassList}: PlaceCardProps): JSX.Element {
   const {isPremium, previewImage, price, rating, title, type} = offer;
   const ratingStarr: string = `${rating / 5 * 100}%`;

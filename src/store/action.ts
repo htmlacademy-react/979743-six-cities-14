@@ -14,9 +14,7 @@ export const loadedOffers = createAction<TOffers>('loadOffers'); // загруж
 
 export const favoritesOffers = createAction<TOffers>('favoritesOffers');
 
-export const cityChange = createAction<string>('main/cityChange'); // если вызвать с аргументом, то он подставится в поле payload.
-
-export const offersListChange = createAction('main/offersListChange'); // нужен ли??
+export const cityChange = createAction<string>('main/cityChange');
 
 export const sortingChange = createAction<string>('main/sortingChange');
 
