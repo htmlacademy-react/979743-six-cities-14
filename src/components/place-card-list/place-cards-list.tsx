@@ -15,6 +15,7 @@ type PlaceCardsListProps = {
 };
 
 function PlaceCardsList({offers, onMouseMouve, classList}: PlaceCardsListProps): JSX.Element {
+
   const {containerClassList, itemClassList, cardClassList} = classList;
 
   return (

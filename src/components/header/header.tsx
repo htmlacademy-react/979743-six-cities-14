@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
@@ -6,6 +7,7 @@ import { TUserData } from '../../types/user-data';
 import { logoutAction } from '../../store/api-actions';
 
 function Header(): JSX.Element {
+
   const dispatch = useAppDispatch();
 
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
@@ -72,4 +74,4 @@ function Header(): JSX.Element {
 
 }
 
-export default Header;
+export default memo(Header);

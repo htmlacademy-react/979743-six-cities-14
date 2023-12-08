@@ -3,6 +3,7 @@ import MainWithOffers from './main-with-offers';
 import MainEmpty from './main-empty';
 import { useAppSelector } from '../../hooks';
 import Spinner from '../../components/spiner/spinner';
+import HeaderMemo from '../../components/header/header';
 
 function MainPage(): JSX.Element {
 
