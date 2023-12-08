@@ -43,15 +43,18 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
-  async (_arg, {dispatch, extra: api}) => {
-    try {
-      const {data} = await api.get<TUserData>(APIRoute.Login);
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      dispatch(userInfo(data));
-    } catch {
-      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-    }
-  },
+  // async (_arg, {dispatch, extra: api}) => {
+  //   try {
+  //     const {data} = await api.get<TUserData>(APIRoute.Login);
+  //     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+  //     dispatch(userInfo(data));
+  //   } catch {
+  //     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+  //   }
+  // },
+  async (_arg, {extra: api}) => {
+    await api.get(APIRoute.Login);
+  }
 );
 
 export const loginAction = createAsyncThunk<void, TAuthData, {
@@ -64,7 +67,7 @@ export const loginAction = createAsyncThunk<void, TAuthData, {
     const {data} = await api.post<TUserData>(APIRoute.Login, {email, password});
     saveToken(data.token);
     dispatch(userInfo(data));
-    dispatch(requireAuthorization(AuthorizationStatus.Auth)); //меняем статус авториизации
+    // dispatch(requireAuthorization(AuthorizationStatus.Auth)); //меняем статус авториизации
   },
 );
 
@@ -74,10 +77,11 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/logout',
-  async (_arg, {dispatch, extra: api}) => {
+  // async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
-    dispatch(requireAuthorization(AuthorizationStatus.NoAuth)); //меняем статус авториизации
+    // dispatch(requireAuthorization(AuthorizationStatus.NoAuth)); //меняем статус авториизации
   },
 );
 

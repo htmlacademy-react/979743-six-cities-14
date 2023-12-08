@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { TOffers } from '../types/offers';
-import { AuthorizationStatus } from '../const';
+// import { AuthorizationStatus } from '../const';
 import { TUserData } from '../types/user-data';
 import { TOfferInfo } from '../types/offer-info';
 import { TNewReview } from '../types/new-review';
@@ -18,7 +18,7 @@ export const cityChange = createAction<string>('main/cityChange');
 
 export const sortingChange = createAction<string>('main/sortingChange');
 
-export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+// export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const userInfo = createAction<TUserData>('user/info');
 

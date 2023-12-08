@@ -72,6 +72,12 @@ const MAX_COMMENT_LENGTH = 300;
 const MIN_RATING = 1;
 const MAX_RATING = 5;
 
+enum NameSpace {
+  Data = 'DATA',
+  Game = 'GAME',
+  User = 'USER',
+}
+
 export {
   DEFAULT_CITY,
   City,
@@ -96,4 +102,5 @@ export {
   MAX_COMMENT_LENGTH,
   MIN_RATING,
   MAX_RATING,
+  NameSpace,
 };

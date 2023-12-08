@@ -17,7 +17,7 @@ type TInitialState = {
   sorting: string;
   sortedOffers: TOffers;
   serverError: string | null; // хранит текст сообщения об ошибке для пользователя
-  authorizationStatus: AuthorizationStatus;
+  // authorizationStatus: AuthorizationStatus;
   userInfo: TUserData;
   reviewsList: TReviews;
   isReviewListLoading: boolean;
@@ -32,7 +32,7 @@ const initialState: TInitialState = {
   sorting: DEFAULT_SORTING_TYPE,
   sortedOffers: [],
   serverError: null, // текст ошибки
-  authorizationStatus: AuthorizationStatus.Unknown,
+  // authorizationStatus: AuthorizationStatus.Unknown,
   userInfo: {
     name: '',
     avatarUrl: '',
@@ -102,9 +102,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(serverError, (state, action) => {
       state.serverError = action.payload; // хранит текст ошибки сервера
     })
-    .addCase(requireAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload;
-    })
+    // .addCase(requireAuthorization, (state, action) => {
+    //   state.authorizationStatus = action.payload;
+    // })
     .addCase(userInfo, (state, action) => {
       state.userInfo = action.payload;
     })
