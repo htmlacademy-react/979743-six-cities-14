@@ -14,7 +14,7 @@ type DetailMessageType = {
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
-  // [StatusCodes.UNAUTHORIZED]: true, // TODO
+  [StatusCodes.UNAUTHORIZED]: true,
   [StatusCodes.NOT_FOUND]: true
 };
 
@@ -27,10 +27,8 @@ export const createAPI = (): AxiosInstance => {
   });
 
   api.interceptors.request.use(
-    // (config: AxiosRequestConfig) => { // TODO
     (config) => {
       const token = getToken();
-
       if (token && config.headers) {
         config.headers['x-token'] = token;
       }
@@ -38,7 +36,6 @@ export const createAPI = (): AxiosInstance => {
       return config;
     },
   );
-
 
   api.interceptors.response.use(
     (response) => response,

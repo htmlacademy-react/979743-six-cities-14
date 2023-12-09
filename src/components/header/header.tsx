@@ -12,9 +12,7 @@ function Header(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-
   const userInfo: TUserData = useAppSelector(getUserInfo);
-
 
   const handleLogoutClick = (evt: React.MouseEvent) => {
     evt.preventDefault();

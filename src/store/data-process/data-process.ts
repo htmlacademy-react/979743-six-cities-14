@@ -1,14 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { DEFAULT_CITY, NameSpace } from '../../const';
+import { NameSpace } from '../../const';
 import { TDataProcess } from '../../types/state';
-import { fetchOfferInfoAction, fetchOffersAction, fetchReviewListAction, sendReviewAction } from '../api-actions';
-import { selectOffersByCity } from '../../util';
+import { fetchFavoritesAction, fetchOfferInfoAction, fetchOffersAction, fetchReviewListAction, sendReviewAction } from '../api-actions';
 
 const initialState: TDataProcess = {
   offers: [], // список офферов для всех городов - так получаем с сервера
   isOffersLoading: true,
-  byCityOffers: [], // УБРАТЬ
-  sortedOffers: [], // УБРАТЬ
   offerInfo: {
     'id': '',
     'title': '',
@@ -43,6 +40,8 @@ const initialState: TDataProcess = {
   },
   reviewsList: [],
   isReviewListLoading: true,
+  favorites: [],
+  isFavoritesLoading: true,
 };
 
 export const dataProcess = createSlice({
@@ -56,8 +55,6 @@ export const dataProcess = createSlice({
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
-        state.byCityOffers = selectOffersByCity(action.payload, DEFAULT_CITY);
-        state.sortedOffers = selectOffersByCity(action.payload, DEFAULT_CITY); // TODO
         state.isOffersLoading = false;
       })
       .addCase(fetchOfferInfoAction.pending, (state) => {
@@ -77,6 +74,13 @@ export const dataProcess = createSlice({
       .addCase(sendReviewAction.fulfilled, (state, action) => {
         state.reviewsList = [...state.reviewsList, action.payload];
         state.isReviewListLoading = false;
+      })
+      .addCase(fetchFavoritesAction.pending, (state) => {
+        state.isFavoritesLoading = true;
+      })
+      .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
+        state.favorites = action.payload;
+        state.isFavoritesLoading = false;
       });
   }
 });

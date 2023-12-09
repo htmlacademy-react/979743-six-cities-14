@@ -16,11 +16,11 @@ export type TAuthProcess = {
 export type TDataProcess = {
   offers: TOffers;
   isOffersLoading: boolean;
-  byCityOffers: TOffers;
-  sortedOffers: TOffers;
   offerInfo: TOfferInfo;
   reviewsList: TReviews;
   isReviewListLoading: boolean;
+  favorites: TOffers;
+  isFavoritesLoading: boolean;
 }
 
 export type TUserActions = { // взаимодействие с пользователем

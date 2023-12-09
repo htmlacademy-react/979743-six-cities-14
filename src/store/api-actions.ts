@@ -94,3 +94,15 @@ export const sendReviewAction = createAsyncThunk<TNewReview, TNewReview, {
     return data;
   },
 );
+
+export const fetchFavoritesAction = createAsyncThunk<TOffers, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavorites',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<TOffers>(APIRoute.Favorites);
+    return data;
+  },
+);

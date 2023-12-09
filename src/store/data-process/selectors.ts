@@ -9,3 +9,5 @@ export const getIsOffersLoading = (state: State): boolean => state[NameSpace.Dat
 export const getOfferInfo = (state: State): TOfferInfo => state[NameSpace.Data].offerInfo;
 export const getReviewsList = (state: State): TReviews => state[NameSpace.Data].reviewsList;
 export const getIsReviewListLoading = (state: State): boolean => state[NameSpace.Data].isReviewListLoading;
+export const getFavorites = (state: State): TOffers => state[NameSpace.Data].favorites;
+export const getIsFavoritesLoading = (state: State): boolean => state[NameSpace.Data].isFavoritesLoading;
