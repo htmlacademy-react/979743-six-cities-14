@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { TDataProcess } from '../../types/state';
-import { fetchFavoritesAction, fetchOfferInfoAction, fetchOffersAction, fetchReviewListAction, sendReviewAction } from '../api-actions';
+import { changeFavoritesAction, fetchFavoritesAction, fetchOfferInfoAction, fetchOffersAction, fetchReviewListAction, sendReviewAction } from '../api-actions';
 
 const initialState: TDataProcess = {
   offers: [], // список офферов для всех городов - так получаем с сервера
@@ -81,6 +81,9 @@ export const dataProcess = createSlice({
       .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
         state.favorites = action.payload;
         state.isFavoritesLoading = false;
+      })
+      .addCase(changeFavoritesAction.fulfilled, (state, action) => {
+        //???? надо что-то делать????
       });
   }
 });

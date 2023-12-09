@@ -80,4 +80,10 @@ function sortReviews(reviwes: TReviews): TReviews {
   return reviwes.slice().sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));
 }
 
-export {selectOffersByCity, selectFavorites, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews};
+function favoritesStatus(isFavorite: boolean): string {
+  return isFavorite
+    ? '0'
+    : '1';
+}
+
+export {selectOffersByCity, selectFavorites, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews, favoritesStatus};

@@ -1,5 +1,9 @@
+import { useAppDispatch } from '../../hooks';
+import { changeFavoritesAction } from '../../store/api-actions';
 import { TOffer } from '../../types/offers';
 import { Link } from 'react-router-dom';
+import { favoritesStatus } from '../../util';
+import { useState } from 'react';
 
 type PlaceCardProps = {
   offer: TOffer;
@@ -7,8 +11,14 @@ type PlaceCardProps = {
 }
 
 function PlaceCard({offer, cardClassList}: PlaceCardProps): JSX.Element {
-  const {isPremium, previewImage, price, rating, title, type} = offer;
+
+  const {id, isPremium, isFavorite, previewImage, price, rating, title, type} = offer;
   const ratingStarr: string = `${rating / 5 * 100}%`;
+
+  const [currentFavorite, setCurrentFavorite] = useState<boolean>(isFavorite);
+  console.log('first currentFavorite - ', currentFavorite);
+  const dispatch = useAppDispatch();
+
   return (
     <>
       {
@@ -27,7 +37,21 @@ function PlaceCard({offer, cardClassList}: PlaceCardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button
+            className={
+              currentFavorite
+                ? 'place-card__bookmark-button place-card__bookmark-button--active button'
+                : 'place-card__bookmark-button button'
+            }
+            type="button"
+            onClick={() => {
+              console.log('onClick currentFavorite - ', currentFavorite);
+              dispatch(changeFavoritesAction({
+                offerID: id,
+                status: favoritesStatus(!currentFavorite) }));
+              setCurrentFavorite(!currentFavorite);
+            }}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
+import { getCity } from '../../store/user-actions/selectors';
 
 function Login(): JSX.Element {
-  const city = useAppSelector((state) => state.city);
+  const city = useAppSelector(getCity);
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);

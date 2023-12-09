@@ -106,3 +106,20 @@ export const fetchFavoritesAction = createAsyncThunk<TOffers, undefined, {
     return data;
   },
 );
+
+type TChangeFavorites = {
+  offerID: string;
+  status: string;
+};
+
+export const changeFavoritesAction = createAsyncThunk<TOfferInfo, TChangeFavorites, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/changeFavorites',
+  async ({offerID, status}, {extra: api}) => {
+    const {data} = await api.post<TOfferInfo>(`${APIRoute.Favorites}/${offerID}/${status}`);
+    return data;
+  },
+);

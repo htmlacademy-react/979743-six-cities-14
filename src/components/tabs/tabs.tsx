@@ -1,10 +1,11 @@
 import { City } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { cityChange } from '../../store/action';
+import { getCity } from '../../store/user-actions/selectors';
 
 function Tabs(): JSX.Element {
   const cities = Object.keys(City);
-  const currentCity = useAppSelector((state) => state.city); // извлекаем данные из store
+  const currentCity = useAppSelector(getCity); // извлекаем данные из store
 
   const dispatch = useAppDispatch();
 
