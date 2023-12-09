@@ -1,10 +1,11 @@
 import { REVIEWS_QTY } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getReviewsList } from '../../store/data-process/selectors';
 import { sortReviews } from '../../util';
 import Review from './review';
 
 function ReviewsList(): JSX.Element {
-  const reviews = useAppSelector((state) => state.reviewsList);
+  const reviews = useAppSelector(getReviewsList);
   const sortedReviews = sortReviews(reviews).slice(0, REVIEWS_QTY);
 
   return (

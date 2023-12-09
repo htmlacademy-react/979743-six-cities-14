@@ -1,9 +1,10 @@
 import { SORTING_TYPES } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sortingChange } from '../../store/action';
+import { getSorting } from '../../store/user-actions/selectors';
 
 function PlacesSortingForm(): JSX.Element {
-  const currentSorting = useAppSelector((state) => state.sorting);
+  const currentSorting = useAppSelector(getSorting);
 
   const dispatch = useAppDispatch();
 

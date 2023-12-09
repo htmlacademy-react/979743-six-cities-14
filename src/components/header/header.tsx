@@ -5,13 +5,16 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import Logo from '../logo/logo';
 import { TUserData } from '../../types/user-data';
 import { logoutAction } from '../../store/api-actions';
+import { getAuthorizationStatus, getUserInfo } from '../../store/auth-process/selectors';
 
 function Header(): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const userInfo: TUserData = useAppSelector((state) => state.userInfo);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  const userInfo: TUserData = useAppSelector(getUserInfo);
+
 
   const handleLogoutClick = (evt: React.MouseEvent) => {
     evt.preventDefault();

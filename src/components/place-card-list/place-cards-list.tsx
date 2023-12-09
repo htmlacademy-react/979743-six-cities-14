@@ -8,7 +8,7 @@ type ClassListProps = {
 };
 
 type PlaceCardsListProps = {
-  offers: TOffers;
+  offers: TOffers; // офферы отфильтрованные по городу, в первноачальом порядке
   onMouseMouve(id: string | null): void | null;
   classList: ClassListProps;
 

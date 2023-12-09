@@ -17,14 +17,16 @@ import { useLoadOfferInfo } from '../../hooks/use-load-offer-info';
 import { useLoadNearby } from '../../hooks/use-load-nearby';
 import { fetchReviewListAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
+import { getIsOffersLoading, getIsReviewListLoading, getOffers, getReviewsList } from '../../store/data-process/selectors';
+import { getAuthorizationStatus } from '../../store/auth-process/selectors';
 
 function Offer(): JSX.Element {
   const params = useParams();
-  const allOffers = useAppSelector((state) => state.offers);
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
-  const isAuth = useAppSelector((state) => state.authorizationStatus);
-  const reviews = useAppSelector((state) => state.reviewsList);
-  const isReviewsLoading = useAppSelector((state) => state.isReviewListLoading);
+  const allOffers = useAppSelector(getOffers);
+  const isOffersLoading = useAppSelector(getIsOffersLoading);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const reviews = useAppSelector(getReviewsList);
+  const isReviewsLoading = useAppSelector(getIsReviewListLoading);
 
   const dispatch = useAppDispatch();
 
@@ -153,7 +155,7 @@ function Offer(): JSX.Element {
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews?.length}</span></h2>
                 <ReviewsList />
                 {
-                  isAuth === AuthorizationStatus.Auth
+                  authorizationStatus === AuthorizationStatus.Auth
                     ? (<ReviewForm />)
                     : null
                 }

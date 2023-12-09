@@ -3,14 +3,18 @@ import MainWithOffers from './main-with-offers';
 import MainEmpty from './main-empty';
 import { useAppSelector } from '../../hooks';
 import Spinner from '../../components/spiner/spinner';
-import HeaderMemo from '../../components/header/header';
+import { getIsOffersLoading, getOffers } from '../../store/data-process/selectors';
+import { selectOffersByCity } from '../../util';
+import { getCity } from '../../store/user-actions/selectors';
 
 function MainPage(): JSX.Element {
 
-  const currentCity: string = useAppSelector((state) => state.city);
-  const offersByCity = useAppSelector((state) => state.sortedOffers);
+  const currentCity: string = useAppSelector(getCity);
+  const offers = useAppSelector(getOffers);
+  const offersByCity = selectOffersByCity(offers, currentCity);
 
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+
+  const isOffersLoading = useAppSelector(getIsOffersLoading);
 
   const offerCount = offersByCity.length;
 

@@ -73,9 +73,10 @@ const MIN_RATING = 1;
 const MAX_RATING = 5;
 
 enum NameSpace {
-  Data = 'DATA',
-  Game = 'GAME',
-  User = 'USER',
+  Auth = 'AUTH', // действия, связанные с авторизацией
+  Data = 'DATA', // действия, связанные  запросом и отправкой данных
+  Error = 'ERROR', // обработка ошибок сервера
+  UserAction = 'USER_ACTION', // действия, связанные с реацией приложения на действия пользователя
 }
 
 export {

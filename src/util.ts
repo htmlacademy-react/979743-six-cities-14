@@ -18,7 +18,7 @@ function findOfferByID (allOffers: TOffers, id: string | undefined): TOffer {
   }
 }
 
-function selecFavorites(allOffers: TOffers): TOffers {
+function selectFavorites(allOffers: TOffers): TOffers {
   const selectedOffers = allOffers.filter((offer) => offer.isFavorite); // возвращает новый массив
   return selectedOffers;
 }
@@ -80,4 +80,4 @@ function sortReviews(reviwes: TReviews): TReviews {
   return reviwes.slice().sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));
 }
 
-export {selectOffersByCity, selecFavorites, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews};
+export {selectOffersByCity, selectFavorites, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews};
