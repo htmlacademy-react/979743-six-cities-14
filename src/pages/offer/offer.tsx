@@ -40,7 +40,7 @@ function Offer(): JSX.Element {
 
   const [activeCardId, setActiveCardId] = useState<string | null>(null);
 
-  if (isOfferInfoLoading || isNearbyLoading || isOffersLoading || isReviewsLoading) { // TODO
+  if (isOfferInfoLoading || isNearbyLoading || isOffersLoading || isReviewsLoading) {
     return (<Spinner />);
   }
 
@@ -169,7 +169,7 @@ function Offer(): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceCardsList offers = {offersNearby} onMouseMouve = {setActiveCardId} classList = {placeCardsClassList}/>
+            <PlaceCardsList offers = {offersNearby.slice(0, OFFERS_NEARBY_QTY)} onMouseMouve = {setActiveCardId} classList = {placeCardsClassList}/>
           </section>
         </div>
       </main>
