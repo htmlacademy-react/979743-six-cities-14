@@ -1,6 +1,5 @@
 import { AuthorizationStatus } from '../const';
 import { store } from '../store';
-import { offersByCity } from '../store/action';
 import { TOfferInfo } from './offer-info';
 import { TOffers } from './offers';
 import { TReviews } from './reviews';
