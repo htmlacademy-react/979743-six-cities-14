@@ -1,3 +1,5 @@
+import { useAppDispatch } from '../../hooks';
+import { changeFavoritesAction } from '../../store/api-actions';
 import { TFavorite } from '../../types/favorites';
 
 type FavoritesCardProps = { // УБРАТЬ ЭТУ ОБЕРТКУ!!!!!
@@ -5,7 +7,9 @@ type FavoritesCardProps = { // УБРАТЬ ЭТУ ОБЕРТКУ!!!!!
 }
 
 function FavoritesCard({offer}: FavoritesCardProps): JSX.Element {
-  const {isPremium, price, previewImage, title, type, rating} = offer;
+  const dispatch = useAppDispatch();
+
+  const {id, isPremium, price, previewImage, title, type, rating} = offer;
   const ratingStarr: string = `${rating / 5 * 100}%`;
   return (
     <>
@@ -25,7 +29,16 @@ function FavoritesCard({offer}: FavoritesCardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+          <button
+            className="place-card__bookmark-button place-card__bookmark-button--active button"
+            type="button"
+            onClick={() => {
+              dispatch(changeFavoritesAction({
+                offerID: id,
+                status: 0,
+              }));
+            }}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
