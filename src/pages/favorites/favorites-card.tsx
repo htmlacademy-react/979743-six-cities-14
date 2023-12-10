@@ -3,7 +3,7 @@ import { changeFavoritesAction } from '../../store/api-actions';
 import { Link } from 'react-router-dom';
 import { TFavorite } from '../../types/favorites';
 
-type FavoritesCardProps = { // УБРАТЬ ЭТУ ОБЕРТКУ!!!!!
+type FavoritesCardProps = {
   offer: TFavorite;
 }
 

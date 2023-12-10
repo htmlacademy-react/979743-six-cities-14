@@ -16,7 +16,6 @@ function App(): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        {/* <ScrollToTop /> */}
         <Routes>
           <Route
             path={AppRoute.Main}

@@ -36,12 +36,6 @@ const ICON_ANCHOR: PointExpression = [20, 40];
 
 const SORTING_TYPES = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'] as const;
 
-// enum SortingType {
-//   Popular = 'Popular',
-//   LowToHigh = 'Price: low to high',
-//   HighToLow = 'Price: high to low',
-//   TopRated = 'Top rated first',
-// }
 export type TSortType = typeof SORTING_TYPES[number];
 
 const DEFAULT_SORTING_TYPE = 'Popular';

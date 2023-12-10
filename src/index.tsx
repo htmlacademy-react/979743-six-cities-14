@@ -1,3 +1,4 @@
+//Версия от 10.12.2023 для второй проверки.
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';

@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from '../const';
+import { AuthorizationStatus, TSortType } from '../const';
 import { store } from '../store';
 import { TOfferInfo } from './offer-info';
 import { TOffers } from './offers';
@@ -27,7 +27,7 @@ export type TDataProcess = {
 
 export type TUserActions = { // взаимодействие с пользователем
   city: string;
-  sorting: string;
+  sorting: TSortType;
   offersByCity: TOffers; // хранит отфильтрованные по городу офферы
 }
 
