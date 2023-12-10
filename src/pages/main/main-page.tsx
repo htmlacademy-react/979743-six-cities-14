@@ -6,8 +6,10 @@ import Spinner from '../../components/spiner/spinner';
 import { getIsOffersLoading, getOffers } from '../../store/data-process/selectors';
 import { selectOffersByCity } from '../../util';
 import { getCity } from '../../store/user-actions/selectors';
+import useScrollToTop from '../../hooks/use-scroll-to-top';
 
 function MainPage(): JSX.Element {
+  useScrollToTop();
   const currentCity: string = useAppSelector(getCity);
   const offers = useAppSelector(getOffers);
   const offersByCity = selectOffersByCity(offers, currentCity);

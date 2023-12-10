@@ -8,7 +8,6 @@ import Offer from '../../pages/offer/offer';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Error404 from '../../pages/error/error';
-import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { getAuthorizationStatus } from '../../store/auth-process/selectors';
 
 function App(): JSX.Element {
@@ -17,7 +16,7 @@ function App(): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <ScrollToTop />
+        {/* <ScrollToTop /> */}
         <Routes>
           <Route
             path={AppRoute.Main}
