@@ -1,8 +1,10 @@
-import { useAppDispatch } from '../../hooks';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeFavoritesAction } from '../../store/api-actions';
 import { TOffer } from '../../types/offers';
-import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/auth-process/selectors';
 
 type PlaceCardProps = {
   offer: TOffer;
@@ -16,6 +18,8 @@ function PlaceCard({offer, cardClassList}: PlaceCardProps): JSX.Element {
 
   const [currentFavorite, setCurrentFavorite] = useState<boolean>(isFavorite);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     setCurrentFavorite(offer.isFavorite);
@@ -47,6 +51,9 @@ function PlaceCard({offer, cardClassList}: PlaceCardProps): JSX.Element {
             }
             type="button"
             onClick={() => {
+              if (authorizationStatus !== AuthorizationStatus.Auth) {
+                navigate('/login');
+              }
               dispatch(changeFavoritesAction({
                 offerID: id,
                 status: Number(!currentFavorite) }));

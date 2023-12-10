@@ -14,9 +14,9 @@ import Map from '../main/map';
 import OfferGallery from './offer-gallery';
 import './offer.css';
 import { useLoadOfferInfo } from '../../hooks/use-load-offer-info';
-import { useLoadNearby } from '../../hooks/use-load-nearby';
-import { fetchNearbyAction, fetchReviewListAction } from '../../store/api-actions';
-import { useParams } from 'react-router-dom';
+// import { useLoadNearby } from '../../hooks/use-load-nearby';
+import { changeFavoritesAction, fetchNearbyAction, fetchReviewListAction } from '../../store/api-actions';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getIsOffersLoading, getIsOffersNearbyLoading, getIsReviewListLoading, getOffers, getOffersNearby, getReviewsList } from '../../store/data-process/selectors';
 import { getAuthorizationStatus } from '../../store/auth-process/selectors';
 
@@ -29,6 +29,7 @@ function Offer(): JSX.Element {
   const isReviewsLoading = useAppSelector(getIsReviewListLoading);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {isOfferInfoLoading, offerInfo} = useLoadOfferInfo();
 
@@ -36,7 +37,6 @@ function Offer(): JSX.Element {
     dispatch(fetchReviewListAction(params.id));
   },[params, dispatch]);
 
-  // const {isNearbyLoading, offersNearby} = useLoadNearby();
   useEffect(() => {
     dispatch(fetchNearbyAction(params.id));
   },[params, dispatch]);
@@ -57,6 +57,8 @@ function Offer(): JSX.Element {
   if(!activeCardId) {
     setActiveCardId(currentOfferForMap.id);
   }
+
+  console.log(offerInfo.isFavorite);
 
   const cityLocation: CityLocationType = {
     name: offerInfo.city.name,
@@ -97,7 +99,24 @@ function Offer(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
+                <button
+                  className={
+                    offerInfo.isFavorite
+                      ? 'offer__bookmark-button offer__bookmark-button--active button'
+                      : 'offer__bookmark-button button'
+                  }
+                  type="button"
+                  onClick={() => {
+                    if (authorizationStatus !== AuthorizationStatus.Auth) {
+                      navigate('/login');
+                    }
+                    dispatch(changeFavoritesAction({
+                      offerID: offerInfo.id,
+                      status: Number(!offerInfo.isFavorite)
+                    }));
+                    // offerInfo.isFavorite = !offerInfo.isFavorite; // TODO
+                  }}
+                >
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>

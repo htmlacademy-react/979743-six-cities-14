@@ -21,7 +21,6 @@ function ReviewForm(): JSX.Element {
     setnewReview({
       ...newReview,
       [name]: value,
-      // isReviewValid: checkReviewValidate(newReview.comment, newReview.rating)
     });
   };
 
@@ -37,7 +36,6 @@ function ReviewForm(): JSX.Element {
     setnewReview({
       rating: 0,
       comment: '',
-      // isReviewValid: false,
     });
   };
 
