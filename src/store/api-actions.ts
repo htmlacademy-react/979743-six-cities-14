@@ -109,7 +109,7 @@ export const fetchFavoritesAction = createAsyncThunk<TOffers, undefined, {
 
 type TChangeFavorites = {
   offerID: string;
-  status: string;
+  status: number;
 };
 
 export const changeFavoritesAction = createAsyncThunk<TOfferInfo, TChangeFavorites, {

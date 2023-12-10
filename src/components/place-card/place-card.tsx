@@ -2,8 +2,7 @@ import { useAppDispatch } from '../../hooks';
 import { changeFavoritesAction } from '../../store/api-actions';
 import { TOffer } from '../../types/offers';
 import { Link } from 'react-router-dom';
-import { favoritesStatus } from '../../util';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type PlaceCardProps = {
   offer: TOffer;
@@ -17,6 +16,10 @@ function PlaceCard({offer, cardClassList}: PlaceCardProps): JSX.Element {
 
   const [currentFavorite, setCurrentFavorite] = useState<boolean>(isFavorite);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setCurrentFavorite(offer.isFavorite);
+  }, [offer.isFavorite]);
 
   return (
     <>
@@ -46,8 +49,7 @@ function PlaceCard({offer, cardClassList}: PlaceCardProps): JSX.Element {
             onClick={() => {
               dispatch(changeFavoritesAction({
                 offerID: id,
-                status: favoritesStatus(currentFavorite) }));
-              setCurrentFavorite(!currentFavorite);
+                status: Number(!currentFavorite) }));
             }}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">

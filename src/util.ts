@@ -14,7 +14,7 @@ function findOfferByID (allOffers: TOffers, id: string | undefined): TOffer {
   if (selectedOffer) {
     return selectedOffer;
   } else {
-    return allOffers[0]; // TODO как undefind обойти???
+    return allOffers[0];
   }
 }
 
@@ -37,7 +37,7 @@ function getCityLocation (allOffers: TOffers, city: string | undefined): CityLoc
     });
   } else {
     return ({
-      name: 'Москва', // смешно //TODO
+      name: 'Москва',
       zoom: 8,
       lat: 55.558741,
       lng: 37.378847,
@@ -80,10 +80,4 @@ function sortReviews(reviwes: TReviews): TReviews {
   return reviwes.slice().sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));
 }
 
-function favoritesStatus(isFavorite: boolean): string {
-  return isFavorite
-    ? '0'
-    : '1';
-}
-
-export {selectOffersByCity, selectFavorites, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews, favoritesStatus};
+export {selectOffersByCity, selectFavorites, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews};

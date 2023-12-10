@@ -83,7 +83,11 @@ export const dataProcess = createSlice({
         state.isFavoritesLoading = false;
       })
       .addCase(changeFavoritesAction.fulfilled, (state, action) => {
-        //???? надо что-то делать????
+        state.offers = state.offers.map((offer) => ({
+          ...offer,
+          isFavorite: offer.id === action.payload.id ? action.payload.isFavorite : offer.isFavorite,
+        }
+        ));
       });
   }
 });
