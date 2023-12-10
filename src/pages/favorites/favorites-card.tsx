@@ -1,5 +1,6 @@
 import { useAppDispatch } from '../../hooks';
 import { changeFavoritesAction } from '../../store/api-actions';
+import { Link } from 'react-router-dom';
 import { TFavorite } from '../../types/favorites';
 
 type FavoritesCardProps = { // УБРАТЬ ЭТУ ОБЕРТКУ!!!!!
@@ -52,7 +53,7 @@ function FavoritesCard({offer}: FavoritesCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/${offer.id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
