@@ -17,7 +17,7 @@ enum AppRoute { // адреса для запросов к серверу
   Logout = '/logout',
   Favorites = '/favorites',
   Offer = '/offer',
-  OfferId = `${AppRoute.Offer}/:id` // так тоже можно
+  OfferId = `${AppRoute.Offer}/:id`
 }
 
 enum AuthorizationStatus {
@@ -35,6 +35,8 @@ const ICON_SIZE: PointExpression = [30, 40];
 const ICON_ANCHOR: PointExpression = [20, 40];
 
 const SORTING_TYPES = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'] as const;
+
+export type TSortType = typeof SORTING_TYPES[number];
 
 const DEFAULT_SORTING_TYPE = 'Popular';
 
@@ -60,6 +62,18 @@ const DATE_FORMAT = 'MMMM YYYY';
 
 const REVIEWS_QTY = 10;
 
+const MIN_COMMENT_LENGTH = 50;
+const MAX_COMMENT_LENGTH = 300;
+const MIN_RATING = 1;
+const MAX_RATING = 5;
+
+enum NameSpace {
+  Auth = 'AUTH', // действия, связанные с авторизацией
+  Data = 'DATA', // действия, связанные  запросом и отправкой данных
+  Error = 'ERROR', // обработка ошибок сервера
+  UserAction = 'USER_ACTION', // действия, связанные с реацией приложения на действия пользователя
+}
+
 export {
   DEFAULT_CITY,
   City,
@@ -79,4 +93,9 @@ export {
   OFFERS_NEARBY_QTY,
   DATE_FORMAT,
   REVIEWS_QTY,
+  MIN_COMMENT_LENGTH,
+  MAX_COMMENT_LENGTH,
+  MIN_RATING,
+  MAX_RATING,
+  NameSpace,
 };

@@ -8,15 +8,14 @@ import Offer from '../../pages/offer/offer';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
 import Error404 from '../../pages/error/error';
-import ScrollToTop from '../scroll-to-top/scroll-to-top';
+import { getAuthorizationStatus } from '../../store/auth-process/selectors';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <ScrollToTop />
         <Routes>
           <Route
             path={AppRoute.Main}
@@ -36,7 +35,7 @@ function App(): JSX.Element {
           />
           <Route
             path={AppRoute.OfferId}
-            element={<Offer />} // как передать один элемент массива?
+            element={<Offer />}
           />
           <Route
             path="*"

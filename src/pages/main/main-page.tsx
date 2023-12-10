@@ -3,13 +3,18 @@ import MainWithOffers from './main-with-offers';
 import MainEmpty from './main-empty';
 import { useAppSelector } from '../../hooks';
 import Spinner from '../../components/spiner/spinner';
+import { getIsOffersLoading, getOffers } from '../../store/data-process/selectors';
+import { selectOffersByCity } from '../../util';
+import { getCity } from '../../store/user-actions/selectors';
+import useScrollToTop from '../../hooks/use-scroll-to-top';
 
 function MainPage(): JSX.Element {
+  useScrollToTop();
+  const currentCity: string = useAppSelector(getCity);
+  const offers = useAppSelector(getOffers);
+  const offersByCity = selectOffersByCity(offers, currentCity);
 
-  const currentCity: string = useAppSelector((state) => state.city); // извлекаем данные из store - город
-  const offersByCity = useAppSelector((state) => state.sortedOffers); // извлекаем данные из store - офферы по городу
-
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+  const isOffersLoading = useAppSelector(getIsOffersLoading);
 
   const offerCount = offersByCity.length;
 

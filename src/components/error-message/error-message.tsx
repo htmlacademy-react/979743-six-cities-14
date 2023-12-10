@@ -1,8 +1,9 @@
 import {useAppSelector} from '../../hooks';
+import { getServerError } from '../../store/errors-process/selectors';
 import './error-message.css';
 
 function ErrorMessage(): JSX.Element | null {
-  const error = useAppSelector((state) => state.serverError);
+  const error = useAppSelector(getServerError);
 
   if(!error) {
     return null;

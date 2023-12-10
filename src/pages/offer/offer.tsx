@@ -13,20 +13,22 @@ import PlaceCardsList from '../../components/place-card-list/place-cards-list';
 import Map from '../main/map';
 import OfferGallery from './offer-gallery';
 import './offer.css';
-import { useLoadOfferInfo } from './use-load-offer-info';
-import { useLoadNearby } from './use-load-nearby';
-import { fetchReviewListAction } from '../../store/api-actions';
-import { useParams } from 'react-router-dom';
+import { useLoadOfferInfo } from '../../hooks/use-load-offer-info';
+import { changeFavoritesAction, fetchNearbyAction, fetchReviewListAction } from '../../store/api-actions';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getIsOffersLoading, getIsOffersNearbyLoading, getIsReviewListLoading, getOffers, getOffersNearby, getReviewsList } from '../../store/data-process/selectors';
+import { getAuthorizationStatus } from '../../store/auth-process/selectors';
 
 function Offer(): JSX.Element {
   const params = useParams();
-  const allOffers = useAppSelector((state) => state.offers);
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
-  const isAuth = useAppSelector((state) => state.authorizationStatus);
-  const reviews = useAppSelector((state) => state.reviewsList);
-  const isReviewsLoading = useAppSelector((state) => state.isReviewListLoading);
+  const allOffers = useAppSelector(getOffers);
+  const isOffersLoading = useAppSelector(getIsOffersLoading);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const reviews = useAppSelector(getReviewsList);
+  const isReviewsLoading = useAppSelector(getIsReviewListLoading);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {isOfferInfoLoading, offerInfo} = useLoadOfferInfo();
 
@@ -34,11 +36,16 @@ function Offer(): JSX.Element {
     dispatch(fetchReviewListAction(params.id));
   },[params, dispatch]);
 
-  const {isNearbyLoading, offersNearby} = useLoadNearby();
+  useEffect(() => {
+    dispatch(fetchNearbyAction(params.id));
+  },[params, dispatch]);
 
-  const [activeCardId, setState] = useState<string | null>(null);
+  const offersNearby = useAppSelector(getOffersNearby);
+  const isNearbyLoading = useAppSelector(getIsOffersNearbyLoading);
 
-  if (isOfferInfoLoading || isNearbyLoading || isOffersLoading || isReviewsLoading) { // TODO
+  const [activeCardId, setActiveCardId] = useState<string | null>(null);
+
+  if (isOfferInfoLoading || isNearbyLoading || isOffersLoading || isReviewsLoading) {
     return (<Spinner />);
   }
 
@@ -47,7 +54,7 @@ function Offer(): JSX.Element {
   offersForMap.push(currentOfferForMap);
 
   if(!activeCardId) {
-    setState(currentOfferForMap.id);
+    setActiveCardId(currentOfferForMap.id);
   }
 
   const cityLocation: CityLocationType = {
@@ -57,7 +64,7 @@ function Offer(): JSX.Element {
     lng: offerInfo.city.location.longitude,
   };
 
-  const placeCardsClassList = { // список классов для списка офферов неподалеку
+  const placeCardsClassList = { // классы для списка офферов неподалеку
     containerClassList: 'near-places__list places__list',
     itemClassList: 'near-places__card place-card',
     cardClassList: 'near-places__image-wrapper place-card__image-wrapper',
@@ -89,7 +96,23 @@ function Offer(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
+                <button
+                  className={
+                    offerInfo.isFavorite
+                      ? 'offer__bookmark-button offer__bookmark-button--active button'
+                      : 'offer__bookmark-button button'
+                  }
+                  type="button"
+                  onClick={() => {
+                    if (authorizationStatus !== AuthorizationStatus.Auth) {
+                      navigate('/login');
+                    }
+                    dispatch(changeFavoritesAction({
+                      offerID: offerInfo.id,
+                      status: Number(!offerInfo.isFavorite)
+                    }));
+                  }}
+                >
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -153,7 +176,7 @@ function Offer(): JSX.Element {
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews?.length}</span></h2>
                 <ReviewsList />
                 {
-                  isAuth === AuthorizationStatus.Auth
+                  authorizationStatus === AuthorizationStatus.Auth
                     ? (<ReviewForm />)
                     : null
                 }
@@ -167,7 +190,7 @@ function Offer(): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceCardsList offers = {offersNearby} setState = {setState} classList = {placeCardsClassList}/>
+            <PlaceCardsList offers = {offersNearby.slice(0, OFFERS_NEARBY_QTY)} classList = {placeCardsClassList}/>
           </section>
         </div>
       </main>

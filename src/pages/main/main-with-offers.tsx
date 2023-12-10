@@ -5,7 +5,9 @@ import Map from './map';
 import PlaceCardsList from '../../components/place-card-list/place-cards-list';
 import PlacesSortingForm from './places-sorting-form';
 import { useState } from 'react';
-import { getCityLocation } from '../../util';
+import { getCityLocation, sortOffers } from '../../util';
+import { useAppSelector } from '../../hooks';
+import { getSorting } from '../../store/user-actions/selectors';
 
 type MainWithOffersProps = {
   offers: TOffers;
@@ -15,10 +17,14 @@ type MainWithOffersProps = {
 function MainWithOffers({offers, currentCity}: MainWithOffersProps): JSX.Element {
   // на входе офферы, отфильтрованные по городу; фильтрация в mainPage
 
-  const [activeCardId, setState] = useState<string | null>(null);
-  const cityLocation: CityLocationType = getCityLocation(offers, currentCity);
+  const currentSorting = useAppSelector(getSorting);
 
-  const placeCardsClassList = { // список классов для списка офферов
+  const sortedOffers = sortOffers(offers, currentSorting);
+
+  const [activeCardId, setActiveCardId] = useState<string | null>(null);
+  const cityLocation: CityLocationType = getCityLocation(sortedOffers, currentCity);
+
+  const placeCardsClassList = { // классы для списка офферов
     containerClassList: 'cities__places-list places__list tabs__content',
     itemClassList: 'cities__card place-card',
     cardClassList: 'cities__image-wrapper place-card__image-wrapper',
@@ -32,11 +38,11 @@ function MainWithOffers({offers, currentCity}: MainWithOffersProps): JSX.Element
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offers.length} places to stay in {currentCity}</b>
+            <b className="places__found">{sortedOffers.length} places to stay in {currentCity}</b>
             <PlacesSortingForm />
-            <PlaceCardsList offers = {offers} setState = {setState} classList = {placeCardsClassList}/>
+            <PlaceCardsList offers = {sortedOffers} onMouseMouve = {setActiveCardId} classList = {placeCardsClassList}/>
           </section>
-          <Map cityLocation = {cityLocation} offers = {offers} activeCardId = {activeCardId}/>
+          <Map cityLocation = {cityLocation} offers = {sortedOffers} activeCardId = {activeCardId}/>
         </div>
       </div>
     </main>

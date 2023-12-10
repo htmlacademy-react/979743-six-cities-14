@@ -9,7 +9,6 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 type MapProps = {
   cityLocation: CityLocationType;
   offers: TOffers;
-  // activeCardId: number | null;
   activeCardId: string | null;
 };
 
@@ -27,8 +26,6 @@ const currentCustomIcon = new Icon({
 
 function Map({cityLocation, offers, activeCardId}: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  // в mapRef.current попадет ссылка на тот DOM-элемент, которому будет назначен пропс ref={mapRef}
-  // будет заполнено ТОЛЬКО после отрисовки компонента
 
   const map = useMap(mapRef, cityLocation);
 

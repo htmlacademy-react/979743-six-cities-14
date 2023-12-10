@@ -1,9 +1,9 @@
 import axios, { AxiosError } from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { APIRoute, BASE_URL, REQUEST_TIMEOUT } from '../../const';
-import { processErrorHandle } from '../../services/process-error-handle';
-import { TOffers } from '../../types/offers';
+import { APIRoute, BASE_URL, REQUEST_TIMEOUT } from '../const';
+import { processErrorHandle } from '../services/process-error-handle';
+import { TOffers } from '../types/offers';
 
 type TLoadNearby = {
   isNearbyLoading: boolean;

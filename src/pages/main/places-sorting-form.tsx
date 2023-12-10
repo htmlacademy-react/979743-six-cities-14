@@ -1,19 +1,17 @@
 import { SORTING_TYPES } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sortingChange } from '../../store/action';
+import { getSorting } from '../../store/user-actions/selectors';
 
 function PlacesSortingForm(): JSX.Element {
-  // const sortingTypes = Object.keys(SortingType);
-  const currentSorting = useAppSelector((state) => state.sorting); // извлекаем данные из store
+  const currentSorting = useAppSelector(getSorting);
 
   const dispatch = useAppDispatch();
 
   const sortingListElem = document.querySelector('.places__options');
 
-
   return (
     <form className="places__sorting" action="#" method="get">
-      {/* input в форме где??? */}
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex={0} onClick={() => sortingListElem?.classList.toggle('places__options--opened')}>
         {currentSorting}
@@ -34,7 +32,6 @@ function PlacesSortingForm(): JSX.Element {
                   dispatch(sortingChange(sorting));
                   sortingListElem?.classList.remove('places__options--opened');
                 }}
-                // onClick={(evt:React.ChangeEvent<HTML???>) => dispatch(sortingChange(evt.target.textContent))}
               >
                 {sorting}
               </li>

@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, MIN_RATING, MAX_RATING, TSortType } from './const';
 import { TOffers, TOffer } from './types/offers';
 import { CityLocationType } from './types/cities';
 import { TReviews } from './types/reviews';
@@ -13,11 +14,11 @@ function findOfferByID (allOffers: TOffers, id: string | undefined): TOffer {
   if (selectedOffer) {
     return selectedOffer;
   } else {
-    return allOffers[0]; // !!! не знаю, как еще undefind обойти
+    return allOffers[0];
   }
 }
 
-function selecFavorites(allOffers: TOffers): TOffers {
+function selectFavorites(allOffers: TOffers): TOffers {
   const selectedOffers = allOffers.filter((offer) => offer.isFavorite); // возвращает новый массив
   return selectedOffers;
 }
@@ -36,7 +37,7 @@ function getCityLocation (allOffers: TOffers, city: string | undefined): CityLoc
     });
   } else {
     return ({
-      name: 'Москва', // смешно
+      name: 'Москва',
       zoom: 8,
       lat: 55.558741,
       lng: 37.378847,
@@ -56,8 +57,7 @@ function sortByRating(offers: TOffers): TOffers {
   return offers.slice().sort((a, b) => b.rating - a.rating);
 }
 
-function sortOffers(offers: TOffers, sortingType: string): TOffers { // offers - это офферы в первоначальном порядке
-  // надо сделать, чтобы sortingType принимала значения только из массива
+function sortOffers(offers: TOffers, sortingType: TSortType): TOffers { // offers - это офферы в первоначальном порядке
   switch (sortingType) {
     case 'Price: low to high':
       return sortLowToHigh(offers);
@@ -71,11 +71,13 @@ function sortOffers(offers: TOffers, sortingType: string): TOffers { // offers -
 }
 
 function checkReviewValidate(comment: string, rating: number): boolean {
-  return (comment.length > 49 && comment.length < 301 && rating > 0 && rating < 6); // TODO
+  return (comment.length >= MIN_COMMENT_LENGTH
+            && comment.length <= MAX_COMMENT_LENGTH
+            && rating >= MIN_RATING && rating <= MAX_RATING);
 }
 
 function sortReviews(reviwes: TReviews): TReviews {
   return reviwes.slice().sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));
 }
 
-export {selectOffersByCity, selecFavorites, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews};
+export {selectOffersByCity, selectFavorites, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews};
