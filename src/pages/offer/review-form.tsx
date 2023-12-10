@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { sendReviewAction } from '../../store/api-actions';
@@ -9,10 +9,11 @@ function ReviewForm(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
 
+  const [isReviewValid, setIsReviewValid] = useState(false);
+
   const [newReview, setnewReview] = useState({
     rating: 0,
     comment: '',
-    isReviewValid: false,
   });
 
   const handleDataChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -20,13 +21,13 @@ function ReviewForm(): JSX.Element {
     setnewReview({
       ...newReview,
       [name]: value,
-      isReviewValid: checkReviewValidate(newReview.comment, newReview.rating)
+      // isReviewValid: checkReviewValidate(newReview.comment, newReview.rating)
     });
   };
 
   const handleReviewSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
-    if (newReview.isReviewValid) {
+    if (isReviewValid) {
       dispatch(sendReviewAction({
         rating: Number(newReview.rating),
         comment: newReview.comment,
@@ -36,9 +37,13 @@ function ReviewForm(): JSX.Element {
     setnewReview({
       rating: 0,
       comment: '',
-      isReviewValid: false,
+      // isReviewValid: false,
     });
   };
+
+  useEffect(() => {
+    setIsReviewValid(checkReviewValidate(newReview.comment, newReview.rating));
+  }, [newReview]);
 
   return (
     <form className="reviews__form form" onSubmit={handleReviewSubmit}>
@@ -109,7 +114,7 @@ function ReviewForm(): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!newReview.isReviewValid}
+          disabled={!isReviewValid}
         >
           Submit
         </button>
