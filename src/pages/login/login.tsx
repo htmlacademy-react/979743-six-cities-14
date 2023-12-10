@@ -1,19 +1,33 @@
 import { Helmet } from 'react-helmet-async';
-import {useRef, FormEvent} from 'react';
+import {useRef, FormEvent, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { getCity } from '../../store/user-actions/selectors';
+import { getAuthorizationStatus } from '../../store/auth-process/selectors';
+import { AuthorizationStatus } from '../../const';
+import Spinner from '../../components/spiner/spinner';
 
 function Login(): JSX.Element {
   const city = useAppSelector(getCity);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      navigate('/');
+    }
+  },[authorizationStatus, navigate]);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown) {
+    return (<Spinner />);
+  }
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
