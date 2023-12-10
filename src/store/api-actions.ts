@@ -95,6 +95,18 @@ export const sendReviewAction = createAsyncThunk<TNewReview, TNewReview, {
   },
 );
 
+export const fetchNearbyAction = createAsyncThunk<TOffers, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchNearby',
+  async (id, {extra: api}) => {
+    const {data} = await api.get<TOffers>(`${APIRoute.Offers}/${id}/nearby`);
+    return data;
+  },
+);
+
 export const fetchFavoritesAction = createAsyncThunk<TOffers, undefined, {
   dispatch: AppDispatch;
   state: State;

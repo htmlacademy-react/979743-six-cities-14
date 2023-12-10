@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { TDataProcess } from '../../types/state';
-import { changeFavoritesAction, fetchFavoritesAction, fetchOfferInfoAction, fetchOffersAction, fetchReviewListAction, sendReviewAction } from '../api-actions';
+import { changeFavoritesAction, fetchFavoritesAction, fetchNearbyAction, fetchOfferInfoAction, fetchOffersAction, fetchReviewListAction, sendReviewAction } from '../api-actions';
 
 const initialState: TDataProcess = {
   offers: [], // список офферов для всех городов - так получаем с сервера
@@ -40,6 +40,8 @@ const initialState: TDataProcess = {
   },
   reviewsList: [],
   isReviewListLoading: true,
+  offersNearBy: [],
+  isOffersNearByLoading: true,
   favorites: [],
   isFavoritesLoading: true,
 };
@@ -75,6 +77,10 @@ export const dataProcess = createSlice({
         state.reviewsList = [...state.reviewsList, action.payload];
         state.isReviewListLoading = false;
       })
+      .addCase(fetchNearbyAction.fulfilled, (state, action) => {
+        state.offersNearBy = action.payload;
+        state.isOffersNearByLoading = false;
+      })
       .addCase(fetchFavoritesAction.pending, (state) => {
         state.isFavoritesLoading = true;
       })
@@ -88,6 +94,10 @@ export const dataProcess = createSlice({
           isFavorite: offer.id === action.payload.id ? action.payload.isFavorite : offer.isFavorite,
         }
         ));
+        state.offersNearBy = state.offersNearBy.map((offerNearBy) => ({
+          ...offerNearBy,
+          isFavorite: offerNearBy.id === action.payload.id ? action.payload.isFavorite : offerNearBy.isFavorite,
+        }));
       });
   }
 });

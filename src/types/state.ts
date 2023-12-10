@@ -20,6 +20,8 @@ export type TDataProcess = {
   offerInfo: TOfferInfo;
   reviewsList: TReviews;
   isReviewListLoading: boolean;
+  offersNearBy: TOffers;
+  isOffersNearByLoading: boolean;
   favorites: TOffers;
   isFavoritesLoading: boolean;
 }

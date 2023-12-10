@@ -15,9 +15,9 @@ import OfferGallery from './offer-gallery';
 import './offer.css';
 import { useLoadOfferInfo } from '../../hooks/use-load-offer-info';
 import { useLoadNearby } from '../../hooks/use-load-nearby';
-import { fetchReviewListAction } from '../../store/api-actions';
+import { fetchNearbyAction, fetchReviewListAction } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
-import { getIsOffersLoading, getIsReviewListLoading, getOffers, getReviewsList } from '../../store/data-process/selectors';
+import { getIsOffersLoading, getIsOffersNearbyLoading, getIsReviewListLoading, getOffers, getOffersNearby, getReviewsList } from '../../store/data-process/selectors';
 import { getAuthorizationStatus } from '../../store/auth-process/selectors';
 
 function Offer(): JSX.Element {
@@ -36,7 +36,13 @@ function Offer(): JSX.Element {
     dispatch(fetchReviewListAction(params.id));
   },[params, dispatch]);
 
-  const {isNearbyLoading, offersNearby} = useLoadNearby();
+  // const {isNearbyLoading, offersNearby} = useLoadNearby();
+  useEffect(() => {
+    dispatch(fetchNearbyAction(params.id));
+  },[params, dispatch]);
+
+  const offersNearby = useAppSelector(getOffersNearby);
+  const isNearbyLoading = useAppSelector(getIsOffersNearbyLoading);
 
   const [activeCardId, setActiveCardId] = useState<string | null>(null);
 
