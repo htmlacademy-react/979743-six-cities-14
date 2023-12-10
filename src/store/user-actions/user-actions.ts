@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { DEFAULT_CITY, DEFAULT_SORTING_TYPE, NameSpace } from '../../const';
 import { TUserActions } from '../../types/state';
-import { cityChange, sortingChange } from '../action';
+import { cityChange, filteredOffersByCity, offersByCity, sortingChange } from '../action';
 
 const initialState: TUserActions = {
   city: DEFAULT_CITY,
   sorting: DEFAULT_SORTING_TYPE,
+  offersByCity: [],
 };
 
 export const userActions = createSlice({
@@ -21,6 +22,9 @@ export const userActions = createSlice({
       .addCase(sortingChange, (state, action) => {
         state.sorting = action.payload;
         // сортировка – в MainWithOffers
+      })
+      .addCase(filteredOffersByCity, (state, action) => {
+        state.offersByCity = action.payload; // хранит отфильтрованные по городу офферы, выборка - в MainPage
       });
   }
 });

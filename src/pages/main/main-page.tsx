@@ -1,18 +1,19 @@
 import Header from '../../components/header/header';
 import MainWithOffers from './main-with-offers';
 import MainEmpty from './main-empty';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import Spinner from '../../components/spiner/spinner';
 import { getIsOffersLoading, getOffers } from '../../store/data-process/selectors';
 import { selectOffersByCity } from '../../util';
 import { getCity } from '../../store/user-actions/selectors';
+import { filteredOffersByCity } from '../../store/action';
 
 function MainPage(): JSX.Element {
-
   const currentCity: string = useAppSelector(getCity);
   const offers = useAppSelector(getOffers);
   const offersByCity = selectOffersByCity(offers, currentCity);
 
+  // const dispatch = useAppDispatch();
 
   const isOffersLoading = useAppSelector(getIsOffersLoading);
 
@@ -21,7 +22,7 @@ function MainPage(): JSX.Element {
   if (isOffersLoading) {
     return (<Spinner />);
   }
-
+  // dispatch(filteredOffersByCity(offersByCity));
   return (
     <div className="page page--gray page--main">
       <Header />

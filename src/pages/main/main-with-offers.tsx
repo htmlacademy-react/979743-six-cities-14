@@ -7,7 +7,7 @@ import PlacesSortingForm from './places-sorting-form';
 import { useState } from 'react';
 import { getCityLocation, sortOffers } from '../../util';
 import { useAppSelector } from '../../hooks';
-import { getSorting } from '../../store/user-actions/selectors';
+import { getCity, getOffersByCity, getSorting } from '../../store/user-actions/selectors';
 
 type MainWithOffersProps = {
   offers: TOffers;
@@ -18,6 +18,9 @@ function MainWithOffers({offers, currentCity}: MainWithOffersProps): JSX.Element
   // на входе офферы, отфильтрованные по городу; фильтрация в mainPage
 
   const currentSorting = useAppSelector(getSorting);
+  // const offers = useAppSelector(getOffersByCity);
+  // const currentCity = useAppSelector(getCity);
+
   const sortedOffers = sortOffers(offers, currentSorting);
 
   const [activeCardId, setActiveCardId] = useState<string | null>(null);

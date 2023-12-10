@@ -4,11 +4,10 @@ import { TUserData } from '../types/user-data';
 
 export const cityChange = createAction<string>('main/cityChange');
 
-export const sortingByCity = createAction<TOffers>('main/sortingByCity');
+export const filteredOffersByCity = createAction<TOffers>('offersByCity');
 
 export const sortingChange = createAction<string>('main/sortingChange');
 
 export const userInfo = createAction<TUserData>('user/info');
 
 export const serverError = createAction<string | null>('serverError'); // ошибка в ответ сервера
-

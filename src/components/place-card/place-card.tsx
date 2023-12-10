@@ -16,7 +16,6 @@ function PlaceCard({offer, cardClassList}: PlaceCardProps): JSX.Element {
   const ratingStarr: string = `${rating / 5 * 100}%`;
 
   const [currentFavorite, setCurrentFavorite] = useState<boolean>(isFavorite);
-  console.log('first currentFavorite - ', currentFavorite);
   const dispatch = useAppDispatch();
 
   return (
@@ -45,10 +44,9 @@ function PlaceCard({offer, cardClassList}: PlaceCardProps): JSX.Element {
             }
             type="button"
             onClick={() => {
-              console.log('onClick currentFavorite - ', currentFavorite);
               dispatch(changeFavoritesAction({
                 offerID: id,
-                status: favoritesStatus(!currentFavorite) }));
+                status: favoritesStatus(currentFavorite) }));
               setCurrentFavorite(!currentFavorite);
             }}
           >

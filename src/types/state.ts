@@ -1,5 +1,6 @@
 import { AuthorizationStatus } from '../const';
 import { store } from '../store';
+import { offersByCity } from '../store/action';
 import { TOfferInfo } from './offer-info';
 import { TOffers } from './offers';
 import { TReviews } from './reviews';
@@ -26,6 +27,7 @@ export type TDataProcess = {
 export type TUserActions = { // взаимодействие с пользователем
   city: string;
   sorting: string;
+  offersByCity: TOffers; // хранит отфильтрованные по городу офферы
 }
 
 export type TErrors = {
