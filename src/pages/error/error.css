@@ -5,9 +5,19 @@
 
 .error {
   margin: 200px auto;
+  margin-bottom: 50px;
   font-family: rubik, arial, sans-serif;
   font-weight: 700;
   font-style: italic;
   font-size: 32px;
+  color: rgb(68, 129, 195);
+}
+
+.go-home {
+  margin: 50px auto;
+  font-family: rubik, arial, sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 24px;
   color: rgb(68, 129, 195);
 }
