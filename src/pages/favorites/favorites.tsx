@@ -4,22 +4,18 @@ import FavoritesFull from './favorites-full';
 import { Helmet } from 'react-helmet-async';
 // import { useLoadFavorites } from './use-load-favorites';
 import Spinner from '../../components/spiner/spinner';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFavoritesAction } from '../../store/api-actions';
+// import { fetchFavoritesAction } from '../../store/api-actions';
 import { getFavorites, getIsFavoritesLoading } from '../../store/data-process/selectors';
 
 function Favorites(): JSX.Element {
-
-  // const favorites = useAppSelector((state) => state.favoritesOffers);
-  // const {isfavoritesLoading, favorites} = useLoadFavorites();
-
   const favorites = useAppSelector(getFavorites);
   const isFavoritesLoading = useAppSelector(getIsFavoritesLoading);
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(fetchFavoritesAction());
-  },[dispatch]);
+  // const dispatch = useAppDispatch();
+  // useEffect(() => {
+  //   dispatch(fetchFavoritesAction());
+  // },[dispatch]);
 
   if (isFavoritesLoading) {
     return (<Spinner />);

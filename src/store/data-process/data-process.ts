@@ -98,6 +98,13 @@ export const dataProcess = createSlice({
           ...offerNearBy,
           isFavorite: offerNearBy.id === action.payload.id ? action.payload.isFavorite : offerNearBy.isFavorite,
         }));
+        //обновляем favorites
+        const changedFavoriteOffer = state.offers.find((offer) => offer.id === action.payload.id);
+        if (action.payload.isFavorite && changedFavoriteOffer) {
+          state.favorites = [...state.favorites, changedFavoriteOffer];
+        } else {
+          state.favorites = state.favorites.filter((offer) => offer.id !== action.payload.id);
+        }
       });
   }
 });

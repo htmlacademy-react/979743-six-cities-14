@@ -6,6 +6,7 @@ import Logo from '../logo/logo';
 import { TUserData } from '../../types/user-data';
 import { logoutAction } from '../../store/api-actions';
 import { getAuthorizationStatus, getUserInfo } from '../../store/auth-process/selectors';
+import { getFavorites } from '../../store/data-process/selectors';
 
 function Header(): JSX.Element {
 
@@ -13,6 +14,8 @@ function Header(): JSX.Element {
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const userInfo: TUserData = useAppSelector(getUserInfo);
+
+  const favoritesCount = useAppSelector(getFavorites).length;
 
   const handleLogoutClick = (evt: React.MouseEvent) => {
     evt.preventDefault();
@@ -34,7 +37,7 @@ function Header(): JSX.Element {
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">{userInfo.email}</span>
-                    <span className="header__favorite-count">3</span>
+                    <span className="header__favorite-count">{favoritesCount}</span>
                   </Link>
                 </li>
                 <li className="header__nav-item">
