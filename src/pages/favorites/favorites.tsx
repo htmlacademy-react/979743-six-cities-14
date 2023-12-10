@@ -5,12 +5,15 @@ import { Helmet } from 'react-helmet-async';
 import Spinner from '../../components/spiner/spinner';
 import { useAppSelector } from '../../hooks';
 import { getFavorites, getIsFavoritesLoading } from '../../store/data-process/selectors';
+import { getAuthorizationStatus } from '../../store/auth-process/selectors';
+import { AuthorizationStatus } from '../../const';
 
 function Favorites(): JSX.Element {
   const favorites = useAppSelector(getFavorites);
   const isFavoritesLoading = useAppSelector(getIsFavoritesLoading);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  if (isFavoritesLoading) {
+  if (isFavoritesLoading && authorizationStatus === AuthorizationStatus.Unknown) {
     return (<Spinner />);
   }
 
