@@ -112,7 +112,6 @@ function Offer(): JSX.Element {
                       offerID: offerInfo.id,
                       status: Number(!offerInfo.isFavorite)
                     }));
-                    // offerInfo.isFavorite = !offerInfo.isFavorite; // TODO
                   }}
                 >
                   <svg className="offer__bookmark-icon" width="31" height="33">
@@ -192,7 +191,7 @@ function Offer(): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceCardsList offers = {offersNearby.slice(0, OFFERS_NEARBY_QTY)} onMouseMouve = {setActiveCardId} classList = {placeCardsClassList}/>
+            <PlaceCardsList offers = {offersNearby.slice(0, OFFERS_NEARBY_QTY)} classList = {placeCardsClassList}/>
           </section>
         </div>
       </main>

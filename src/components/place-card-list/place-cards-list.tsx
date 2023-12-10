@@ -9,7 +9,7 @@ type ClassListProps = {
 
 type PlaceCardsListProps = {
   offers: TOffers; // офферы отфильтрованные по городу, в первноачальом порядке
-  onMouseMouve(id: string | null): void | null;
+  onMouseMouve?(id: string | null): void | null;
   classList: ClassListProps;
 
 };
@@ -24,8 +24,8 @@ function PlaceCardsList({offers, onMouseMouve, classList}: PlaceCardsListProps):
         <article
           key = {offer.id}
           className={itemClassList}
-          onMouseOver = {() => onMouseMouve(offer.id)}
-          onMouseOut = {() => onMouseMouve(null)}
+          onMouseOver = {() => onMouseMouve?.(offer.id)}
+          onMouseOut = {() => onMouseMouve?.(null)}
         >
           <PlaceCard offer = {offer} cardClassList = {cardClassList}/>
         </article>
