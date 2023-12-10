@@ -17,7 +17,6 @@ export const userActions = createSlice({
     builder
       .addCase(cityChange, (state, action) => {
         state.city = action.payload;
-        state.sorting = DEFAULT_SORTING_TYPE;
         // выборка по городу - в MainPage
       })
       .addCase(sortingChange, (state, action) => {
