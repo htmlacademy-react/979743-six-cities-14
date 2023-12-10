@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { sendReviewAction } from '../../store/api-actions';
@@ -15,6 +15,8 @@ function ReviewForm(): JSX.Element {
     rating: 0,
     comment: '',
   });
+
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleDataChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = evt.target;
@@ -37,6 +39,8 @@ function ReviewForm(): JSX.Element {
       rating: 0,
       comment: '',
     });
+
+    formRef?.current?.reset();
   };
 
   useEffect(() => {
@@ -44,7 +48,7 @@ function ReviewForm(): JSX.Element {
   }, [newReview]);
 
   return (
-    <form className="reviews__form form" onSubmit={handleReviewSubmit}>
+    <form className="reviews__form form" onSubmit={handleReviewSubmit} ref={formRef}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input

@@ -58,8 +58,6 @@ function Offer(): JSX.Element {
     setActiveCardId(currentOfferForMap.id);
   }
 
-  console.log(offerInfo.isFavorite);
-
   const cityLocation: CityLocationType = {
     name: offerInfo.city.name,
     zoom: offerInfo.city.location.zoom,
