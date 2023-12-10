@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { DEFAULT_CITY, DEFAULT_SORTING_TYPE, NameSpace } from '../../const';
 import { TUserActions } from '../../types/state';
-import { cityChange, filteredOffersByCity, offersByCity, sortingChange } from '../action';
+import { cityChange, filteredOffersByCity, sortingChange } from '../action';
 
 const initialState: TUserActions = {
   city: DEFAULT_CITY,
@@ -17,6 +17,7 @@ export const userActions = createSlice({
     builder
       .addCase(cityChange, (state, action) => {
         state.city = action.payload;
+        state.sorting = DEFAULT_SORTING_TYPE;
         // выборка по городу - в MainPage
       })
       .addCase(sortingChange, (state, action) => {

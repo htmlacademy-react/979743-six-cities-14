@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, MIN_RATING, MAX_RATING, SortingType } from './const';
+import { MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, MIN_RATING, MAX_RATING, TSortType } from './const';
 import { TOffers, TOffer } from './types/offers';
 import { CityLocationType } from './types/cities';
 import { TReviews } from './types/reviews';
@@ -57,13 +57,13 @@ function sortByRating(offers: TOffers): TOffers {
   return offers.slice().sort((a, b) => b.rating - a.rating);
 }
 
-function sortOffers(offers: TOffers, sortingType: string): TOffers { // offers - это офферы в первоначальном порядке
+function sortOffers(offers: TOffers, sortingType: TSortType): TOffers { // offers - это офферы в первоначальном порядке
   switch (sortingType) {
-    case SortingType.LowToHigh:
+    case 'Price: low to high':
       return sortLowToHigh(offers);
-    case SortingType.HighToLow:
+    case 'Price: high to low':
       return sortHighToLow(offers);
-    case SortingType.TopRated:
+    case 'Top rated first':
       return sortByRating(offers);
     default: //  = Popular
       return offers; // первоначальный порядок
