@@ -38,7 +38,7 @@ function MainWithOffers({offers, currentCity}: MainWithOffersProps): JSX.Element
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{sortedOffers.length} places to stay in {currentCity}</b>
+            <b className="places__found">{sortedOffers.length} {sortedOffers.length === 1 ? 'place' : 'places'} to stay in {currentCity}</b>
             <PlacesSortingForm />
             <PlaceCardsList offers = {sortedOffers} onMouseMouve = {setActiveCardId} classList = {placeCardsClassList}/>
           </section>
