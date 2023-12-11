@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import {useRef, FormEvent, useEffect, useMemo} from 'react';
+import {FormEvent, useEffect, useMemo, useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -10,11 +10,14 @@ import Spinner from '../../components/spiner/spinner';
 import { getRandomArrayItem } from '../../util';
 import { cityChange } from '../../store/action';
 
+export const PASSWORD_PATTERN = /(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z]{2,}/;
+export const EMAIL_PATTERN = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
 function Login(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  const loginRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const [login, setLogin] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>(null);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -34,16 +37,18 @@ function Login(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginAction({
-        email: loginRef.current.value,
-        password: passwordRef.current.value
-      }))
-        .then((serverRusult) => {
-          if (serverRusult.type === 'user/login/fulfilled') {
-            navigate(-1);
-          }
-        });
+    if (login !== null && password !== null) {
+      if (password.match(PASSWORD_PATTERN) && login.match(EMAIL_PATTERN)) {
+        dispatch(loginAction({
+          email: login,
+          password: password
+        }))
+          .then((serverRusult) => {
+            if (serverRusult.type === 'user/login/fulfilled') {
+              navigate(-1);
+            }
+          });
+      }
     }
   };
 
@@ -74,7 +79,8 @@ function Login(): JSX.Element {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
-                  ref={loginRef}
+                  value={login ?? ''}
+                  onChange={(evt) => setLogin(evt.target.value)}
                   className="login__input form__input"
                   type="email"
                   name="email"
@@ -86,7 +92,8 @@ function Login(): JSX.Element {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
                 <input
-                  ref={passwordRef}
+                  value={password ?? ''}
+                  onChange={(evt) => setPassword(evt.target.value)}
                   className="login__input form__input"
                   type="password"
                   name="password"

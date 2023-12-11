@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sendReviewAction } from '../../store/api-actions';
 import { checkReviewValidate } from '../../util';
 import { NewCommentCondition } from '../../const';
@@ -10,7 +10,7 @@ function ReviewForm(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const [isReviewValid, setIsReviewValid] = useState(false);
-
+  const reviewList = useAppSelector((state) => state.DATA.reviewsList);
   const [newReview, setnewReview] = useState<{rating?: number; comment: string}>({
     rating: 0,
     comment: '',
@@ -35,19 +35,21 @@ function ReviewForm(): JSX.Element {
         id: params.id ?? '',
       }));
     }
-
-    formRef?.current?.reset();
-
-    setnewReview({
-      rating: undefined,
-      comment: '',
-    });
   };
 
   useEffect(() => {
     const isValid = checkReviewValidate(newReview.comment, newReview.rating);
     setIsReviewValid(isValid);
   }, [newReview]);
+
+  useEffect(() => {
+    formRef?.current?.reset();
+
+    setnewReview({
+      rating: undefined,
+      comment: '',
+    });
+  }, [reviewList]);
 
   return (
     <form className="reviews__form form" onSubmit={handleReviewSubmit} ref={formRef}>
@@ -61,8 +63,12 @@ function ReviewForm(): JSX.Element {
           id="5-stars"
           type="radio"
           checked={Number(newReview.rating) === 5}
+          disabled={Number(newReview.rating) !== 5}
         />
-        <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
+        <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect" onClick={() => {
+          setnewReview({...newReview, rating: 5});
+        }}
+        >
           <svg className="form__star-image" width="37" height="33">
             <use xlinkHref="#icon-star"></use>
           </svg>
@@ -76,8 +82,12 @@ function ReviewForm(): JSX.Element {
           id="4-stars"
           type="radio"
           checked={Number(newReview.rating) === 4}
+          disabled={Number(newReview.rating) !== 4}
         />
-        <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
+        <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good" onClick={() => {
+          setnewReview({...newReview, rating: 4});
+        }}
+        >
           <svg className="form__star-image" width="37" height="33">
             <use xlinkHref="#icon-star"></use>
           </svg>
@@ -91,8 +101,12 @@ function ReviewForm(): JSX.Element {
           id="3-stars"
           type="radio"
           checked={Number(newReview.rating) === 3}
+          disabled={Number(newReview.rating) !== 3}
         />
-        <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
+        <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad" onClick={() => {
+          setnewReview({...newReview, rating: 3});
+        }}
+        >
           <svg className="form__star-image" width="37" height="33">
             <use xlinkHref="#icon-star"></use>
           </svg>
@@ -106,8 +120,12 @@ function ReviewForm(): JSX.Element {
           id="2-stars"
           type="radio"
           checked={Number(newReview.rating) === 2}
+          disabled={Number(newReview.rating) !== 2}
         />
-        <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
+        <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly" onClick={() => {
+          setnewReview({...newReview, rating: 2});
+        }}
+        >
           <svg className="form__star-image" width="37" height="33">
             <use xlinkHref="#icon-star"></use>
           </svg>
@@ -118,11 +136,15 @@ function ReviewForm(): JSX.Element {
           className="form__rating-input visually-hidden"
           name="rating"
           value="1"
-          id="1-star"
+          id="1-stars"
           type="radio"
           checked={Number(newReview.rating) === 1}
+          disabled={Number(newReview.rating) !== 1}
         />
-        <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
+        <label htmlFor="1-stars" className="reviews__rating-label form__rating-label" title="terribly" onClick={() => {
+          setnewReview({...newReview, rating: 1});
+        }}
+        >
           <svg className="form__star-image" width="37" height="33">
             <use xlinkHref="#icon-star"></use>
           </svg>
