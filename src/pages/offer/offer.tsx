@@ -77,7 +77,7 @@ function Offer(): JSX.Element {
     cardClassList: 'near-places__image-wrapper place-card__image-wrapper',
   };
   const {images, isPremium, title, rating, price, bedrooms, maxAdults, type, goods, host, description} = offerInfo;
-  const ratingStarr: string = `${Math.round(rating) / 5 * 100}%`;
+  const ratingStarr: string = `${Number(Math.round(rating) / 5 * 100)}%`;
 
   const paramsID = params.id;
 
@@ -162,7 +162,7 @@ function Offer(): JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={`offer__avatar-wrapper pro user__avatar-wrapper ${host.isPro ? 'offer__avatar-wrapper--pro' : ''}`}>
                     <img className="offer__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">
