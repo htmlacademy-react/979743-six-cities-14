@@ -23,6 +23,7 @@ export type TDataProcess = {
   isOffersNearByLoading: boolean;
   favorites: TOffers;
   isFavoritesLoading: boolean;
+  isSendingReview: boolean;
 }
 
 export type TUserActions = { // взаимодействие с пользователем

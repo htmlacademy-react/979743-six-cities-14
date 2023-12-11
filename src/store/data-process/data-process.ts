@@ -44,6 +44,7 @@ const initialState: TDataProcess = {
   isOffersNearByLoading: true,
   favorites: [],
   isFavoritesLoading: true,
+  isSendingReview: false,
 };
 
 export const dataProcess = createSlice({
@@ -76,6 +77,13 @@ export const dataProcess = createSlice({
       .addCase(sendReviewAction.fulfilled, (state, action) => {
         state.reviewsList = [...state.reviewsList, action.payload];
         state.isReviewListLoading = false;
+        state.isSendingReview = false;
+      })
+      .addCase(sendReviewAction.pending, (state) => {
+        state.isSendingReview = true;
+      })
+      .addCase(sendReviewAction.rejected, (state) => {
+        state.isSendingReview = false;
       })
       .addCase(fetchNearbyAction.fulfilled, (state, action) => {
         state.offersNearBy = action.payload;

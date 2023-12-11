@@ -51,7 +51,7 @@ function Map({cityLocation, offers, activeCardId}: MapProps): JSX.Element {
   }, [map, offers, activeCardId]);
 
   useEffect(() => {
-    map?.setView([cityLocation.lat, cityLocation.lng]);
+    map?.setView([cityLocation.lat ?? 0, cityLocation.lng ?? 0]);
   }, [map, cityLocation]);
 
   return (
