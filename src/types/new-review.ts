@@ -1,3 +1,9 @@
+export type TSendNewReview = {
+  id: string | undefined;
+  rating: number;
+  comment: string;
+}
+
 export type TNewReview = {
   id: string;
   date: string;

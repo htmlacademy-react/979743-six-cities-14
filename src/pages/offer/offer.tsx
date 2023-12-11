@@ -65,10 +65,10 @@ function Offer(): JSX.Element {
   }
 
   const cityLocation: CityLocationType = {
-    name: offerInfo.city.name,
-    zoom: offerInfo.city.location.zoom,
-    lat: offerInfo.city.location.latitude,
-    lng: offerInfo.city.location.longitude,
+    name: offerInfo?.city.name,
+    zoom: offerInfo?.city.location.zoom,
+    lat: offerInfo?.city.location.latitude,
+    lng: offerInfo?.city.location.longitude,
   };
 
   const placeCardsClassList = { // классы для списка офферов неподалеку

@@ -62,10 +62,12 @@ const DATE_FORMAT = 'MMMM YYYY';
 
 const REVIEWS_QTY = 10;
 
-const MIN_COMMENT_LENGTH = 50;
-const MAX_COMMENT_LENGTH = 300;
-const MIN_RATING = 1;
-const MAX_RATING = 5;
+const NewCommentCondition = {
+  MinCommentLength: 50,
+  MaxCommentLength: 300,
+  MinRating: 1,
+  MaxRating: 5,
+};
 
 enum NameSpace {
   Auth = 'AUTH', // действия, связанные с авторизацией
@@ -93,9 +95,6 @@ export {
   OFFERS_NEARBY_QTY,
   DATE_FORMAT,
   REVIEWS_QTY,
-  MIN_COMMENT_LENGTH,
-  MAX_COMMENT_LENGTH,
-  MIN_RATING,
-  MAX_RATING,
+  NewCommentCondition,
   NameSpace,
 };

@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, MIN_RATING, MAX_RATING, TSortType } from './const';
+import { TSortType, NewCommentCondition } from './const';
 import { TOffers, TOffer } from './types/offers';
 import { CityLocationType } from './types/cities';
 import { TReviews } from './types/reviews';
@@ -66,13 +66,13 @@ function sortOffers(offers: TOffers, sortingType: TSortType): TOffers { // offer
 }
 
 function checkReviewValidate(comment: string, rating: number): boolean {
-  return (comment.length >= MIN_COMMENT_LENGTH
-            && comment.length <= MAX_COMMENT_LENGTH
-            && rating >= MIN_RATING && rating <= MAX_RATING);
+  return (comment.length >= NewCommentCondition.MinCommentLength
+            && comment.length <= NewCommentCondition.MaxCommentLength
+            && rating >= NewCommentCondition.MinRating && rating <= NewCommentCondition.MaxRating);
 }
 
 function sortReviews(reviwes: TReviews): TReviews {
   return reviwes.slice().sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));
 }
 
-export {selectOffersByCity, selectFavorites, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews};
+export {selectOffersByCity, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews};

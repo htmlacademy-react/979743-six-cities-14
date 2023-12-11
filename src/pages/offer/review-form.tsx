@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { sendReviewAction } from '../../store/api-actions';
 import { checkReviewValidate } from '../../util';
-import { MIN_COMMENT_LENGTH } from '../../const';
+import { NewCommentCondition } from '../../const';
 
 function ReviewForm(): JSX.Element {
   const params = useParams();
@@ -111,7 +111,7 @@ function ReviewForm(): JSX.Element {
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_COMMENT_LENGTH} characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{NewCommentCondition.MinCommentLength} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"

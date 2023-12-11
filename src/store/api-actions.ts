@@ -7,7 +7,7 @@ import { TOfferInfo } from '../types/offer-info';
 import { TUserData } from '../types/user-data';
 import { TAuthData } from '../types/auth-data';
 import { saveToken, dropToken } from '../services/token';
-import { TNewReview } from '../types/new-review';
+import { TNewReview, TSendNewReview } from '../types/new-review';
 import { TReviews } from '../types/reviews';
 
 export const fetchOffersAction = createAsyncThunk<TOffers, undefined, {
@@ -83,7 +83,7 @@ export const fetchReviewListAction = createAsyncThunk<TReviews, string | undefin
   },
 );
 
-export const sendReviewAction = createAsyncThunk<TNewReview, TNewReview, {
+export const sendReviewAction = createAsyncThunk<TNewReview, TSendNewReview, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
