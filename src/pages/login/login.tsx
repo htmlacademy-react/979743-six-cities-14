@@ -1,16 +1,16 @@
 import { Helmet } from 'react-helmet-async';
-import {useRef, FormEvent, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useRef, FormEvent, useEffect, useMemo} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import { getCity } from '../../store/user-actions/selectors';
 import { getAuthorizationStatus } from '../../store/auth-process/selectors';
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, Cities } from '../../const';
 import Spinner from '../../components/spiner/spinner';
+import { getRandomArrayItem } from '../../util';
+import { cityChange } from '../../store/action';
 
 function Login(): JSX.Element {
-  const city = useAppSelector(getCity);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -18,6 +18,8 @@ function Login(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const randomCity = useMemo(() => getRandomArrayItem(Cities), []);
 
   useEffect(() => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
@@ -98,9 +100,15 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>{city}</span>
-              </a>
+              <Link
+                className="locations__item-link"
+                to="/"
+                onClick={() => {
+                  dispatch(cityChange(randomCity));
+                }}
+              >
+                <span>{randomCity}</span>
+              </Link>
             </div>
           </section>
         </div>

@@ -15,7 +15,7 @@ import OfferGallery from './offer-gallery';
 import './offer.css';
 import { useLoadOfferInfo } from '../../hooks/use-load-offer-info';
 import { changeFavoritesAction, fetchNearbyAction, fetchReviewListAction } from '../../store/api-actions';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { getIsOffersLoading, getIsOffersNearbyLoading, getIsReviewListLoading, getOffers, getOffersNearby, getReviewsList } from '../../store/data-process/selectors';
 import { getAuthorizationStatus } from '../../store/auth-process/selectors';
 
@@ -31,6 +31,7 @@ function Offer(): JSX.Element {
   const navigate = useNavigate();
 
   const {isOfferInfoLoading, offerInfo} = useLoadOfferInfo();
+  const [currentFavorite, setCurrentFavorite] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch(fetchReviewListAction(params.id));
@@ -40,6 +41,12 @@ function Offer(): JSX.Element {
     dispatch(fetchNearbyAction(params.id));
   },[params, dispatch]);
 
+  useEffect(() => {
+    if (offerInfo) {
+      setCurrentFavorite(offerInfo.isFavorite);
+    }
+  }, [offerInfo]);
+
   const offersNearby = useAppSelector(getOffersNearby);
   const isNearbyLoading = useAppSelector(getIsOffersNearbyLoading);
 
@@ -47,6 +54,10 @@ function Offer(): JSX.Element {
 
   if (isOfferInfoLoading || isNearbyLoading || isOffersLoading || isReviewsLoading) {
     return (<Spinner />);
+  }
+
+  if (!offerInfo) {
+    return <Navigate to="/404" />;
   }
 
   const currentOfferForMap: TOffer = findOfferByID(allOffers, params.id);
@@ -58,10 +69,10 @@ function Offer(): JSX.Element {
   }
 
   const cityLocation: CityLocationType = {
-    name: offerInfo.city.name,
-    zoom: offerInfo.city.location.zoom,
-    lat: offerInfo.city.location.latitude,
-    lng: offerInfo.city.location.longitude,
+    name: offerInfo?.city.name,
+    zoom: offerInfo?.city.location.zoom,
+    lat: offerInfo?.city.location.latitude,
+    lng: offerInfo?.city.location.longitude,
   };
 
   const placeCardsClassList = { // классы для списка офферов неподалеку
@@ -70,7 +81,7 @@ function Offer(): JSX.Element {
     cardClassList: 'near-places__image-wrapper place-card__image-wrapper',
   };
   const {images, isPremium, title, rating, price, bedrooms, maxAdults, type, goods, host, description} = offerInfo;
-  const ratingStarr: string = `${rating / 5 * 100}%`;
+  const ratingStarr: string = `${Number(Math.round(rating) / 5 * 100)}%`;
 
   const paramsID = params.id;
 
@@ -98,7 +109,7 @@ function Offer(): JSX.Element {
                 </h1>
                 <button
                   className={
-                    offerInfo.isFavorite
+                    currentFavorite
                       ? 'offer__bookmark-button offer__bookmark-button--active button'
                       : 'offer__bookmark-button button'
                   }
@@ -109,8 +120,9 @@ function Offer(): JSX.Element {
                     }
                     dispatch(changeFavoritesAction({
                       offerID: offerInfo.id,
-                      status: Number(!offerInfo.isFavorite)
+                      status: Number(!currentFavorite)
                     }));
+                    setCurrentFavorite(!currentFavorite);
                   }}
                 >
                   <svg className="offer__bookmark-icon" width="31" height="33">
@@ -154,7 +166,7 @@ function Offer(): JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={`offer__avatar-wrapper pro user__avatar-wrapper ${host.isPro ? 'offer__avatar-wrapper--pro' : ''}`}>
                     <img className="offer__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">

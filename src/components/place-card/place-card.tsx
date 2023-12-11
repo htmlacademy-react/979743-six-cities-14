@@ -14,7 +14,7 @@ type PlaceCardProps = {
 function PlaceCard({offer, cardClassList}: PlaceCardProps): JSX.Element {
 
   const {id, isPremium, isFavorite, previewImage, price, rating, title, type} = offer;
-  const ratingStarr: string = `${rating / 5 * 100}%`;
+  const ratingStarr: string = `${Math.round(rating) / 5 * 100}%`;
 
   const [currentFavorite, setCurrentFavorite] = useState<boolean>(isFavorite);
   const dispatch = useAppDispatch();

@@ -7,8 +7,8 @@ import { TOfferInfo } from '../types/offer-info';
 import { TUserData } from '../types/user-data';
 import { TAuthData } from '../types/auth-data';
 import { saveToken, dropToken } from '../services/token';
-import { TNewReview } from '../types/new-review';
-import { TReviews } from '../types/reviews';
+import { TSendNewReview } from '../types/new-review';
+import { TReview, TReviews } from '../types/reviews';
 
 export const fetchOffersAction = createAsyncThunk<TOffers, undefined, {
   dispatch: AppDispatch;
@@ -83,14 +83,14 @@ export const fetchReviewListAction = createAsyncThunk<TReviews, string | undefin
   },
 );
 
-export const sendReviewAction = createAsyncThunk<TNewReview, TNewReview, {
+export const sendReviewAction = createAsyncThunk<TReview, TSendNewReview, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'send/review',
   async ({comment, rating, id}, {extra: api}) => {
-    const {data} = await api.post<TNewReview>(`${APIRoute.Reviews}/${id}`, {comment, rating});
+    const {data} = await api.post<TReview>(`${APIRoute.Reviews}/${id}`, {comment, rating});
     return data;
   },
 );

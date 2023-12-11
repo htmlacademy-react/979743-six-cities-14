@@ -7,7 +7,7 @@ import { getToken } from '../services/token';
 
 type TLoadOfferInfo = {
   isOfferInfoLoading: boolean;
-  offerInfo: TOfferInfo;
+  offerInfo: TOfferInfo | undefined;
 };
 
 function useLoadOfferInfo(): TLoadOfferInfo {
