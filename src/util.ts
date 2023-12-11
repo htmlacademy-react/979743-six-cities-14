@@ -18,11 +18,6 @@ function findOfferByID (allOffers: TOffers, id: string | undefined): TOffer {
   }
 }
 
-function selectFavorites(allOffers: TOffers): TOffers {
-  const selectedOffers = allOffers.filter((offer) => offer.isFavorite); // возвращает новый массив
-  return selectedOffers;
-}
-
 function getCityLocation (allOffers: TOffers, city: string | undefined): CityLocationType {
   // вызывается в MainWithOffers при старте и при изменении города
 

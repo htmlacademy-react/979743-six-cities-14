@@ -31,6 +31,7 @@ function Offer(): JSX.Element {
   const navigate = useNavigate();
 
   const {isOfferInfoLoading, offerInfo} = useLoadOfferInfo();
+  const [currentFavorite, setCurrentFavorite] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch(fetchReviewListAction(params.id));
@@ -39,6 +40,12 @@ function Offer(): JSX.Element {
   useEffect(() => {
     dispatch(fetchNearbyAction(params.id));
   },[params, dispatch]);
+
+  useEffect(() => {
+    if (offerInfo) {
+      setCurrentFavorite(offerInfo.isFavorite);
+    }
+  }, [offerInfo]);
 
   const offersNearby = useAppSelector(getOffersNearby);
   const isNearbyLoading = useAppSelector(getIsOffersNearbyLoading);
@@ -98,7 +105,7 @@ function Offer(): JSX.Element {
                 </h1>
                 <button
                   className={
-                    offerInfo.isFavorite
+                    currentFavorite
                       ? 'offer__bookmark-button offer__bookmark-button--active button'
                       : 'offer__bookmark-button button'
                   }
@@ -109,8 +116,9 @@ function Offer(): JSX.Element {
                     }
                     dispatch(changeFavoritesAction({
                       offerID: offerInfo.id,
-                      status: Number(!offerInfo.isFavorite)
+                      status: Number(!currentFavorite)
                     }));
+                    setCurrentFavorite(!currentFavorite);
                   }}
                 >
                   <svg className="offer__bookmark-icon" width="31" height="33">
