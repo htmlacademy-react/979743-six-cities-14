@@ -65,9 +65,9 @@ function sortOffers(offers: TOffers, sortingType: TSortType): TOffers { // offer
   }
 }
 
-function checkReviewValidate(comment: string, rating: number): boolean {
+function checkReviewValidate(comment: string, rating?: number): boolean {
   return (comment?.length >= NewCommentCondition.MinCommentLength
-            && comment.length <= NewCommentCondition.MaxCommentLength
+            && comment.length <= NewCommentCondition.MaxCommentLength && rating !== undefined
             && rating >= NewCommentCondition.MinRating && rating <= NewCommentCondition.MaxRating);
 }
 

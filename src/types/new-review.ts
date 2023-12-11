@@ -1,5 +1,5 @@
 export type TSendNewReview = {
-  id: string | undefined;
+  id: string;
   rating: number;
   comment: string;
 }
@@ -13,5 +13,5 @@ export type TNewReview = {
     isPro: boolean;
   };
   comment: string;
-  rating: number;
+  rating: number | undefined;
 }
