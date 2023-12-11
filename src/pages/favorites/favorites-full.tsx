@@ -1,6 +1,6 @@
 import { TOffers } from '../../types/offers';
 import FavoritesCard from './favorites-card';
-import { City } from '../../const';
+import { Cities } from '../../const';
 import { selectOffersByCity } from '../../util';
 import { Link } from 'react-router-dom';
 
@@ -10,7 +10,6 @@ type FavoritesFullProps = {
 
 //на входе уже отфильтрованный массив по isFavorites
 function FavoritesFull({favorites}: FavoritesFullProps): JSX.Element {
-  const cities = Object.keys(City);
   return (
     <>
       <main className="page__main page__main--favorites">
@@ -19,7 +18,7 @@ function FavoritesFull({favorites}: FavoritesFullProps): JSX.Element {
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
               {
-                cities.map((city) => {
+                Cities.map((city) => {
                   if(selectOffersByCity(favorites, city).length > 0) {
                     return (
                       <li className="favorites__locations-items" key={city}>

@@ -2,14 +2,16 @@ import { PointExpression } from 'leaflet';
 
 const DEFAULT_CITY = 'Paris';
 
-enum City {
-  Paris = 'Paris',
-  Cologne = 'Cologne',
-  Brussels = 'Brussels',
-  Amsterdam = 'Amsterdam',
-  Hamburg = 'Hamburg',
-  Dusseldorf = 'Dusseldorf'
-}
+// enum City {
+//   Paris = 'Paris',
+//   Cologne = 'Cologne',
+//   Brussels = 'Brussels',
+//   Amsterdam = 'Amsterdam',
+//   Hamburg = 'Hamburg',
+//   Dusseldorf = 'Dusseldorf'
+// }
+
+const Cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 enum AppRoute { // адреса для запросов к серверу
   Main = '/',
@@ -78,7 +80,8 @@ enum NameSpace {
 
 export {
   DEFAULT_CITY,
-  City,
+  // City,
+  Cities,
   AppRoute,
   AuthorizationStatus,
   URL_MARKER_DEFAULT,

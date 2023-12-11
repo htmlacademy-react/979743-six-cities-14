@@ -66,7 +66,7 @@ function sortOffers(offers: TOffers, sortingType: TSortType): TOffers { // offer
 }
 
 function checkReviewValidate(comment: string, rating: number): boolean {
-  return (comment.length >= NewCommentCondition.MinCommentLength
+  return (comment?.length >= NewCommentCondition.MinCommentLength
             && comment.length <= NewCommentCondition.MaxCommentLength
             && rating >= NewCommentCondition.MinRating && rating <= NewCommentCondition.MaxRating);
 }
@@ -75,4 +75,8 @@ function sortReviews(reviwes: TReviews): TReviews {
   return reviwes.slice().sort((a, b) => dayjs(b.date).diff(dayjs(a.date)));
 }
 
-export {selectOffersByCity, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews};
+function getRandomArrayItem(items: Array<string>): string {
+  return items[Math.floor(Math.random() * items.length)];
+}
+
+export {selectOffersByCity, getCityLocation, findOfferByID, sortOffers, checkReviewValidate, sortReviews, getRandomArrayItem};
