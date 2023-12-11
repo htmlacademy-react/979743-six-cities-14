@@ -52,6 +52,7 @@ function Header(): JSX.Element {
       </header>
     );
   }
+
   return (
     <header className="header">
       <div className="container">
@@ -74,8 +75,6 @@ function Header(): JSX.Element {
       </div>
     </header>
   );
-
-
 }
 
 export default memo(Header);

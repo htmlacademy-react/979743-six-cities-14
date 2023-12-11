@@ -15,7 +15,7 @@ import OfferGallery from './offer-gallery';
 import './offer.css';
 import { useLoadOfferInfo } from '../../hooks/use-load-offer-info';
 import { changeFavoritesAction, fetchNearbyAction, fetchReviewListAction } from '../../store/api-actions';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { getIsOffersLoading, getIsOffersNearbyLoading, getIsReviewListLoading, getOffers, getOffersNearby, getReviewsList } from '../../store/data-process/selectors';
 import { getAuthorizationStatus } from '../../store/auth-process/selectors';
 
@@ -54,6 +54,10 @@ function Offer(): JSX.Element {
 
   if (isOfferInfoLoading || isNearbyLoading || isOffersLoading || isReviewsLoading) {
     return (<Spinner />);
+  }
+
+  if (!offerInfo) {
+    return <Navigate to="/404" />;
   }
 
   const currentOfferForMap: TOffer = findOfferByID(allOffers, params.id);

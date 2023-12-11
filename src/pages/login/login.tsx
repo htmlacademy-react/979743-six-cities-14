@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import { getCity } from '../../store/user-actions/selectors';
 import { getAuthorizationStatus } from '../../store/auth-process/selectors';
 import { AuthorizationStatus, Cities } from '../../const';
 import Spinner from '../../components/spiner/spinner';
@@ -12,7 +11,6 @@ import { getRandomArrayItem } from '../../util';
 import { cityChange } from '../../store/action';
 
 function Login(): JSX.Element {
-  // const city = useAppSelector(getCity);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const loginRef = useRef<HTMLInputElement | null>(null);
