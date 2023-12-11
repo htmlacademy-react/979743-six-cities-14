@@ -11,7 +11,7 @@ function FavoritesCard({offer}: FavoritesCardProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const {id, isPremium, price, previewImage, title, type, rating} = offer;
-  const ratingStarr: string = `${rating / 5 * 100}%`;
+  const ratingStarr: string = `${Math.round(rating) / 5 * 100}%`;
   return (
     <>
       {

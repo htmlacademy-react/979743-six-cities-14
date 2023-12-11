@@ -77,7 +77,7 @@ function Offer(): JSX.Element {
     cardClassList: 'near-places__image-wrapper place-card__image-wrapper',
   };
   const {images, isPremium, title, rating, price, bedrooms, maxAdults, type, goods, host, description} = offerInfo;
-  const ratingStarr: string = `${rating / 5 * 100}%`;
+  const ratingStarr: string = `${Math.round(rating) / 5 * 100}%`;
 
   const paramsID = params.id;
 

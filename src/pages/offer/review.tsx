@@ -6,7 +6,7 @@ function Review(review: TReview): JSX.Element {
   const date = dayjs(review.date).format(DATE_FORMAT);
 
   const {rating, comment, user} = review;
-  const ratingStarr: string = `${rating / 5 * 100}%`;
+  const ratingStarr: string = `${Math.round(rating) / 5 * 100}%`;
 
   return (
     <>
